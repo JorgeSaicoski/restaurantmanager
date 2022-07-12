@@ -9,11 +9,11 @@ class Restaurant(models.Model):
     #how can add products and change the cash?
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     #how can create order
-    weiter = models.ManyToManyField(User)
+    weiter = models.ManyToManyField(User, related_name="weiter")
     #how receive the order and change this state?
-    kitchen = models.ManyToManyField(User)
+    kitchen = models.ManyToManyField(User, related_name="kitchen")
     #how can close a order?
-    cashier = models.ManyToManyField(User)
+    cashier = models.ManyToManyField(User, related_name="cashier")
     #how much the restaurant have in the cash?
     cash = models.FloatField()
     #this restaurant paid us?
