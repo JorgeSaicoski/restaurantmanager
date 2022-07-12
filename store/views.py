@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 def store(request):
+	# Change to get a specif restaurant
 	context = {}
 	return render(request, 'store/store.html', context)
 
