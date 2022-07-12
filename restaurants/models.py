@@ -19,4 +19,4 @@ class Restaurant(models.Model):
     #this restaurant paid us?
     is_vip = models.BooleanField(default=True)
     #30 days free. And then the restaurant must to pay to renew. Manualy check is cheaper.
-    vip_days = IntegerField(default=30)
+    vip_days = models.IntegerField(default=30)
