@@ -1,17 +1,17 @@
-{% extends 'store/main.html' %}
+{% extends 'main.html' %}
 {% load static %}
 {% block content %}
 	<div>
 		<div>
 			<div>
 
-				<a href="{% url 'store' %}">; Continue Shopping</a>
+				<a href="{% url 'store' restaurant.name %}">; Continue Shopping</a>
 				<table>
 					<tr>
 						<th><h5>Items: {{order.get_cart_items}}</h5></th>
 						<th><h5>Total: UYU{{order.get_cart_total|floatformat:2}}</h5></th>
 						<th>
-							<a href="{% url 'checkout' %}">Checkout</a>
+							<a href="{% url 'checkout' restaurant.name %}">Checkout</a>
 						</th>
 					</tr>
 				</table>
