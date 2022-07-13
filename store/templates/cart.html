@@ -2,17 +2,14 @@
 {% load static %}
 {% block content %}
 	<div>
-		<div >
-			<div >
+		<div>
+			<div>
 
-				<a  href="{% url 'store' %}"> Continue Shopping</a>
-
-				<br>
-				<br>
-				<table class="table">
+				<a href="{% url 'store' %}">; Continue Shopping</a>
+				<table>
 					<tr>
-						<th><h5>Items: <strong>3</strong></h5></th>
-						<th><h5>Total:<strong> $42</strong></h5></th>
+						<th><h5>Items: {{order.get_cart_items}}</h5></th>
+						<th><h5>Total: UYU{{order.get_cart_total|floatformat:2}}</h5></th>
 						<th>
 							<a href="{% url 'checkout' %}">Checkout</a>
 						</th>
@@ -21,21 +18,25 @@
 
 			</div>
 
-			<br>
 			<div>
-				<div class="cart-row">
-					<div style="flex:2"></div>
-					<div style="flex:2"><strong>Item</strong></div>
-					<div style="flex:1"><strong>Price</strong></div>
-					<div style="flex:1"><strong>Quantity</strong></div>
-					<div style="flex:1"><strong>Total</strong></div>
+				<div>
+					<div></div>
+					<div>Item</div>
+					<div>Price</div>
+					<div>Quantity</div>
+					<div>Total</div>
 				</div>
-
-				<div class="cart-row">
+				{% for item in items %}
+				<div>
+					<!--<div><img src="{{item.product.imageURL}}"></div>-->
+					<div "><p>{{item.product.name}}</p></div>
+					<div><p>${{item.product.price|floatformat:2}}</p></div>
+					<div>
+						<p>{{item.quantity}}</p>
+					</div>
 				</div>
-
+				{% endfor %}
 			</div>
 		</div>
 	</div>
 {% endblock content %}
-

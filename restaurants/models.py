@@ -20,3 +20,6 @@ class Restaurant(models.Model):
     is_vip = models.BooleanField(default=True)
     #30 days free. And then the restaurant must to pay to renew. Manualy check is cheaper.
     vip_days = models.IntegerField(default=30)
+
+    def __str__(self):
+        return self.name
