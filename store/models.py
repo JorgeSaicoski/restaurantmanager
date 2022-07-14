@@ -30,6 +30,7 @@ class Order(models.Model):
 	closed = models.BooleanField(default=False)
 	transaction_id = models.CharField(max_length=100, null=True)
 	restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
+	delivery = models.BooleanField(default=True)
 
 	def __str__(self):
 		return str(self.id)
