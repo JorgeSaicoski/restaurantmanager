@@ -9,11 +9,31 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     </head>
     <body>
-    	<h3>Navbar Placeholder</h3>
+    	<nav>Navbar Placeholder</nav>
         <div>
             {% block content %}
             {% endblock content %}
         </div>
-
+        <script>
+          let user = '{{request.user}}'
+          let restaurant = '{{restaurant.name}}'
+          function getToken(name) {
+      		    let cookieValue = null;
+      		    if (document.cookie && document.cookie !== '') {
+      		        let cookies = document.cookie.split(';');
+      		        for (let i = 0; i < cookies.length; i++) {
+      		            let cookie = cookies[i].trim();
+      		            // Does this cookie string begin with the name we want?
+      		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+      		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+      		                break;
+      		            }
+      		        }
+      		    }
+      		    return cookieValue;
+      		}
+      		let csrftoken = getToken('csrftoken')
+        </script>
+        <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
     </body>
 </html>
