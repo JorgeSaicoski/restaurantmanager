@@ -34,26 +34,34 @@ def cart(request, pk):
 	else:
 		#Create empty cart for now for non-logged in user
 		items = []
-		order = {'get_cart_total':0,'get_cart_items':0}
+		order = {'get_cart_total':0, 'get_cart_items':0}
 		cartItems = order['get_cart_items']
+
 
 	context = {
 		'items':items,
 		'order':order,
 		'restaurant':restaurant,
+		'cartItems':cartItems
 	}
 	return render(request, 'store/cart.html', context)
 
 #send to pay
 def checkout(request,pk):
 	restaurant = Restaurant.objects.get(name=pk)
-	customer = request.user.customer
-	order, created = Order.objects.get_or_create(customer=customer, complete=False, restaurant=restaurant)
-	context = {
-		'restaurant': restaurant,
-		'order':order
-	}
-	return render(request, 'store/checkout.html', context)
+	if request.user.is_authenticated:
+		customer = request.user.customer
+		order, created = Order.objects.get_or_create(customer=customer, complete=False,restaurant=restaurant)
+		items = order.orderitem_set.all()
+		cartItems = order.get_cart_items
+	else:
+		#Create empty cart for now for non-logged in user
+		items = []
+		order = {'get_cart_total':0, 'get_cart_items':0}
+		cartItems = order['get_cart_items']
+
+	context = {'items':items, 'order':order, 'cartItems':cartItems}
+	return render(request, 'checkout.html', context)
 
 # link to update items in the cart
 def updateItem(request, pk):

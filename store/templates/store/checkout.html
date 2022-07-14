@@ -17,7 +17,7 @@
 						</div>
 					</div>
 
-					<div id="shipping-info">
+					<div id="delivery-info">
 						<hr>
 						<p>Shipping Information:</p>
 						<hr>
@@ -38,7 +38,7 @@
 				</form>
 			</div>
 
-			<br>
+
 			<div class="box-element hidden" id="payment-info">
 				<h5>Paypal Options</h5>
 			</div>
@@ -65,3 +65,18 @@
 		</div>
 	</div>
 {% endblock content %}
+<script type="text/javascript">
+	let delivery = '{{order.delivery}}'
+
+	if (delivery == 'False'){
+	 	document.getElementById('delivery-info').innerHTML = ''
+	}
+
+  let form = document.getElementById('form')
+  form.addEventListener('submit', function(e){
+    e.preventDefault()
+    document.getElementById('form-button').classList.add("hidden");
+    document.getElementById('payment-info').classList.remove("hidden");
+  })
+
+</script>
