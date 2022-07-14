@@ -1,12 +1,17 @@
-body{
+body {
   background-color: blue;
 }
-div{
-  background-color: black;
+div {
+  background-color: blue;
 }
-.updateBtns{
+.updateBtns {
   background-color: lightblue;
   color: white;
   text-align: center;
   font-size: 15550px;
+}
+a{
+  color:green;
+  background-color: red;
+  padding: 2px
 }
