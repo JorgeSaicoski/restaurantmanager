@@ -29,10 +29,12 @@
 				{% for item in items %}
 				<div>
 					<!--<div><img src="{{item.product.imageURL}}"></div>-->
-					<div "><p>{{item.product.name}}</p></div>
+					<div><p>{{item.product.name}}</p></div>
 					<div><p>${{item.product.price|floatformat:2}}</p></div>
 					<div>
+						<button type="button" name="remove" data-product="{{item.product.id}}" data-action="remove" class="update-cart">-</button>
 						<p>{{item.quantity}}</p>
+						<button type="button" name="add" data-product="{{item.product.id}}" data-action="add" class="update-cart">+</button>
 					</div>
 				</div>
 				{% endfor %}
