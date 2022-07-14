@@ -42,7 +42,7 @@ def checkout(request,pk):
 	}
 	return render(request, 'store/checkout.html', context)
 
-# link to update items
+# link to update items in the cart
 def updateItem(request, pk):
 	restaurant = Restaurant.objects.get(name=pk)
 

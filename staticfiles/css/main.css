@@ -1,0 +1,12 @@
+body{
+  background-color: blue;
+}
+div{
+  background-color: black;
+}
+.updateBtns{
+  background-color: lightblue;
+  color: white;
+  text-align: center;
+  font-size: 15550px;
+}
