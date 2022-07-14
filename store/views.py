@@ -13,7 +13,7 @@ def store(request,pk):
 		'restaurant':restaurant,
 		'products':products
 	}
-	return render(request, 'store.html', context)
+	return render(request, 'store/store.html', context)
 
 #send to cart
 def cart(request, pk):
@@ -32,7 +32,7 @@ def cart(request, pk):
 		'order':order,
 		'restaurant':restaurant,
 	}
-	return render(request, 'cart.html', context)
+	return render(request, 'store/cart.html', context)
 
 #send to pay
 def checkout(request,pk):
@@ -40,7 +40,7 @@ def checkout(request,pk):
 	context = {
 		'restaurant': restaurant,
 	}
-	return render(request, 'checkout.html', context)
+	return render(request, 'store/checkout.html', context)
 
 # link to update items
 def updateItem(request, pk):
