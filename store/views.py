@@ -8,11 +8,19 @@ import json
 def store(request,pk):
 	# Change to get a specif restaurant
 	restaurant = Restaurant.objects.get(name=pk)
-	products = Product.objects.filter(restaurant=restaurant)
-	context = {
-		'restaurant':restaurant,
-		'products':products
-	}
+	if request.user.is_authenticated:
+		customer = request.user.customer
+		order, created = Order.objects.get_or_create(customer=customer, complete=False, restaurant=restaurant)
+		items = order.orderitem_set.all()
+		cartItems = order.get_cart_items
+	else:
+		#Create empty cart for now for non-logged in user
+		items = []
+		order = {'get_cart_total':0, 'get_cart_items':0}
+		cartItems = order['get_cart_items']
+
+	products = Product.objects.all()
+	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant}
 	return render(request, 'store/store.html', context)
 
 #send to cart
@@ -22,10 +30,12 @@ def cart(request, pk):
 		customer = request.user.customer
 		order, created = Order.objects.get_or_create(customer=customer, complete=False, restaurant=restaurant)
 		items = order.orderitem_set.all()
+		cartItems = order.get_cart_items
 	else:
 		#Create empty cart for now for non-logged in user
 		items = []
 		order = {'get_cart_total':0,'get_cart_items':0}
+		cartItems = order['get_cart_items']
 
 	context = {
 		'items':items,
@@ -37,8 +47,11 @@ def cart(request, pk):
 #send to pay
 def checkout(request,pk):
 	restaurant = Restaurant.objects.get(name=pk)
+	customer = request.user.customer
+	order, created = Order.objects.get_or_create(customer=customer, complete=False, restaurant=restaurant)
 	context = {
 		'restaurant': restaurant,
+		'order':order
 	}
 	return render(request, 'store/checkout.html', context)
 
@@ -64,5 +77,5 @@ def updateItem(request, pk):
 	orderItem.save()
 	if orderItem.quantity <= 0:
 		orderItem.delete()
-		
+
 	return JsonResponse('Item was added', safe=False)
