@@ -3,3 +3,7 @@ env
 .vscode
 .idea
 db.sqlite3
+store/__pycache__
+restaurants/__pycache__
+restaurants/migrations
+store/migrations
