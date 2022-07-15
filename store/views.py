@@ -10,7 +10,7 @@ def store(request,pk):
 	restaurant = Restaurant.objects.get(name=pk)
 	if request.user.is_authenticated:
 		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, complete=False, restaurant=restaurant)
+		order, created = Order.objects.get_or_create(customer=customer, closed=False, restaurant=restaurant)
 		items = order.orderitem_set.all()
 		cartItems = order.get_cart_items
 	else:
@@ -28,7 +28,7 @@ def cart(request, pk):
 	restaurant = Restaurant.objects.get(name=pk)
 	if request.user.is_authenticated:
 		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, complete=False, restaurant=restaurant)
+		order, created = Order.objects.get_or_create(customer=customer, closed=False, restaurant=restaurant)
 		items = order.orderitem_set.all()
 		cartItems = order.get_cart_items
 	else:
@@ -51,7 +51,7 @@ def checkout(request,pk):
 	restaurant = Restaurant.objects.get(name=pk)
 	if request.user.is_authenticated:
 		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, complete=False,restaurant=restaurant)
+		order, created = Order.objects.get_or_create(customer=customer, closed=False,restaurant=restaurant)
 		items = order.orderitem_set.all()
 		cartItems = order.get_cart_items
 	else:
@@ -73,7 +73,7 @@ def updateItem(request, pk):
 
 	customer = request.user.customer
 	product = Product.objects.get(id=productId)
-	order, created = Order.objects.get_or_create(customer=customer, complete=False, restaurant=restaurant)
+	order, created = Order.objects.get_or_create(customer=customer, closed=False, restaurant=restaurant)
 
 	orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
 
