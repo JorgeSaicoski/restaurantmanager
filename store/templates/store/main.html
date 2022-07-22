@@ -10,10 +10,7 @@
     </head>
     <body>
     	<nav>Navbar Placeholder</nav>
-        <div>
-            {% block content %}
-            {% endblock content %}
-        </div>
+
         <script>
           let user = '{{request.user}}'
           let restaurant = '{{restaurant.name}}'
@@ -34,6 +31,10 @@
       		}
       		let csrftoken = getToken('csrftoken')
         </script>
+        <div>
+            {% block content %}
+            {% endblock content %}
+        </div>
         <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
     </body>
 </html>

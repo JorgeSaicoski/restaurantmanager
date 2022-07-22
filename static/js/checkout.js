@@ -52,3 +52,23 @@ function submitFormData(){
 document.getElementById('make-payment').addEventListener('click', function(e){
   submitFormData()
 })
+
+/*
+let url = `/restaurant/${restaurant}/process_order/`
+fetch(url, {
+	method:'POST',
+	headers:{
+		'Content-Type':'applicaiton/json',
+		'X-CSRFToken':csrftoken,
+	},
+	body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
+
+})
+.then((response) => response.json())
+.then((data) => {
+  console.log('Success:', data);
+  alert('Transaction completed');
+  window.location.href = "{% url 'store' %}"
+
+})
+*/
