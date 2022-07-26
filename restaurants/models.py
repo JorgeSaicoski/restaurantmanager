@@ -23,3 +23,10 @@ class Restaurant(models.Model):
 
     def __str__(self):
         return self.name
+    @property
+    def get_kitchen(self):
+        list = []
+        for i in self.kitchen.all():
+            list.append(i)
+        return list
+

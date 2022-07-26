@@ -39,7 +39,7 @@ def cookieCart(request):
     return {'cartItems': cartItems, 'order': order, 'items': items}
 
 
-def cartData(request):
+def cartData(request, restaurant):
     if request.user.is_authenticated:
         customer = request.user.customer
         order, created = Order.objects.get_or_create(customer=customer, closed=False, restaurant=restaurant)

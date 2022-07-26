@@ -1,29 +1,37 @@
 from django.shortcuts import render
 from restaurants.models import Restaurant
-from store.models import Product, Order, OrderItem
+from store.models import Product, Order, OrderItem, ShippingAddress
 from django.http import JsonResponse
 import json
 import datetime
-from .utils import cookieCart
+from .utils import cookieCart, cartData
 
 # Create your views here.
 #go to store
 def store(request,pk):
 	# Change to get a specif restaurant
 	restaurant = Restaurant.objects.get(name=pk)
-	if request.user.is_authenticated:
-		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, closed=False, restaurant=restaurant)
-		items = order.orderitem_set.all()
-		cartItems = order.get_cart_items
-	else:
-		#Create empty cart for now for non-logged in user
-		cookieData = cookieCart(request)
-		cartItems = cookieData['cartItems']
-		order = cookieData['order']
-		items = cookieData['items']
+	data = cartData(request, restaurant)
+	cartItems = data['cartItems']
+	order = data['order']
+	items = data['items']
+	print(request.user)
+	print(restaurant.get_kitchen)
+	print(request.user in restaurant.get_kitchen)
 
-		cartItems = order['get_cart_items']
+	#if request.user.is_authenticated:
+	#	customer = request.user.customer
+	#	order, created = Order.objects.get_or_create(customer=customer, closed=False, restaurant=restaurant)
+	#	items = order.orderitem_set.all()
+	#	cartItems = order.get_cart_items
+	#else:
+	#	#Create empty cart for now for non-logged in user
+	#	cookieData = cookieCart(request)
+	#	cartItems = cookieData['cartItems']
+	#	order = cookieData['order']
+	#	items = cookieData['items']
+#
+#		cartItems = order['get_cart_items']
 
 	products = Product.objects.all()
 	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant}
@@ -115,26 +123,31 @@ def updateItem(request, pk):
 
 def processOrder(request, pk):
 	restaurant = Restaurant.objects.get(name=pk)
+	#create id
 	transaction_id = datetime.datetime.now().timestamp()
+	#get form data
 	data = json.loads(request.body)
-
+	#if it is logged
 	if request.user.is_authenticated:
 		customer = request.user.customer
 		order, created = Order.objects.get_or_create(customer=customer, complete=False, restaurant=restaurant)
-		total = float(data['form']['total'])
-		order.transaction_id = transaction_id
-		if total == order.get_cart_total:
-			order.complete = True
-		order.save()
-		if order.delivery == True:
-			ShippingAddress.objects.create(
-				customer=customer,
-				order=order,
-				address=data['shipping']['address'],
-				city=data['shipping']['city'],
-				state=data['shipping']['state'],
-				zipcode=data['shipping']['zipcode'],
-			)
+	#if not logged
 	else:
-		print('User is not logged in')
+		customer, order = guestOrder(request, data)
+	total = float(data['form']['total'])
+	order.transaction_id = transaction_id
+	if total == order.get_cart_total:
+		order.complete = True
+	order.save()
+	#if it is delivery
+	if order.delivery == True:
+		ShippingAddress.objects.create(
+			customer=customer,
+			order=order,
+			address=data['shipping']['address'],
+			city=data['shipping']['city'],
+			state=data['shipping']['state'],
+			zipcode=data['shipping']['zipcode'],
+		)
+
 	return JsonResponse('Payment submitted..', safe=False)

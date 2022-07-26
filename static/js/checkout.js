@@ -20,20 +20,20 @@ form.addEventListener('submit', function(e){
   document.getElementById('form-button').classList.add("hidden");
   document.getElementById('payment-info').classList.remove("hidden");
 })
+let userFormData ={
+  'name':null,
+  'email':null,
+  'phone': null,
+  'total': total,
+}
+let deliveryInfo = {
+  'address':null,
+  'city': null,
+  'state': null,
+  'zipcode':null,
+}
 function submitFormData(){
-  alert('Payment button clicked')
-  let userFormData ={
-    'name':null,
-    'email':null,
-    'phone': null,
-    'total': total,
-  }
-  let deliveryInfo = {
-    'address':null,
-    'city': null,
-    'state': null,
-    'zipcode':null,
-  }
+
   if (delivery != 'False'){
       deliveryInfo.address = form.address.value
       deliveryInfo.city = form.city.value
@@ -45,8 +45,6 @@ function submitFormData(){
       userFormData.phone = form.phone.value
       userFormData.email = form.email.value
   }
-  console.log('Shipping Info:', deliveryInfo)
-  console.log('User Info:', userFormData)
 }
 document.getElementById('make-payment').addEventListener('click', function(e){
   submitFormData()
@@ -57,15 +55,21 @@ document.getElementById('make-payment').addEventListener('click', function(e){
   		'Content-Type':'applicaiton/json',
   		'X-CSRFToken':csrftoken,
   	},
-  	body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
+  	body:JSON.stringify({'form':userFormData, 'shipping':deliveryInfo}),
 
   })
   .then((response) => response.json())
   .then((data) => {
     console.log('Success:', data);
     alert('Transaction completed');
+    window.location.href = "{% url 'store' restaurant %}"
+    cart = {}
+    document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+
     window.location.href = "{% url 'store' %}"
 
   })
 
+
 })
+console.log(csrftoken)
