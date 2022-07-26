@@ -1,13 +1,12 @@
-
 if (delivery == 'False'){
   document.getElementById('delivery-info').innerHTML = ''
 }
 /*if it have a account it not need a customer info*/
-if (userr != 'AnonymousUser'){
+if (user != 'AnonymousUser'){
   document.getElementById('user-info').innerHTML = ''
 }
 /*if it is not delivery and it is logged it dont need a form*/
-if (delivery == 'False' && userr != 'AnonymousUser'){
+if (delivery == 'False' && user != 'AnonymousUser'){
   //Hide entire form if user is logged in and delivery is false
   document.getElementById('form-wrapper').classList.add("hidden");
   //Show payment if logged in user wants to buy an item that does not require delivery
@@ -41,7 +40,7 @@ function submitFormData(){
       deliveryInfo.state = form.state.value
       deliveryInfo.zipcode = form.zipcode.value
   }
-  if (userr == 'AnonymousUser'){
+  if (user == 'AnonymousUser'){
       userFormData.name = form.name.value
       userFormData.phone = form.phone.value
       userFormData.email = form.email.value
@@ -51,24 +50,22 @@ function submitFormData(){
 }
 document.getElementById('make-payment').addEventListener('click', function(e){
   submitFormData()
-})
+  let url = `/restaurant/${restaurant}/process_order/`
+  fetch(url, {
+  	method:'POST',
+  	headers:{
+  		'Content-Type':'applicaiton/json',
+  		'X-CSRFToken':csrftoken,
+  	},
+  	body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
 
-/*
-let url = `/restaurant/${restaurant}/process_order/`
-fetch(url, {
-	method:'POST',
-	headers:{
-		'Content-Type':'applicaiton/json',
-		'X-CSRFToken':csrftoken,
-	},
-	body:JSON.stringify({'form':userFormData, 'shipping':shippingInfo}),
+  })
+  .then((response) => response.json())
+  .then((data) => {
+    console.log('Success:', data);
+    alert('Transaction completed');
+    window.location.href = "{% url 'store' %}"
+
+  })
 
 })
-.then((response) => response.json())
-.then((data) => {
-  console.log('Success:', data);
-  alert('Transaction completed');
-  window.location.href = "{% url 'store' %}"
-
-})
-*/

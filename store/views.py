@@ -4,6 +4,7 @@ from store.models import Product, Order, OrderItem
 from django.http import JsonResponse
 import json
 import datetime
+from .utils import cookieCart
 
 # Create your views here.
 #go to store
@@ -17,8 +18,11 @@ def store(request,pk):
 		cartItems = order.get_cart_items
 	else:
 		#Create empty cart for now for non-logged in user
-		items = []
-		order = {'get_cart_total':0, 'get_cart_items':0}
+		cookieData = cookieCart(request)
+		cartItems = cookieData['cartItems']
+		order = cookieData['order']
+		items = cookieData['items']
+
 		cartItems = order['get_cart_items']
 
 	products = Product.objects.all()
@@ -35,11 +39,30 @@ def cart(request, pk):
 		cartItems = order.get_cart_items
 	else:
 		#Create empty cart for now for non-logged in user
+		try:
+			cart = json.loads(request.COOKIES['cart'])
+		except:
+			cart = {}
 		items = []
 		order = {'get_cart_total':0, 'get_cart_items':0}
 		cartItems = order['get_cart_items']
+		for i in cart:
+			# We use try block to prevent items in cart that may have been removed from causing error
+			try:
+				cartItems += cart[i]['quantity']
+				product = Product.objects.get(id=i)
+				total = (product.price * cart[i]['quantity'])
 
-
+				order['get_cart_total'] += total
+				order['get_cart_items'] += cart[i]['quantity']
+				item = {
+					'id': product.id,
+					'product': {'id': product.id, 'name': product.name, 'price': product.price}, 'quantity': cart[i]['quantity'],
+					'get_total': total,
+				}
+				items.append(item)
+			except:
+				pass
 	context = {
 		'items':items,
 		'order':order,
