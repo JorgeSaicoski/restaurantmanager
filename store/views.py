@@ -15,24 +15,6 @@ def store(request,pk):
 	cartItems = data['cartItems']
 	order = data['order']
 	items = data['items']
-	print(request.user)
-	print(restaurant.get_kitchen)
-	print(request.user in restaurant.get_kitchen)
-
-	#if request.user.is_authenticated:
-	#	customer = request.user.customer
-	#	order, created = Order.objects.get_or_create(customer=customer, closed=False, restaurant=restaurant)
-	#	items = order.orderitem_set.all()
-	#	cartItems = order.get_cart_items
-	#else:
-	#	#Create empty cart for now for non-logged in user
-	#	cookieData = cookieCart(request)
-	#	cartItems = cookieData['cartItems']
-	#	order = cookieData['order']
-	#	items = cookieData['items']
-#
-#		cartItems = order['get_cart_items']
-
 	products = Product.objects.all()
 	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant}
 	return render(request, 'store/store.html', context)
