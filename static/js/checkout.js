@@ -31,6 +31,7 @@ let deliveryInfo = {
   'city': null,
   'state': null,
   'zipcode':null,
+  'restaurant':restaurant,
 }
 function submitFormData(){
 
@@ -62,11 +63,11 @@ document.getElementById('make-payment').addEventListener('click', function(e){
   .then((data) => {
     console.log('Success:', data);
     alert('Transaction completed');
-    window.location.href = "{% url 'store' restaurant %}"
+    window.location.href = `/restaurant/${restaurant}`
     cart = {}
     document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 
-    window.location.href = "{% url 'store' %}"
+    window.location.href = `/restaurant/${restaurant}`
 
   })
 

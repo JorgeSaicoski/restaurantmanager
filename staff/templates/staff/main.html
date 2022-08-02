@@ -1,0 +1,36 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+           <title>{{restaurant.name}}</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+    </head>
+    <body>
+    	<nav>Navbar Placeholder</nav>
+
+        <script>
+        //get user
+          let user = '{{request.user}}'
+          //get restaurant
+          let restaurant = '{{restaurant.name}}'
+          //get token
+      		let csrftoken = getToken('csrftoken')
+          //to do list
+          let todo = {{todo}}
+          console.log(todo)
+        </script>
+        <nav>
+            {{% if is_kitchen = True %}}
+            <a>Cocina</a>
+            {{% endif %}}
+        </nav>
+        <div>
+            {% block content %}
+            {% endblock content %}
+        </div>
+        <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+    </body>
+</html>

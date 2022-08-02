@@ -4,13 +4,14 @@ from store.models import Product, Order, OrderItem, ShippingAddress
 from django.http import JsonResponse
 import json
 import datetime
-from .utils import cookieCart, cartData
+from .utils import cookieCart, cartData, guestOrder
 
 # Create your views here.
 #go to store
 def store(request,pk):
 	# Change to get a specif restaurant
 	restaurant = Restaurant.objects.get(name=pk)
+	#get cookies
 	data = cartData(request, restaurant)
 	cartItems = data['cartItems']
 	order = data['order']
@@ -24,7 +25,7 @@ def cart(request, pk):
 	restaurant = Restaurant.objects.get(name=pk)
 	if request.user.is_authenticated:
 		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, closed=False, restaurant=restaurant)
+		order, created = Order.objects.get_or_create(customer=customer, closed=False, complete=False, restaurant=restaurant)
 		items = order.orderitem_set.all()
 		cartItems = order.get_cart_items
 	else:
@@ -66,7 +67,7 @@ def checkout(request,pk):
 	restaurant = Restaurant.objects.get(name=pk)
 	if request.user.is_authenticated:
 		customer = request.user.customer
-		order, created = Order.objects.get_or_create(customer=customer, closed=False,restaurant=restaurant)
+		order, created = Order.objects.get_or_create(customer=customer, closed=False, complete=False, restaurant=restaurant)
 		items = order.orderitem_set.all()
 		cartItems = order.get_cart_items
 	else:
@@ -88,7 +89,7 @@ def updateItem(request, pk):
 
 	customer = request.user.customer
 	product = Product.objects.get(id=productId)
-	order, created = Order.objects.get_or_create(customer=customer, closed=False, restaurant=restaurant)
+	order, created = Order.objects.get_or_create(customer=customer, closed=False, complete=False, restaurant=restaurant)
 
 	orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
 
@@ -115,7 +116,7 @@ def processOrder(request, pk):
 		order, created = Order.objects.get_or_create(customer=customer, complete=False, restaurant=restaurant)
 	#if not logged
 	else:
-		customer, order = guestOrder(request, data)
+		customer, order = guestOrder(request, data, restaurant)
 	total = float(data['form']['total'])
 	order.transaction_id = transaction_id
 	if total == order.get_cart_total:

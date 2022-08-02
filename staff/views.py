@@ -13,9 +13,10 @@ def list(request):
     return render(request, 'staff/list.html', context)
 
 
-def detail(request, pk):
+def main(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
     orders = Order.objects.filter(restaurant=restaurant).values()
+    is_kitchen = False
     # check if user is auth to kitchen
     if request.user in restaurant.get_kitchen:
         is_kitchen = True
@@ -27,7 +28,7 @@ def detail(request, pk):
         'is_kitchen': is_kitchen,
         'todo': todo,
     }
-    return render(request, 'staff/detail.html', context)
+    return render(request, 'staff/main.html', context)
 
 def update_item(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
