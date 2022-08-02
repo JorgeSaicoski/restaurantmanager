@@ -20,6 +20,9 @@ class Product(models.Model):
 	def __str__(self):
 		return self.name
 	@property
+	def get_name(self):
+		return self.name
+	@property
 	def get_price(self):
 		return self.price
 
@@ -45,17 +48,32 @@ class Order(models.Model):
 		orderitems = self.orderitem_set.all()
 		total = sum([item.quantity for item in orderitems])
 		return total
-
+	@property
+	def get_items(self):
+		orderitems = self.orderitem_set.all().values()
+		list = []
+		for i in orderitems:
+			id = i["product_id"]
+			order_id = i["order_id"]
+			complete = i["complete"]
+			quantity = i["quantity"]
+			product = Product.objects.get(id=i["product_id"])
+			product_name = product.get_name
+			list.append({'product_id': id, 'order_id': order_id, 'complete': complete, 'quantity':quantity, 'product_name':product_name})
+		return list
 class OrderItem(models.Model):
 	product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
 	order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
 	quantity = models.IntegerField(default=0, null=True, blank=True)
 	date_added = models.DateTimeField(auto_now_add=True)
 	complete = models.BooleanField(default=False)
+	def __str__(self):
+		return str(self.product)
 	@property
 	def get_total(self):
 		total = self.product.price * self.quantity
 		return total
+
 
 class ShippingAddress(models.Model):
 	customer = models.ForeignKey(Customer, on_delete=models.SET_NULL, null=True)

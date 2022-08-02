@@ -12,25 +12,38 @@
     	<nav>Navbar Placeholder</nav>
 
         <script>
-        //get user
+          //get user
           let user = '{{request.user}}'
           //get restaurant
           let restaurant = '{{restaurant.name}}'
           //get token
-      		let csrftoken = getToken('csrftoken')
-          //to do list
-          let todo = {{todo}}
-          console.log(todo)
+          function getToken(name) {
+              let cookieValue = null;
+              if (document.cookie && document.cookie !== '') {
+                  let cookies = document.cookie.split(';');
+                  for (let i = 0; i < cookies.length; i++) {
+                      let cookie = cookies[i].trim();
+                      // Does this cookie string begin with the name we want?
+                      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                          break;
+                      }
+                  }
+              }
+              return cookieValue;
+          }
+          let csrftoken = getToken('csrftoken')
+
         </script>
         <nav>
-            {{% if is_kitchen = True %}}
-            <a>Cocina</a>
-            {{% endif %}}
+            {% if is_kitchen %}
+            <a href="{% url 'kitchen' restaurant.name %}">Cocina</a>
+            {% endif %}
         </nav>
         <div>
             {% block content %}
             {% endblock content %}
         </div>
-        <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/staff.js' %}"></script>
     </body>
 </html>
