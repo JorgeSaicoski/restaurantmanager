@@ -25,6 +25,7 @@ class Restaurant(models.Model):
 
     def __str__(self):
         return self.name
+    #here we will get and check all the staff
     @property
     def get_kitchen(self):
         list = []

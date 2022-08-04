@@ -11,6 +11,7 @@ class Customer(models.Model):
 
 	def __str__(self):
 		return self.name
+	#Get customer to print in the order for the weiter/delivery
 	@property
 	def get_customer(self):
 		name = self.name
@@ -49,11 +50,13 @@ class Order(models.Model):
 		total = sum([item.get_total for item in orderitems])
 		return total
 
+	#Get cart items to print in cart
 	@property
 	def get_cart_items(self):
 		orderitems = self.orderitem_set.all()
 		total = sum([item.quantity for item in orderitems])
 		return total
+	#Get cart items to print to kitchen
 	@property
 	def get_items(self):
 		orderitems = self.orderitem_set.all().values()
@@ -68,11 +71,13 @@ class Order(models.Model):
 			list.append({'product_id': id, 'order_id': order_id, 'complete': complete, 'quantity':quantity, 'product_name':product_name})
 		return list
 
+	# Get cart items to print to weiter
 	@property
 	def get_items_order(self):
 		order = []
 		if self.delivery:
 			shipping_address = ShippingAddress.objects.filter(order=self.id)
+			#bug when there is 2 shipping address
 			for i in shipping_address:
 				shipping = i.get_shipping
 				order.append({"shipping": shipping})
@@ -108,6 +113,8 @@ class ShippingAddress(models.Model):
 
 	def __str__(self):
 		return self.address
+
+	# Get shipping to print in the order for the weiter/delivery
 	@property
 	def get_shipping(self):
 		address = self.address
