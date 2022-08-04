@@ -68,7 +68,6 @@ def update_item(request, pk):
     for i in order.get_items:
         todo.append(i)
     for i in todo:
-        print(i["complete"])
         if i["complete"] is False:
             order.complete = False
             break
@@ -81,15 +80,15 @@ def weiter(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
     #get the orders of this restaurant
     orders = Order.objects.filter(restaurant=restaurant)
-    todo = []
+    info = []
     # check if user is auth to kitchen
     if request.user in restaurant.get_weiter:
         #get the todo itens (will get only the todo itens for this restaurant)
         for i in orders:
-            print(i.get_items_order)
+            info.append(i.get_items_order)
 
     context = {
         'restaurant': restaurant,
-        'todo': todo,
+        'todo': info,
     }
-    return render(request, 'staff/kitchen.html', context)
+    return render(request, 'staff/weiter.html', context)

@@ -1,0 +1,31 @@
+{% extends 'staff/main.html' %}
+{% load static %}
+{% block content %}
+	<div>
+		{% for order in todo %}
+			<p>Enderezco</p>
+			<p>{{order.0.shipping.address}}</p>
+			<p>{{order.0.shipping.city}}</p>
+			<p>Pedidos</p>
+			<p>Numero de pedido {{order.1.items.0.order_id}}</p>
+			{% for i in order.1.items %}
+			<p>{{i.product_name}}</p>
+			<p>Cantitad {{i.quantity}}</p>
+			<p>Listo para entrega</p>
+				{% if i.complete%}
+				<p>si</p>
+				{% endif %}
+				{% if i.complete == False%}
+				<p>no</p>
+				{% endif %}
+			{% endfor %}
+			<p>Costumer</p>
+			<p>{{order.1.customer.name}}</p>
+			<p>{{order.1.customer.email}}</p>
+			<hr>
+		{% endfor %}
+
+
+	</div>
+
+{% endblock content %}

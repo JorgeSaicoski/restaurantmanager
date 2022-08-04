@@ -76,11 +76,11 @@ class Order(models.Model):
 	def get_items_order(self):
 		order = []
 		if self.delivery:
-			shipping_address = ShippingAddress.objects.filter(order=self.id)
-			#bug when there is 2 shipping address
-			for i in shipping_address:
-				shipping = i.get_shipping
-				order.append({"shipping": shipping})
+			shipping_address = ShippingAddress.objects.get(order=self.id)
+			shipping = shipping_address.get_shipping
+			order.append({"shipping": shipping})
+		else:
+			order.append({"shipping": False})
 
 
 
