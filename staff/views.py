@@ -76,3 +76,20 @@ def update_item(request, pk):
             order.complete = True
             order.save()
     return JsonResponse('Item was added', safe=False)
+
+def weiter(request, pk):
+    restaurant = Restaurant.objects.get(name=pk)
+    #get the orders of this restaurant
+    orders = Order.objects.filter(restaurant=restaurant)
+    todo = []
+    # check if user is auth to kitchen
+    if request.user in restaurant.get_weiter:
+        #get the todo itens (will get only the todo itens for this restaurant)
+        for i in orders:
+            print(i.get_items_order)
+
+    context = {
+        'restaurant': restaurant,
+        'todo': todo,
+    }
+    return render(request, 'staff/kitchen.html', context)

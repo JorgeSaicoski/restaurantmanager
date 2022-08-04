@@ -31,4 +31,11 @@ class Restaurant(models.Model):
         for i in self.kitchen.all():
             list.append(i)
         return list
+    @property
+    def get_weiter(self):
+        list = []
+        for i in self.weiter.all():
+            list.append(i)
+        return list
+
 

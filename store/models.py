@@ -11,6 +11,12 @@ class Customer(models.Model):
 
 	def __str__(self):
 		return self.name
+	@property
+	def get_customer(self):
+		name = self.name
+		email = self.email
+		phone = self.phone
+		return {"name":name, "email":email, "phone":phone}
 
 
 class Product(models.Model):
@@ -61,6 +67,22 @@ class Order(models.Model):
 			product_name = product.get_name
 			list.append({'product_id': id, 'order_id': order_id, 'complete': complete, 'quantity':quantity, 'product_name':product_name})
 		return list
+
+	@property
+	def get_items_order(self):
+		order = []
+		if self.delivery:
+			shipping_address = ShippingAddress.objects.filter(order=self.id)
+			for i in shipping_address:
+				shipping = i.get_shipping
+				order.append({"shipping": shipping})
+
+
+
+		items = self.get_items
+		custumer = self.customer.get_customer
+		order.append({"items":items, "customer":custumer})
+		return order
 class OrderItem(models.Model):
 	product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)
 	order = models.ForeignKey(Order, on_delete=models.SET_NULL, null=True)
@@ -86,3 +108,8 @@ class ShippingAddress(models.Model):
 
 	def __str__(self):
 		return self.address
+	@property
+	def get_shipping(self):
+		address = self.address
+		city = self.city
+		return {"address":address,"city":city}
