@@ -23,7 +23,7 @@ class Restaurant(models.Model):
     #30 days free. And then the restaurant must to pay to renew. Manualy check is cheaper.
     vip_days = models.IntegerField(default=30)
     #how much order this restaurant have today?
-    counter = models.IntegerField(default=0)
+    counter = models.IntegerField(default=1)
 
     def __str__(self):
         return self.name

@@ -55,7 +55,7 @@ def update_item(request, pk):
     action = data['action']
     orderId = data['orderId']
     product = Product.objects.get(id=productId)
-    order = Order.objects.get(id=orderId)
+    order = Order.objects.get(transaction_id=orderId)
     orderItem = OrderItem.objects.get(order=order, product=product)
     if action == 'finish':
         orderItem.complete = True
