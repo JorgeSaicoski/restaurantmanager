@@ -3,7 +3,6 @@ from restaurants.models import Restaurant
 from store.models import Product, Order, OrderItem, ShippingAddress
 from django.http import JsonResponse
 import json
-import datetime
 from .utils import cookieCart, cartData, guestOrder
 
 # Create your views here.

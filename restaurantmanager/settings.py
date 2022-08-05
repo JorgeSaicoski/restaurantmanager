@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'restaurants.apps.RestaurantsConfig',
     'store.apps.StoreConfig',
     'staff.apps.StaffConfig',
+    'accounts.apps.AccountsConfig',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
