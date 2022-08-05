@@ -107,7 +107,9 @@ def updateItem(request, pk):
 def processOrder(request, pk):
 	restaurant = Restaurant.objects.get(name=pk)
 	#create id
-	transaction_id = datetime.datetime.now().timestamp()
+	transaction_id = restaurant.counter
+	restaurant.counter =+ 1
+	restaurant.save()
 	#get form data
 	data = json.loads(request.body)
 	#if it is logged
@@ -122,6 +124,7 @@ def processOrder(request, pk):
 	if total == order.get_cart_total:
 		order.complete = True
 	order.save()
+
 	#if it is delivery
 	if order.delivery == True:
 		ShippingAddress.objects.create(
@@ -132,5 +135,6 @@ def processOrder(request, pk):
 			state=data['shipping']['state'],
 			zipcode=data['shipping']['zipcode'],
 		)
+
 
 	return JsonResponse('Payment submitted..', safe=False)

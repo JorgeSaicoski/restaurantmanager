@@ -38,7 +38,7 @@ class Order(models.Model):
 	date_ordered = models.DateTimeField(auto_now_add=True)
 	complete = models.BooleanField(default=False)
 	closed = models.BooleanField(default=False)
-	transaction_id = models.CharField(max_length=100, null=True)
+	transaction_id = models.CharField(max_length=1000, null=True)
 	restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 	delivery = models.BooleanField(default=True)
 
@@ -63,7 +63,7 @@ class Order(models.Model):
 		list = []
 		for i in orderitems:
 			id = i["product_id"]
-			order_id = i["order_id"]
+			order_id = self.transaction_id
 			complete = i["complete"]
 			quantity = i["quantity"]
 			product = Product.objects.get(id=i["product_id"])
@@ -76,9 +76,12 @@ class Order(models.Model):
 	def get_items_order(self):
 		order = []
 		if self.delivery:
-			shipping_address = ShippingAddress.objects.get(order=self.id)
-			shipping = shipping_address.get_shipping
-			order.append({"shipping": shipping})
+			shipping_address = ShippingAddress.objects.filter(order=self.id)
+
+			for i in shipping_address:
+				shipping = i.get_shipping
+				order.append({"shipping": shipping})
+
 		else:
 			order.append({"shipping": False})
 

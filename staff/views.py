@@ -81,14 +81,20 @@ def weiter(request, pk):
     #get the orders of this restaurant
     orders = Order.objects.filter(restaurant=restaurant)
     info = []
+    todo = []
     # check if user is auth to kitchen
     if request.user in restaurant.get_weiter:
         #get the todo itens (will get only the todo itens for this restaurant)
         for i in orders:
-            info.append(i.get_items_order)
+            if i.complete:
+                info.append(i.get_items_order)
+            else:
+                todo.append(i.get_items_order)
 
+    print(info)
     context = {
         'restaurant': restaurant,
-        'todo': info,
+        'todo': todo,
+        'info': info,
     }
     return render(request, 'staff/weiter.html', context)
