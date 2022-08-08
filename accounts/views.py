@@ -27,7 +27,10 @@ def customer_request(request):
 			form.save()
 			email = request.POST["email"]
 			name = request.POST["name"]
-			customer = Customer.objects.get(email=email, name=name)
+			try:
+				customer = Customer.objects.get(email=email)
+			except:
+				return render(request=request, template_name="accounts/customer.html", context={"register_form": form, "message": "Este email ya esta en uso"})
 			customer.user = user
 			customer.save()
 
