@@ -39,6 +39,9 @@
             {% if is_kitchen %}
             <a href="{% url 'kitchen' restaurant.name %}">Cocina</a>
             {% endif %}
+            {% if is_weiter %}
+            <a href="{% url 'weiter' restaurant.name %}">Salon</a>
+            {% endif %}
         </nav>
         <div>
             {% block content %}

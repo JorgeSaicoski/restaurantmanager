@@ -30,7 +30,7 @@ def main(request, pk):
         is_kitchen = True
     # check if user is auth to weiter
     if request.user in restaurant.get_weiter:
-        is_weiter = False
+        is_weiter = True
     context = {
         'restaurant': restaurant,
         'is_kitchen': is_kitchen,
@@ -56,6 +56,8 @@ def kitchen(request, pk):
     context = {
         'restaurant': restaurant,
         'todo': todo,
+        'is_kitchen': True,
+        'is_weiter': True,
     }
     return render(request, 'staff/kitchen.html', context)
 
@@ -112,5 +114,7 @@ def weiter(request, pk):
         'restaurant': restaurant,
         'todo': todo,
         'info': info,
+        'is_kitchen': True,
+        'is_weiter': True,
     }
     return render(request, 'staff/weiter.html', context)

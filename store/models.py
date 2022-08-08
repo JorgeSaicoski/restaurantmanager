@@ -25,7 +25,7 @@ class Order(models.Model):
 	date_ordered = models.DateTimeField(auto_now_add=True)
 	complete = models.BooleanField(default=False)
 	closed = models.BooleanField(default=False)
-	transaction_id = models.CharField(max_length=1000, null=True)
+	transaction_id = models.CharField(max_length=1000, null=True, blank=True)
 	restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 	delivery = models.BooleanField(default=True)
 

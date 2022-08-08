@@ -7,15 +7,18 @@ from accounts.models import Customer
 def register_request(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
+		# If anything is alright
 		if form.is_valid():
 			user = form.save()
 			login(request, user)
 			messages.success(request, "Registration successful." )
 			return redirect("customer_register")
+		# If the password is wrong (the another test is checked in front)
+		return render(request=request, template_name="accounts/register.html", context={"register_form": form, "message": "Las contraseñas no son iguales"})
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 	form = NewUserForm()
 	return render (request=request, template_name="accounts/register.html", context={"register_form":form})
-
+# Create a profile
 def customer_request(request):
 	if request.method == "POST":
 		form = NewCustomerForm(request.POST)
