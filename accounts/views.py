@@ -1,6 +1,6 @@
 from django.shortcuts import  render, redirect
-from .forms import NewUserForm, NewCustomerForm
-from django.contrib.auth import login
+from .forms import NewUserForm, NewCustomerForm, LoginForm
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from accounts.models import Customer
 
@@ -26,7 +26,6 @@ def customer_request(request):
 			user = request.user
 			form.save()
 			email = request.POST["email"]
-			name = request.POST["name"]
 			try:
 				customer = Customer.objects.get(email=email)
 			except:
@@ -39,3 +38,20 @@ def customer_request(request):
 		messages.error(request, "Unsuccessful registration. Invalid information.")
 	form = NewCustomerForm(request.POST)
 	return render (request=request, template_name="accounts/customer.html", context={"register_form":form})
+
+
+def login_request(request):
+
+	if request.method == 'POST':
+		username = request.POST['username']
+		password = request.POST['password']
+		user = authenticate(request, username=username, password=password)
+		if user is not None:
+			login(request, user)
+			messages.success(request, f' wecome {username} !!')
+			return redirect("/")
+		else:
+			messages.info(request, f'account done not exit plz sign in')
+	form = LoginForm()
+
+	return render(request, 'accounts/login.html', {'form': form})

@@ -24,3 +24,9 @@ class NewCustomerForm(forms.ModelForm):
         model = Customer
         fields = ("name", "email", "phone")
 
+
+class LoginForm(forms.Form):
+    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(max_length = 200)
+
+
