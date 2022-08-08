@@ -105,10 +105,8 @@ def updateItem(request, pk):
 
 def processOrder(request, pk):
 	restaurant = Restaurant.objects.get(name=pk)
-	#create id
-	transaction_id = restaurant.counter
-	restaurant.counter =+ 1
-	restaurant.save()
+
+
 	#get form data
 	data = json.loads(request.body)
 	#if it is logged
@@ -119,9 +117,14 @@ def processOrder(request, pk):
 	else:
 		customer, order = guestOrder(request, data, restaurant)
 	total = float(data['form']['total'])
+	#create id
+	transaction_id = restaurant.counter
+
+	restaurant.counter =  restaurant.counter + 1
+	restaurant.save()
 	order.transaction_id = transaction_id
-	if total == order.get_cart_total:
-		order.complete = True
+
+	order.complete = True
 	order.save()
 
 	#if it is delivery
