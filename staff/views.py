@@ -7,6 +7,10 @@ import json
 
 # Create your views here.
 
+# Function to check the permission
+
+
+# List of restaurants
 def list(request):
     restaurants = Restaurant.objects.all()
     context = {
@@ -14,16 +18,23 @@ def list(request):
     }
     return render(request, 'staff/list.html', context)
 
-
+# Get the list of permission that this user have.
 def main(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
+    # Initially it have no permissions.
     is_kitchen = False
+    is_weiter = False
+    # Now we check the permissions
     # check if user is auth to kitchen
     if request.user in restaurant.get_kitchen:
         is_kitchen = True
+    # check if user is auth to weiter
+    if request.user in restaurant.get_weiter:
+        is_weiter = False
     context = {
         'restaurant': restaurant,
         'is_kitchen': is_kitchen,
+        'is_weiter': is_weiter,
     }
     return render(request, 'staff/main.html', context)
 
@@ -62,14 +73,18 @@ def update_item(request, pk):
     elif action == 'return':
         orderItem.complete = False
     orderItem.save()
-    #check if the orders is completed
+
     todo = []
     #loop to get the dictonary in the order
     for i in order.get_items:
         todo.append(i)
+    # check if the orders is completed
     for i in todo:
+        # if any item is not complete:
         if i["complete"] is False:
+            #Order is not complete
             order.complete = False
+            #And we dont need to check the rest
             break
         else:
             order.complete = True
@@ -86,12 +101,13 @@ def weiter(request, pk):
     if request.user in restaurant.get_weiter:
         #get the todo itens (will get only the todo itens for this restaurant)
         for i in orders:
+            #Separate the cart that is already paid to the cart that is not paid
             if i.complete:
                 info.append(i.get_items_order)
+            # The order that is not paid the weiter can change (put and sack products)
             else:
                 todo.append(i.get_items_order)
 
-    print(info)
     context = {
         'restaurant': restaurant,
         'todo': todo,

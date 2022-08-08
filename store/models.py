@@ -12,6 +12,7 @@ class Product(models.Model):
 	restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 	def __str__(self):
 		return self.name
+	#Get te properties when it is needed
 	@property
 	def get_name(self):
 		return self.name
@@ -30,6 +31,7 @@ class Order(models.Model):
 
 	def __str__(self):
 		return str(self.id)
+	#get the price to buy this orden (to help in cart)
 	@property
 	def get_cart_total(self):
 		orderitems = self.orderitem_set.all()
@@ -85,6 +87,7 @@ class OrderItem(models.Model):
 	complete = models.BooleanField(default=False)
 	def __str__(self):
 		return str(self.product)
+	#get how much is to buy this product in this order
 	@property
 	def get_total(self):
 		total = self.product.price * self.quantity
