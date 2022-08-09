@@ -110,9 +110,7 @@ def weiter(request, pk):
             else:
                 todo.append(i.get_items_order)
 
-    print(todo)
-    print("::::arribatodo:::::")
-    print(info)
+
     context = {
         'restaurant': restaurant,
         'todo': todo,

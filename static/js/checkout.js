@@ -50,28 +50,41 @@ function submitFormData(){
 document.getElementById('make-payment').addEventListener('click', function(e){
     submitFormData()
     let url = `/restaurant/${restaurant}/process_order/`
-    try{
-      fetch(url, {
-      	method:'POST',
-      	headers:{
-      		'Content-Type':'applicaiton/json',
-      		'X-CSRFToken':csrftoken,
-      	},
-      	body:JSON.stringify({'form':userFormData, 'shipping':deliveryInfo}),
+    fetch(url, {
+    	method:'POST',
+    	headers:{
+    		'Content-Type':'applicaiton/json',
+    		'X-CSRFToken':csrftoken,
+    	},
+    	body:JSON.stringify({'form':userFormData, 'shipping':deliveryInfo}),
 
-      })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Success:', data);
-        alert('Transaction completed');
-        window.location.href = `/restaurant/${restaurant}`
-        cart = {}
-        document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      Swal.fire(
+        'Pedido realizado',
+        'Entre en contato para cualquier alteracion',
+        'success'
+      )
+      window.location.href = `/restaurant/${restaurant}`
+      cart = {}
+      document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 
-        window.location.href = `/restaurant/${restaurant}`
+      window.location.href = `/restaurant/${restaurant}`
+      }
+    ).catch(e=>Swal.fire({
+        title: 'Este email esta en uso.',
+        showDenyButton: true,
+        showCancelButton: true,
+        confirmButtonText: 'Haga login (el carrito queda deletado)',
+        denyButtonText: `Cambiar de email`,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          window.location.href = `http://127.0.0.1:8000/account/login/`
+        } else if (result.isDenied) {
+          Swal.fire('Elija un email que no este en uso')
         }
-      ).catch(e=>alert("Hay una cuenta con este email. Por favor, realizar login"))
-  }catch(e){
-    alert(e)
-  }
+      })
+  )
 })
