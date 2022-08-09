@@ -116,7 +116,7 @@ def processOrder(request, pk):
 	#if not logged
 	else:
 		customer, order = guestOrder(request, data, restaurant)
-	total = float(data['form']['total'])
+
 	#create id
 	transaction_id = restaurant.counter
 

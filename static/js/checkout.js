@@ -48,29 +48,30 @@ function submitFormData(){
   }
 }
 document.getElementById('make-payment').addEventListener('click', function(e){
-  submitFormData()
-  let url = `/restaurant/${restaurant}/process_order/`
-  fetch(url, {
-  	method:'POST',
-  	headers:{
-  		'Content-Type':'applicaiton/json',
-  		'X-CSRFToken':csrftoken,
-  	},
-  	body:JSON.stringify({'form':userFormData, 'shipping':deliveryInfo}),
+    submitFormData()
+    let url = `/restaurant/${restaurant}/process_order/`
+    try{
+      fetch(url, {
+      	method:'POST',
+      	headers:{
+      		'Content-Type':'applicaiton/json',
+      		'X-CSRFToken':csrftoken,
+      	},
+      	body:JSON.stringify({'form':userFormData, 'shipping':deliveryInfo}),
 
-  })
-  .then((response) => response.json())
-  .then((data) => {
-    console.log('Success:', data);
-    alert('Transaction completed');
-    window.location.href = `/restaurant/${restaurant}`
-    cart = {}
-    document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+      })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('Success:', data);
+        alert('Transaction completed');
+        window.location.href = `/restaurant/${restaurant}`
+        cart = {}
+        document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 
-    window.location.href = `/restaurant/${restaurant}`
-
-  })
-
-
+        window.location.href = `/restaurant/${restaurant}`
+        }
+      ).catch(e=>alert("Hay una cuenta con este email. Por favor, realizar login"))
+  }catch(e){
+    alert(e)
+  }
 })
-console.log(csrftoken)
