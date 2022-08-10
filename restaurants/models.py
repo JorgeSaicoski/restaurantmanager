@@ -24,7 +24,10 @@ class Restaurant(models.Model):
     vip_days = models.IntegerField(default=30)
     #how much order this restaurant have today?
     counter = models.IntegerField(default=1)
-
+    #description
+    description = models.TextField(max_length=2000, default="")
+    #contact for clients
+    contact = models.CharField(max_length=200, default="")
 
     def __str__(self):
         return self.name
