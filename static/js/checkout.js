@@ -63,7 +63,7 @@ document.getElementById('make-payment').addEventListener('click', function(e){
     .then((data) => {
       Swal.fire(
         'Pedido realizado',
-        'Entre en contato para cualquier alteracion',
+        `Entre en contato para cualquier alteracion ${restaurantContact}`,
         'success'
       ).then((result) => {
         document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
@@ -71,11 +71,6 @@ document.getElementById('make-payment').addEventListener('click', function(e){
         window.location.href = `/restaurant/${restaurant}`
       })
       cart = {}
-      setTimeout(() => {
-        document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
-
-        window.location.href = `/restaurant/${restaurant}`
-      }, 10000)
       }
     ).catch(e=>Swal.fire({
         title: 'Este email esta en uso.',
