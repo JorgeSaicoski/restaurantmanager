@@ -25,6 +25,7 @@ class Restaurant(models.Model):
     #how much order this restaurant have today?
     counter = models.IntegerField(default=1)
 
+
     def __str__(self):
         return self.name
     #here we will get and check all the staff
@@ -40,5 +41,14 @@ class Restaurant(models.Model):
         for i in self.weiter.all():
             list.append(i)
         return list
+    def get_cashier(self):
+        list = []
+        for i in self.cashier.all():
+            list.append(i)
+        return list
+    def get_owner(self):
+        list = [self.owner]
+        return list
+
 
 

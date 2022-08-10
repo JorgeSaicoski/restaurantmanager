@@ -8,6 +8,28 @@ import json
 # Create your views here.
 
 # Function to check the permission
+def is_kitchen(user, restaurant):
+    if user in restaurant.get_kitchen:
+        return True
+    else:
+        return False
+def is_weiter(user, restaurant):
+    if user in restaurant.get_weiter:
+        return True
+    else:
+        return False
+
+def is_cashier(user, restaurant):
+    if user in restaurant.get_cashier():
+        return True
+    else:
+        return False
+
+def is_owner(user, restaurant):
+    if user in restaurant.get_owner():
+        return True
+    else:
+        return False
 
 
 # List of restaurants
@@ -42,9 +64,10 @@ def kitchen(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
     #get the orders of this restaurant
     orders = Order.objects.filter(restaurant=restaurant)
+    user = request.user
     todo = []
     # check if user is auth to kitchen
-    if request.user in restaurant.get_kitchen:
+    if is_kitchen(user, restaurant) or is_owner():
         #get the todo itens (will get only the todo itens for this restaurant)
         for i in orders:
             #function to detail any item for a order
@@ -53,14 +76,17 @@ def kitchen(request, pk):
             for i in product:
                 todo.append(i)
 
+
     context = {
         'restaurant': restaurant,
         'todo': todo,
-        'is_kitchen': True,
-        'is_weiter': True,
+        'is_kitchen': is_kitchen(user, restaurant),
+        'is_weiter': is_weiter(user, restaurant),
+        'is_cashier': is_cashier(user, restaurant),
+        'is_owner': is_owner(user, restaurant)
     }
     return render(request, 'staff/kitchen.html', context)
-
+#Update item for weiter
 def update_item(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
     data = json.loads(request.body)
@@ -68,7 +94,7 @@ def update_item(request, pk):
     action = data['action']
     orderId = data['orderId']
     product = Product.objects.get(id=productId)
-    order = Order.objects.get(transaction_id=orderId)
+    order = Order.objects.get(transaction_id=orderId, restaurant=restaurant)
     orderItem = OrderItem.objects.get(order=order, product=product)
     if action == 'finish':
         orderItem.complete = True
@@ -95,12 +121,13 @@ def update_item(request, pk):
 
 def weiter(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
+    user = request.user
     #get the orders of this restaurant
     orders = Order.objects.filter(restaurant=restaurant)
     info = []
     todo = []
     # check if user is auth to kitchen
-    if request.user in restaurant.get_weiter:
+    if is_weiter(user, restaurant) or is_owner(user, restaurant):
         #get the todo itens (will get only the todo itens for this restaurant)
         for i in orders:
             #Separate the cart that is already paid to the cart that is not paid
@@ -115,7 +142,9 @@ def weiter(request, pk):
         'restaurant': restaurant,
         'todo': todo,
         'info': info,
-        'is_kitchen': True,
-        'is_weiter': True,
+        'is_kitchen': is_kitchen(user, restaurant),
+        'is_weiter': is_weiter(user, restaurant),
+        'is_cashier': is_cashier(user, restaurant),
+        'is_owner': is_owner(user, restaurant)
     }
     return render(request, 'staff/weiter.html', context)
