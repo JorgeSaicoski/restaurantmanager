@@ -1,0 +1,9 @@
+{% extends 'staff/main.html' %}
+{% load static %}
+{% block content %}
+  {% for table in tables %}
+    {{table.name}}
+    <button type="button">Editar Pedido</button>
+  {% endfor %}
+
+{% endblock content %}

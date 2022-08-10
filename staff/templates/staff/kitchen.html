@@ -20,28 +20,25 @@
             </div>
 						<button data-product="{{item.product_id}}" data-order="{{item.order_id}}" data-action="finish" class="add-btn update-order">Terminar</button>
         </div>
+			{% else %}
+				<h3>Plato terminado<h3>
+					<div class="">
+							<div class="">
+								<p>Plato</p>
+								<p>{{item.product_id}}</p>
+								<p>{{item.product_name}}</p>
+							</div>
+							<div class="">
+								<p>Pedido</p>
+								<p>{{item.order_id}}</p>
+							</div>
+							<div class="">
+									<p>Quantidade</p>
+									<p>{{item.quantity}}</p>
+							</div>
+							<button data-product="{{item.product_id}}" data-order="{{item.order_id}}" data-action="return" class="add-btn update-order">Retorno</button>
+					</div>
       {% endif %}
-		{% endfor %}
-		{% for item in todo %}
-		{% if item.complete == True %}
-			<h3>Plato terminado<h3>
-				<div class="">
-						<div class="">
-							<p>Plato</p>
-							<p>{{item.product_id}}</p>
-							<p>{{item.product_name}}</p>
-						</div>
-						<div class="">
-							<p>Pedido</p>
-							<p>{{item.order_id}}</p>
-						</div>
-						<div class="">
-								<p>Quantidade</p>
-								<p>{{item.quantity}}</p>
-						</div>
-						<button data-product="{{item.product_id}}" data-order="{{item.order_id}}" data-action="return" class="add-btn update-order">Retorno</button>
-				</div>
-			{% endif %}
 		{% endfor %}
 
 

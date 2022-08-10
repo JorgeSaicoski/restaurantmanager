@@ -48,5 +48,17 @@
             {% endblock content %}
         </div>
         <script type="text/javascript" src="{% static 'js/staff.js' %}"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script type="text/javascript">
+        {% if message %}
+        message = '{{message}}'
+          Swal.fire(
+            'Erro!',
+            message,
+            'success'
+          )
+        {% endif %}
+        </script>
+
     </body>
 </html>

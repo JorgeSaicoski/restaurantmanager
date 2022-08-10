@@ -29,9 +29,11 @@
 				<p>{{order.1.customer.name}}</p>
 				<p>{{order.1.customer.email}}</p>
 				<hr>
+			{% else %}
+
 			{% endif %}
 		{% endfor %}
-
+		<a href="{% url 'tables' restaurant.name %}">Mesas</a>
 
 	</div>
 

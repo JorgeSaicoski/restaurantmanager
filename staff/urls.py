@@ -9,4 +9,6 @@ urlpatterns = [
 	path('<str:pk>/mozo', views.weiter, name="weiter"),
 	path('<str:pk>/update_item/', views.update_item, name="update_item"),
 	path('<str:pk>/delivery_item/', views.delivery_item, name="update_item"),
+	path('<str:pk>/new_table/', views.new_table, name="new_table"),
+	path('<str:pk>/tables/', views.tables, name="tables"),
 ]
