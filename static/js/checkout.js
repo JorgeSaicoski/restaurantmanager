@@ -65,13 +65,17 @@ document.getElementById('make-payment').addEventListener('click', function(e){
         'Pedido realizado',
         'Entre en contato para cualquier alteracion',
         'success'
-      )
+      ).then((result) => {
+        document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+
+        window.location.href = `/restaurant/${restaurant}`
+      })
       cart = {}
       setTimeout(() => {
         document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 
         window.location.href = `/restaurant/${restaurant}`
-      }, 5000)
+      }, 10000)
       }
     ).catch(e=>Swal.fire({
         title: 'Este email esta en uso.',
