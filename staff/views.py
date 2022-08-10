@@ -43,20 +43,13 @@ def list(request):
 # Get the list of permission that this user have.
 def main(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
-    # Initially it have no permissions.
-    is_kitchen = False
-    is_weiter = False
-    # Now we check the permissions
-    # check if user is auth to kitchen
-    if request.user in restaurant.get_kitchen:
-        is_kitchen = True
-    # check if user is auth to weiter
-    if request.user in restaurant.get_weiter:
-        is_weiter = True
+    user = request.user
     context = {
         'restaurant': restaurant,
-        'is_kitchen': is_kitchen,
-        'is_weiter': is_weiter,
+        'is_kitchen': is_kitchen(user, restaurant),
+        'is_weiter': is_weiter(user, restaurant),
+        'is_cashier': is_cashier(user, restaurant),
+        'is_owner': is_owner(user, restaurant)
     }
     return render(request, 'staff/main.html', context)
 
@@ -148,3 +141,14 @@ def weiter(request, pk):
         'is_owner': is_owner(user, restaurant)
     }
     return render(request, 'staff/weiter.html', context)
+def delivery_item(request, pk):
+    restaurant = Restaurant.objects.get(name=pk)
+    data = json.loads(request.body)
+    productId = data['productId']
+    orderId = data['orderId']
+    product = Product.objects.get(id=productId)
+    order = Order.objects.get(transaction_id=orderId, restaurant=restaurant)
+    orderItem = OrderItem.objects.get(order=order, product=product)
+    orderItem.delivered = True
+    orderItem.save()
+    return JsonResponse('Item was added', safe=False)

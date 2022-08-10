@@ -10,15 +10,20 @@
 				<p>Pedidos</p>
 				<p>Numero de pedido {{order.1.items.0.order_id}}</p>
 				{% for i in order.1.items %}
-				<p>{{i.product_name}}</p>
-				<p>Cantitad {{i.quantity}}</p>
-				<p>Listo para entrega</p>
-					{% if i.complete%}
-					<p>si</p>
-					{% endif %}
-					{% if i.complete == False%}
-					<p>no</p>
-					{% endif %}
+					<p>{{i.product_name}}</p>
+					<p>Cantitad {{i.quantity}}</p>
+					<p>Listo para entrega</p>
+						{% if i.complete%}
+						<p>si</p>
+							{% if i.delivered%}
+								<p>Entregue</p>
+							{% else %}
+								<button data-product="{{i.product_id}}" data-order="{{i.order_id}}" class="btn-delivered">Entregar</button>
+							{% endif %}
+						{% endif %}
+						{% if i.complete == False%}
+						<p>no</p>
+						{% endif %}
 				{% endfor %}
 				<p>Costumer</p>
 				<p>{{order.1.customer.name}}</p>

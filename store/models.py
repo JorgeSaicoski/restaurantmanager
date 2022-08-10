@@ -53,10 +53,11 @@ class Order(models.Model):
 			id = i["product_id"]
 			order_id = self.transaction_id
 			complete = i["complete"]
+			delivered = i["delivered"]
 			quantity = i["quantity"]
 			product = Product.objects.get(id=i["product_id"])
 			product_name = product.get_name
-			list.append({'product_id': id, 'order_id': order_id, 'complete': complete, 'quantity':quantity, 'product_name':product_name})
+			list.append({'product_id': id, 'order_id': order_id, 'complete': complete, 'quantity':quantity, 'product_name':product_name, 'delivered':delivered})
 		return list
 
 	# Get cart items to print to weiter
@@ -85,6 +86,7 @@ class OrderItem(models.Model):
 	quantity = models.IntegerField(default=0, null=True, blank=True)
 	date_added = models.DateTimeField(auto_now_add=True)
 	complete = models.BooleanField(default=False)
+	delivered = models.BooleanField(default=False)
 	def __str__(self):
 		return str(self.product)
 	#get how much is to buy this product in this order
