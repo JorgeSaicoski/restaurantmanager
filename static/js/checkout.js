@@ -66,11 +66,12 @@ document.getElementById('make-payment').addEventListener('click', function(e){
         'Entre en contato para cualquier alteracion',
         'success'
       )
-      window.location.href = `/restaurant/${restaurant}`
       cart = {}
-      document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+      setTimeout(() => {
+        document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 
-      window.location.href = `/restaurant/${restaurant}`
+        window.location.href = `/restaurant/${restaurant}`
+      }, 5000)
       }
     ).catch(e=>Swal.fire({
         title: 'Este email esta en uso.',
