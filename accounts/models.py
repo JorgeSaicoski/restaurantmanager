@@ -21,4 +21,19 @@ class Customer(models.Model):
 		phone = self.phone
 		return {"name":name, "email":email, "phone":phone}
 
-
+	#get orders to cashier
+	@property
+	def get_orders(self):
+		orders = self.order_set.all().values()
+		list = []
+		order = []
+		for i in orders:
+			order_id = self.transaction_id
+			complete = i["complete"]
+			delivered = i["delivered"]
+			quantity = i["quantity"]
+			product = Product.objects.get(id=i["product_id"])
+			product_name = product.get_name
+			list.append({'product_id': id, 'order_id': order_id, 'complete': complete, 'quantity':quantity, 'product_name':product_name, 'delivered':delivered})
+		order.append({"items":list,"customer":self.get_customer})
+		return order

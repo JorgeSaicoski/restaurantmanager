@@ -16,8 +16,31 @@
       <button type="button" name="add" data-product="{{item.product_id}}" data-action="add" class="update-table">+</button>
     </div>
   {% endfor %}
+  {% if cartItems %}
+    <button id="make-payment">realizar pedido</button>
+  {% endif %}
+
+  {% for order in orders_closed %}
+    {% for i in order %}
+      <p>Numero del pedido {{i.order_id}}</p>
+      <p>{{i.quantity}} {{i.product_name}}</p>
+      {% if i.complete %}
+        {% if i.delivered %}
+        <p>Ya fue entregado</p>
+        {% else %}
+        <p>Cocina he terminado</p>
+        {% endif %}
+      {% else %}
+        <p>No esta listo.</p>
+      {% endif %}
+      <hr>
+    {% endfor %}
+  {% endfor %}
   <script type="text/javascript">
     let table = '{{table}}'
     console.log(table)
   </script>
+  <script type="text/javascript" src="{% static 'js/table.js' %}"></script>
 {% endblock content %}
+
+{'product_id': 3, 'order_id': '1', 'complete': False, 'quantity': 1, 'product_name': 'Xis Bacon', 'delivered': False}

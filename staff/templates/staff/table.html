@@ -3,7 +3,8 @@
 {% block content %}
   {% for table in tables %}
     {{table.name}}
-    <button type="button">Editar Pedido</button>
+    <a href="{% url 'table' restaurant.name table.name %}">Editar Pedido</a>
   {% endfor %}
+  <a href="{% url 'new_table' restaurant.name %}">Nuevo Pedido</a>
 
 {% endblock content %}

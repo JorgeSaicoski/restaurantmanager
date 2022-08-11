@@ -149,7 +149,6 @@ def weiter(request, pk):
             # The order that is not paid the weiter can change (put and sack products)
             else:
                 todo.append(i.get_items_order)
-
     context = {
         'restaurant': restaurant,
         'todo': todo,
@@ -217,17 +216,21 @@ def table(request, pk, table):
 
     customer = Customer.objects.get(name=table)
     table_detail = customer.get_customer
-    print(table_detail["name"])
     order, created = Order.objects.get_or_create(customer=customer, closed=False, complete=False, delivery=False,
                                                  restaurant=restaurant)
     items = Product.objects.filter(restaurant=restaurant)
+    order_closed = Order.objects.filter(customer=customer, closed=False, complete=True, restaurant=restaurant)
     cartItems = order.get_items
-    print(cartItems)
+    orders_closed = []
+    for i in order_closed:
+        orders_closed.append(i.get_items)
+
     context = {
         'items': items,
         'table': table_detail["name"],
         'restaurant': restaurant,
-        'cartItems': cartItems
+        'cartItems': cartItems,
+        'orders_closed': orders_closed
     }
     return render(request, 'staff/orderdetail.html', context)
 
@@ -238,7 +241,6 @@ def updateTable(request, pk, table):
     data = json.loads(request.body)
     productId = data['productId']
     action = data['action']
-    print(data)
 
     customer = Customer.objects.get(name=table)
     product = Product.objects.get(id=productId)
@@ -257,3 +259,23 @@ def updateTable(request, pk, table):
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
+
+
+def processTable(request, pk, table):
+    restaurant = Restaurant.objects.get(name=pk)
+    data = json.loads(request.body)
+    # get form data
+    customer = Customer.objects.get(name=table)
+    order, created = Order.objects.get_or_create(customer=customer, complete=False, restaurant=restaurant)
+
+    # create id
+    transaction_id = restaurant.counter
+
+    restaurant.counter = restaurant.counter + 1
+    restaurant.save()
+    order.transaction_id = transaction_id
+
+    order.complete = True
+    order.save()
+
+    return JsonResponse('Payment submitted..', safe=False)
