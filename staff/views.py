@@ -64,22 +64,31 @@ def main(request, pk):
 def kitchen(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
     # get the orders of this restaurant
-    orders = Order.objects.filter(restaurant=restaurant)
+    orders = Order.objects.filter(restaurant=restaurant).order_by('transaction_id')
     user = request.user
-    todo = []
+    local = []
+    delivery = []
     # check if user is auth to kitchen
     if is_kitchen(user, restaurant) or is_owner():
         # get the todo itens (will get only the todo itens for this restaurant)
+
         for i in orders:
             # function to detail any item for a order
-            product = i.get_items
-            # loop for get only dictonary
-            for i in product:
-                todo.append(i)
+            if i.is_delivery:
+                product = i.get_items
+                # loop for get only dictonary
+                for i in product:
+                    delivery.append(i)
+            else:
+                product = i.get_items
+                # loop for get only dictonary
+                for i in product:
+                    local.append(i)
 
     context = {
         'restaurant': restaurant,
-        'todo': todo,
+        'local': local,
+        'delivery': delivery,
         'is_kitchen': is_kitchen(user, restaurant),
         'is_weiter': is_weiter(user, restaurant),
         'is_cashier': is_cashier(user, restaurant),
@@ -174,13 +183,15 @@ def new_table(request, pk):
             name = request.POST["name"]
             try:
                 customer = Customer.objects.get(name=name, restaurant=restaurant)
-                return render(request=request, template_name="staff/newtable.html", context={"register_form": form, "message":"Esta mesa ya existe"})
+                return render(request=request, template_name="staff/newtable.html",
+                              context={"register_form": form, "message": "Esta mesa ya existe"})
             except:
                 customer = Customer.objects.create(name=name, restaurant=restaurant)
             customer.save()
             return redirect("/staff/{}/mozo".format(restaurant))
     form = NewTableForm(request.POST)
     return render(request=request, template_name="staff/newtable.html", context={"register_form": form})
+
 
 def tables(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
@@ -199,3 +210,50 @@ def tables(request, pk):
         'is_owner': is_owner(user, restaurant)
     }
     return render(request, 'staff/table.html', context)
+
+
+def table(request, pk, table):
+    restaurant = Restaurant.objects.get(name=pk)
+
+    customer = Customer.objects.get(name=table)
+    table_detail = customer.get_customer
+    print(table_detail["name"])
+    order, created = Order.objects.get_or_create(customer=customer, closed=False, complete=False, delivery=False,
+                                                 restaurant=restaurant)
+    items = Product.objects.filter(restaurant=restaurant)
+    cartItems = order.get_items
+    print(cartItems)
+    context = {
+        'items': items,
+        'table': table_detail["name"],
+        'restaurant': restaurant,
+        'cartItems': cartItems
+    }
+    return render(request, 'staff/orderdetail.html', context)
+
+
+def updateTable(request, pk, table):
+    restaurant = Restaurant.objects.get(name=pk)
+
+    data = json.loads(request.body)
+    productId = data['productId']
+    action = data['action']
+    print(data)
+
+    customer = Customer.objects.get(name=table)
+    product = Product.objects.get(id=productId)
+    order, created = Order.objects.get_or_create(customer=customer, closed=False, complete=False, delivery=False,
+                                                 restaurant=restaurant)
+
+    orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+
+    if action == 'add':
+        orderItem.quantity = (orderItem.quantity + 1)
+    elif action == 'remove':
+        orderItem.quantity = (orderItem.quantity - 1)
+
+    orderItem.save()
+    if orderItem.quantity <= 0:
+        orderItem.delete()
+
+    return JsonResponse('Item was added', safe=False)

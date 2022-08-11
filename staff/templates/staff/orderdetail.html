@@ -1,0 +1,23 @@
+{% extends 'staff/main.html' %}
+{% load static %}
+
+{% block content %}
+  <h2>{{table}}</h2>
+  <a href="{% url 'tables' restaurant.name %}">; Volver</a>
+  {% for item in items %}
+    <div>
+      <p>{{item.name}}</p><button data-product="{{item.id}}" data-action="add" class="add-btn update-table">Pedir</button>
+    </div>
+  {% endfor %}
+  {% for item in cartItems %}
+    <div>
+      <button type="button" name="remove" data-product="{{item.product_id}}" data-action="remove" class="update-table">-</button>
+      <p>{{item.quantity}}</p>
+      <button type="button" name="add" data-product="{{item.product_id}}" data-action="add" class="update-table">+</button>
+    </div>
+  {% endfor %}
+  <script type="text/javascript">
+    let table = '{{table}}'
+    console.log(table)
+  </script>
+{% endblock content %}

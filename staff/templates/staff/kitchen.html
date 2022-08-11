@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
 	<div>
-		{% for item in todo %}
+		{% for item in delivery %}
       {% if item.complete == False %}
         <div class="">
             <div class="">
@@ -20,8 +20,12 @@
             </div>
 						<button data-product="{{item.product_id}}" data-order="{{item.order_id}}" data-action="finish" class="add-btn update-order">Terminar</button>
         </div>
-			{% else %}
-				<h3>Plato terminado<h3>
+      {% endif %}
+		{% endfor %}
+			<h2>Platos terminados<h2>
+		{% for item in delivery %}
+			{% if item.complete %}
+
 					<div class="">
 							<div class="">
 								<p>Plato</p>
@@ -38,7 +42,8 @@
 							</div>
 							<button data-product="{{item.product_id}}" data-order="{{item.order_id}}" data-action="return" class="add-btn update-order">Retorno</button>
 					</div>
-      {% endif %}
+				{% endif %}
+
 		{% endfor %}
 
 

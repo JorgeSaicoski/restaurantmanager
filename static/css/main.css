@@ -1,17 +1,17 @@
 body {
-  background-color: blue;
+  background-color: #e76f51;
 }
 div {
-  background-color: blue;
+  background-color: #e9c46a;
 }
 .updateBtns {
-  background-color: lightblue;
+  background-color: #264653;
   color: white;
   text-align: center;
   font-size: 15550px;
 }
 a{
-  color:green;
+  color: #2a9d8f;
   background-color: red;
   padding: 2px;
 }

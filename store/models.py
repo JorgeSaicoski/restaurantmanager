@@ -60,6 +60,10 @@ class Order(models.Model):
 			list.append({'product_id': id, 'order_id': order_id, 'complete': complete, 'quantity':quantity, 'product_name':product_name, 'delivered':delivered})
 		return list
 
+	@property
+	def is_delivery(self):
+		return self.delivery
+
 	# Get cart items to print to weiter
 	@property
 	def get_items_order(self):
