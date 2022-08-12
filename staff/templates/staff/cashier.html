@@ -1,0 +1,25 @@
+{% extends 'staff/main.html' %}
+{% load static %}
+{% block content %}
+  {% if is_cashier %}
+    <p>Pedidos para local</p>
+    {% for orders in local_order %}
+      {% for order in orders %}
+          {{order.customer.name}}
+          {% for i in order.orders %}
+            {% if i.transaction_id %}
+            <p>pedido {{i.transaction_id}}</p>
+            {% endif %}
+          {% endfor %}
+        <hr>
+      {% endfor %}
+    {% endfor %}
+    <p>Pedidos para delivery</p>
+    {% for order in orders %}
+      <p>Cliente</p>
+      <p>{{order.1.customer.name}}</p>
+      <p>{{order.1.customer.email}}</p>
+      <hr>
+    {% endfor %}
+  {% endif %}
+{% endblock content %}

@@ -52,7 +52,7 @@ document.getElementById('make-payment').addEventListener('click', function(e){
       ).then((result) => {
         document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 
-        window.location.href = `/staff/${restaurant}/mozo/`
+        location.reload()
       })
       cart = {}
       }

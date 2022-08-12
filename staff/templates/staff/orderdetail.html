@@ -2,45 +2,46 @@
 {% load static %}
 
 {% block content %}
-  <h2>{{table}}</h2>
-  <a href="{% url 'tables' restaurant.name %}">; Volver</a>
-  {% for item in items %}
-    <div>
-      <p>{{item.name}}</p><button data-product="{{item.id}}" data-action="add" class="add-btn update-table">Pedir</button>
-    </div>
-  {% endfor %}
-  {% for item in cartItems %}
-    <div>
-      <button type="button" name="remove" data-product="{{item.product_id}}" data-action="remove" class="update-table">-</button>
-      <p>{{item.quantity}}</p>
-      <button type="button" name="add" data-product="{{item.product_id}}" data-action="add" class="update-table">+</button>
-    </div>
-  {% endfor %}
-  {% if cartItems %}
-    <button id="make-payment">realizar pedido</button>
-  {% endif %}
+  {% if is_weiter %}
+    <h2>{{customer.name}}</h2>
+    <a href="{% url 'weiter' restaurant.name %}">; Volver</a>
+    {% for item in items %}
+      <div>
+        <p>{{item.name}}</p><button data-product="{{item.id}}" data-action="add" class="update-order">Pedir</button>
+      </div>
+    {% endfor %}
+    {% for item in cartItems %}
+      <p>{{item.product_name}}</p>
 
-  {% for order in orders_closed %}
-    {% for i in order %}
-      <p>Numero del pedido {{i.order_id}}</p>
-      <p>{{i.quantity}} {{i.product_name}}</p>
-      {% if i.complete %}
-        {% if i.delivered %}
+      {% if item.complete %}
+        {% if item.delivered %}
         <p>Ya fue entregado</p>
         {% else %}
         <p>Cocina he terminado</p>
         {% endif %}
       {% else %}
         <p>No esta listo.</p>
+        <div>
+          <button type="button" name="remove" data-product="{{item.product_id}}" data-action="remove" class="update-order">-</button>
+          <p>{{item.quantity}}</p>
+          <button type="button" name="add" data-product="{{item.product_id}}" data-action="add" class="update-order">+</button>
+        </div>
       {% endif %}
-      <hr>
     {% endfor %}
-  {% endfor %}
-  <script type="text/javascript">
-    let table = '{{table}}'
-    console.log(table)
-  </script>
-  <script type="text/javascript" src="{% static 'js/table.js' %}"></script>
-{% endblock content %}
+    {% if shipping %}
+      <p>Ciudad {{shipping.city}}, direccion {{shipping.address}}</p>
+      <div class="">
+        <p>Contacto</p>
+        <p>Nombre: {{customer.name}}</p>
+        <p>Email: {{customer.email}}</p>
+        <p>Telefono: {{customer.phone}}</p>
 
-{'product_id': 3, 'order_id': '1', 'complete': False, 'quantity': 1, 'product_name': 'Xis Bacon', 'delivered': False}
+      </div>
+    <button data-product="{{cartItems.0.product_id}}" data-order="{{cartItems.0.order_id}}" data-mode="all" class="btn-delivered">Entregar pedido</button>
+    {% endif %}
+    <script type="text/javascript">
+      let order = '{{cartItems.0.order_id}}'
+    </script>
+    <script type="text/javascript" src="{% static 'js/order.js' %}"></script>
+  {% endif %}
+{% endblock content %}

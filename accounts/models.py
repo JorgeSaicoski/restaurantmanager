@@ -28,12 +28,10 @@ class Customer(models.Model):
 		list = []
 		order = []
 		for i in orders:
-			order_id = self.transaction_id
 			complete = i["complete"]
-			delivered = i["delivered"]
-			quantity = i["quantity"]
-			product = Product.objects.get(id=i["product_id"])
-			product_name = product.get_name
-			list.append({'product_id': id, 'order_id': order_id, 'complete': complete, 'quantity':quantity, 'product_name':product_name, 'delivered':delivered})
-		order.append({"items":list,"customer":self.get_customer})
+			closed = i["closed"]
+			transaction_id = i["transaction_id"]
+			delivery = i["delivery"]
+			list.append({"complete":complete, "closed":closed, "transaction_id":transaction_id, "delivery":delivery})
+		order.append({"orders":list,"customer":self.get_customer})
 		return order

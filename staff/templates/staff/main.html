@@ -45,6 +45,9 @@
             <a href="{% url 'weiter' restaurant.name %}">Salon</a>
             <a href="{% url 'tables' restaurant.name %}">Mesas</a>
             {% endif %}
+            {% if is_cashier %}
+            <a href="{% url 'cashier' restaurant.name %}">Caja</a>
+            {% endif %}
         </nav>
         <div>
             {% block content %}

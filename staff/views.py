@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from restaurants.models import Restaurant
-from store.models import OrderItem, Order, Product
+from store.models import OrderItem, Order, Product, ShippingAddress
 from .forms import NewTableForm
 from accounts.models import Customer
 from django.http import JsonResponse
@@ -97,7 +97,7 @@ def kitchen(request, pk):
     return render(request, 'staff/kitchen.html', context)
 
 
-# Update item for weiter
+# Kitchen update item for weiter delivery
 def update_item(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
     data = json.loads(request.body)
@@ -118,18 +118,34 @@ def update_item(request, pk):
     # loop to get the dictonary in the order
     for i in order.get_items:
         todo.append(i)
-    # check if the orders is completed
-    for i in todo:
-        # if any item is not complete:
-        if i["complete"] is False:
-            # Order is not complete
-            order.complete = False
-            # And we dont need to check the rest
-            break
-        else:
-            order.complete = True
-            order.save()
     return JsonResponse('Item was added', safe=False)
+
+
+def cashier(request, pk):
+    restaurant = Restaurant.objects.get(name=pk)
+    user = request.user
+    orders = []
+    local_order = []
+    customers_list = Customer.objects.filter(restaurant=restaurant)
+    all_orders = Order.objects.filter(restaurant=restaurant)
+    if is_cashier(user, restaurant) or is_owner(user, restaurant):
+        for customer in customers_list:
+            local_order.append(customer.get_orders)
+        for order in all_orders:
+            if order.complete and order.delivery:
+                orders.append(order.get_items_order)
+    print(local_order)
+    context = {
+        'local_order': local_order,
+        'orders': orders,
+        'restaurant': restaurant,
+        'is_kitchen': is_kitchen(user, restaurant),
+        'is_weiter': is_weiter(user, restaurant),
+        'is_cashier': is_cashier(user, restaurant),
+        'is_owner': is_owner(user, restaurant)
+    }
+
+    return render(request, 'staff/cashier.html', context)
 
 
 def weiter(request, pk):
@@ -145,7 +161,8 @@ def weiter(request, pk):
         for i in orders:
             # Separate the cart that is already paid to the cart that is not paid
             if i.complete:
-                info.append(i.get_items_order)
+                if i.get_items:
+                    info.append(i.get_items_order)
             # The order that is not paid the weiter can change (put and sack products)
             else:
                 todo.append(i.get_items_order)
@@ -160,17 +177,61 @@ def weiter(request, pk):
     }
     return render(request, 'staff/weiter.html', context)
 
+#detail of a order
+def orderDetail(request, pk, id):
+    restaurant = Restaurant.objects.get(name=pk)
+    user = request.user
+    if is_weiter(user, restaurant) or is_owner(user, restaurant):
+        order = Order.objects.get(transaction_id=id, restaurant=restaurant)
+        customer = order.customer.get_customer
+        products = Product.objects.filter(restaurant=restaurant)
+        items = []
+        cartItems = order.get_items
+        for item in products:
+            check = True
+            for i in cartItems:
+                if item.get_name == i["product_name"]:
+                    check = False
+            if check:
+                items.append(item)
+
+        try:
+            shipping = ShippingAddress.objects.get(order=order).get_shipping
+        except:
+            shipping = False
+
+    context = {
+        'items': items,
+        'restaurant': restaurant,
+        'cartItems': cartItems,
+        'customer': customer,
+        'shipping': shipping,
+        'is_kitchen': is_kitchen(user, restaurant),
+        'is_weiter': is_weiter(user, restaurant),
+        'is_cashier': is_cashier(user, restaurant),
+        'is_owner': is_owner(user, restaurant)
+    }
+    return render(request, 'staff/orderdetail.html', context)
 
 def delivery_item(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
     data = json.loads(request.body)
     productId = data['productId']
     orderId = data['orderId']
-    product = Product.objects.get(id=productId)
+    mode = data["mode"]
     order = Order.objects.get(transaction_id=orderId, restaurant=restaurant)
-    orderItem = OrderItem.objects.get(order=order, product=product)
-    orderItem.delivered = True
-    orderItem.save()
+    product = Product.objects.get(id=productId)
+    if mode == "item":
+        orderItem = OrderItem.objects.get(order=order, product=product)
+        orderItem.delivered = True
+        orderItem.save()
+    else:
+        ordemItem = OrderItem.objects.filter(order=order)
+        for item in ordemItem:
+            item.delivered = True
+            item.complete = True
+            item.save()
+
     return JsonResponse('Item was added', safe=False)
 
 
@@ -187,7 +248,7 @@ def new_table(request, pk):
             except:
                 customer = Customer.objects.create(name=name, restaurant=restaurant)
             customer.save()
-            return redirect("/staff/{}/mozo".format(restaurant))
+            return redirect("/staff/{}/{}".format(restaurant,name))
     form = NewTableForm(request.POST)
     return render(request=request, template_name="staff/newtable.html", context={"register_form": form})
 
@@ -196,9 +257,10 @@ def tables(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
     user = request.user
     tables = []
-    get_tables = Customer.objects.filter(restaurant=restaurant)
-    for i in get_tables:
-        tables.append(i.get_customer)
+    if is_weiter(user, restaurant) or is_owner(user, restaurant):
+        get_tables = Customer.objects.filter(restaurant=restaurant)
+        for i in get_tables:
+            tables.append(i.get_customer)
 
     context = {
         'restaurant': restaurant,
@@ -213,28 +275,64 @@ def tables(request, pk):
 
 def table(request, pk, table):
     restaurant = Restaurant.objects.get(name=pk)
-
-    customer = Customer.objects.get(name=table)
-    table_detail = customer.get_customer
-    order, created = Order.objects.get_or_create(customer=customer, closed=False, complete=False, delivery=False,
-                                                 restaurant=restaurant)
-    items = Product.objects.filter(restaurant=restaurant)
-    order_closed = Order.objects.filter(customer=customer, closed=False, complete=True, restaurant=restaurant)
-    cartItems = order.get_items
+    user = request.user
     orders_closed = []
-    for i in order_closed:
-        orders_closed.append(i.get_items)
+    if is_weiter(user, restaurant) or is_owner(user, restaurant):
+
+        customer = Customer.objects.get(name=table, restaurant=restaurant)
+        table_detail = customer.get_customer
+        order, created = Order.objects.get_or_create(customer=customer, closed=False, complete=False, delivery=False,
+                                                     restaurant=restaurant)
+        products = Product.objects.filter(restaurant=restaurant)
+        order_closed = Order.objects.filter(customer=customer, closed=False, complete=True, restaurant=restaurant)
+        cartItems = order.get_items
+        items=[]
+        for item in products:
+            check = True
+            for i in cartItems:
+                if item.get_name == i["product_name"]:
+                    check = False
+            if check:
+                items.append(item)
+
+        for i in order_closed:
+            orders_closed.append(i.get_items)
 
     context = {
         'items': items,
         'table': table_detail["name"],
         'restaurant': restaurant,
         'cartItems': cartItems,
-        'orders_closed': orders_closed
+        'orders_closed': orders_closed,
+        'is_kitchen': is_kitchen(user, restaurant),
+        'is_weiter': is_weiter(user, restaurant),
+        'is_cashier': is_cashier(user, restaurant),
+        'is_owner': is_owner(user, restaurant)
     }
-    return render(request, 'staff/orderdetail.html', context)
+    return render(request, 'staff/tabledetail.html', context)
 
 
+def updateOrder(request, pk, id):
+    restaurant = Restaurant.objects.get(name=pk)
+
+    data = json.loads(request.body)
+    productId = data['productId']
+    action = data['action']
+    product = Product.objects.get(id=productId)
+    order = Order.objects.get(restaurant=restaurant, transaction_id=id)
+
+    orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+
+    if action == 'add':
+        orderItem.quantity = (orderItem.quantity + 1)
+    elif action == 'remove':
+        orderItem.quantity = (orderItem.quantity - 1)
+
+    orderItem.save()
+    if orderItem.quantity <= 0:
+        orderItem.delete()
+
+    return JsonResponse('Item was added', safe=False)
 def updateTable(request, pk, table):
     restaurant = Restaurant.objects.get(name=pk)
 
@@ -242,7 +340,7 @@ def updateTable(request, pk, table):
     productId = data['productId']
     action = data['action']
 
-    customer = Customer.objects.get(name=table)
+    customer = Customer.objects.get(name=table, restaurant=restaurant)
     product = Product.objects.get(id=productId)
     order, created = Order.objects.get_or_create(customer=customer, closed=False, complete=False, delivery=False,
                                                  restaurant=restaurant)
@@ -265,7 +363,7 @@ def processTable(request, pk, table):
     restaurant = Restaurant.objects.get(name=pk)
     data = json.loads(request.body)
     # get form data
-    customer = Customer.objects.get(name=table)
+    customer = Customer.objects.get(name=table, restaurant=restaurant)
     order, created = Order.objects.get_or_create(customer=customer, complete=False, restaurant=restaurant)
 
     # create id
@@ -279,3 +377,4 @@ def processTable(request, pk, table):
     order.save()
 
     return JsonResponse('Payment submitted..', safe=False)
+

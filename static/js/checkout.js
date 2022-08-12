@@ -81,7 +81,7 @@ document.getElementById('make-payment').addEventListener('click', function(e){
       }).then((result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          window.location.href = `http://127.0.0.1:8000/account/login/`
+          window.location.href = `/account/login/`
         } else if (result.isDenied) {
           Swal.fire('Elija un email que no este en uso')
         }
