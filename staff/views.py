@@ -64,7 +64,7 @@ def main(request, pk):
 def kitchen(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
     # get the orders of this restaurant
-    orders = Order.objects.filter(restaurant=restaurant).order_by('transaction_id')
+    orders = Order.objects.filter(restaurant=restaurant, closed=False).order_by('transaction_id')
     user = request.user
     local = []
     delivery = []
@@ -127,14 +127,13 @@ def cashier(request, pk):
     orders = []
     local_order = []
     customers_list = Customer.objects.filter(restaurant=restaurant)
-    all_orders = Order.objects.filter(restaurant=restaurant)
+    all_orders = Order.objects.filter(restaurant=restaurant, closed=False)
     if is_cashier(user, restaurant) or is_owner(user, restaurant):
         for customer in customers_list:
             local_order.append(customer.get_orders)
         for order in all_orders:
             if order.complete and order.delivery:
-                orders.append(order.get_items_order)
-    print(local_order)
+                orders.append(order)
     context = {
         'local_order': local_order,
         'orders': orders,
@@ -152,7 +151,7 @@ def weiter(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
     user = request.user
     # get the orders of this restaurant
-    orders = Order.objects.filter(restaurant=restaurant)
+    orders = Order.objects.filter(restaurant=restaurant, closed=False)
     info = []
     todo = []
     # check if user is auth to kitchen
@@ -186,10 +185,9 @@ def orderDetail(request, pk, id):
         customer = order.customer.get_customer
         products = Product.objects.filter(restaurant=restaurant)
         items = []
-        cartItems = order.get_items
         for item in products:
             check = True
-            for i in cartItems:
+            for i in order.get_items:
                 if item.get_name == i["product_name"]:
                     check = False
             if check:
@@ -203,7 +201,7 @@ def orderDetail(request, pk, id):
     context = {
         'items': items,
         'restaurant': restaurant,
-        'cartItems': cartItems,
+        'order': order,
         'customer': customer,
         'shipping': shipping,
         'is_kitchen': is_kitchen(user, restaurant),
@@ -284,25 +282,22 @@ def table(request, pk, table):
         order, created = Order.objects.get_or_create(customer=customer, closed=False, complete=False, delivery=False,
                                                      restaurant=restaurant)
         products = Product.objects.filter(restaurant=restaurant)
-        order_closed = Order.objects.filter(customer=customer, closed=False, complete=True, restaurant=restaurant)
-        cartItems = order.get_items
+        orders_closed = Order.objects.filter(customer=customer, closed=False, complete=True, restaurant=restaurant)
         items=[]
         for item in products:
             check = True
-            for i in cartItems:
+            for i in order.get_items:
                 if item.get_name == i["product_name"]:
                     check = False
             if check:
                 items.append(item)
 
-        for i in order_closed:
-            orders_closed.append(i.get_items)
 
     context = {
         'items': items,
         'table': table_detail["name"],
         'restaurant': restaurant,
-        'cartItems': cartItems,
+        'order': order,
         'orders_closed': orders_closed,
         'is_kitchen': is_kitchen(user, restaurant),
         'is_weiter': is_weiter(user, restaurant),
@@ -375,6 +370,25 @@ def processTable(request, pk, table):
 
     order.complete = True
     order.save()
+
+    return JsonResponse('Payment submitted..', safe=False)
+
+def closeOrder(request, pk, id):
+    restaurant = Restaurant.objects.get(name=pk)
+    data = json.loads(request.body)
+    name = data['customer']
+    order = Order.objects.get(restaurant=restaurant, transaction_id = id)
+    order.closed = True
+    order.save()
+    customer = Customer.objects.get(name=name, restaurant=restaurant)
+    for order in customer.get_orders:
+        for i in order["orders"]:
+            if i["transaction_id"]:
+                if not i["closed"]:
+                   return JsonResponse('Payment submitted..', safe=False)
+    customer.delete()
+
+
 
     return JsonResponse('Payment submitted..', safe=False)
 

@@ -63,7 +63,14 @@ class Order(models.Model):
 	@property
 	def is_delivery(self):
 		return self.delivery
-
+	#if all itens is completed (for weiter)
+	@property
+	def is_finished(self):
+		orderitems = self.orderitem_set.all().values()
+		for item in orderitems:
+			if not item["delivered"]:
+				return False
+		return True
 	# Get cart items to print to weiter
 	@property
 	def get_items_order(self):

@@ -10,7 +10,7 @@
         <p>{{item.name}}</p><button data-product="{{item.id}}" data-action="add" class="update-order">Pedir</button>
       </div>
     {% endfor %}
-    {% for item in cartItems %}
+    {% for item in order.get_items %}
       <p>{{item.product_name}}</p>
 
       {% if item.complete %}
@@ -37,11 +37,40 @@
         <p>Telefono: {{customer.phone}}</p>
 
       </div>
-    <button data-product="{{cartItems.0.product_id}}" data-order="{{cartItems.0.order_id}}" data-mode="all" class="btn-delivered">Entregar pedido</button>
+      {% if order.is_finished %}
+        <p>Completado y entregué</p>
+      {% else %}
+        <button data-product="{{order.get_items.0.product_id}}" data-order="{{order.get_items.0.order_id}}" data-mode="all" class="btn-delivered">Entregar pedido</button>
+      {% endif %}
+
     {% endif %}
-    <script type="text/javascript">
-      let order = '{{cartItems.0.order_id}}'
-    </script>
-    <script type="text/javascript" src="{% static 'js/order.js' %}"></script>
   {% endif %}
+  {% if is_cashier %}
+  <p>Numero del pedido {{order.get_items.0.order_id}}</p>
+    {% for i in order.get_items %}
+
+      <p>{{i.quantity}} {{i.product_name}}</p>
+      {% if i.complete %}
+        {% if i.delivered %}
+        <p>Ya fue entregado</p>
+        {% else %}
+        <p>Cocina he terminado</p>
+        <button data-product="{{i.product_id}}" data-order="{{i.order_id}}" data-mode="item" class="btn-delivered">Entregar item</button>
+        {% endif %}
+      {% else %}
+        <p>No esta listo.</p>
+      {% endif %}
+    {% endfor %}
+    <tr>
+      <th><h5>Items: {{order.get_cart_items}}</h5></th>
+      <th><h5>Total: UYU{{order.get_cart_total|floatformat:2}}</h5></th>
+      <th>
+        <button data-customer="{{customer.name}}" id="btn-paid">Pagar</button>
+      </th>
+    </tr>
+  {% endif %}
+  <script type="text/javascript">
+    let order = '{{order.get_items.0.order_id}}'
+  </script>
+  <script type="text/javascript" src="{% static 'js/order.js' %}"></script>
 {% endblock content %}

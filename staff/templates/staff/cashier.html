@@ -7,8 +7,9 @@
       {% for order in orders %}
           {{order.customer.name}}
           {% for i in order.orders %}
-            {% if i.transaction_id %}
+            {% if i.transaction_id and not i.closed %}
             <p>pedido {{i.transaction_id}}</p>
+            <a href="{% url 'orderDetail' restaurant.name i.transaction_id %}">Detalles del pedido</a>
             {% endif %}
           {% endfor %}
         <hr>
@@ -16,10 +17,16 @@
     {% endfor %}
     <p>Pedidos para delivery</p>
     {% for order in orders %}
-      <p>Cliente</p>
-      <p>{{order.1.customer.name}}</p>
-      <p>{{order.1.customer.email}}</p>
+        {{order.customer.name}}
+
+        {% if order.transaction_id %}
+        <p>pedido {{order.transaction_id}}</p>
+        <a href="{% url 'orderDetail' restaurant.name order.transaction_id %}">Detalles del pedido</a>
+
+        {% endif %}
+
       <hr>
+
     {% endfor %}
   {% endif %}
 {% endblock content %}

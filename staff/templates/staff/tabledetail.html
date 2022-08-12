@@ -10,7 +10,7 @@
         <p>{{item.name}}</p><button data-product="{{item.id}}" data-action="add" class="add-btn update-table">Pedir</button>
       </div>
     {% endfor %}
-    {% for item in cartItems %}
+    {% for item in order.get_items %}
     <p>{{item.product_name}}</p>
       <div>
         <button type="button" name="remove" data-product="{{item.product_id}}" data-action="remove" class="update-table">-</button>
@@ -18,13 +18,14 @@
         <button type="button" name="add" data-product="{{item.product_id}}" data-action="add" class="update-table">+</button>
       </div>
     {% endfor %}
-    {% if cartItems %}
+    {% if order.get_items %}
       <button id="make-payment">realizar pedido</button>
     {% endif %}
 
+
     {% for order in orders_closed %}
-    <p>Numero del pedido {{i.order_id}}</p>
-      {% for i in order %}
+    <p>Numero del pedido {{order.get_items.0.order_id}}</p>
+      {% for i in order.get_items %}
 
         <p>{{i.quantity}} {{i.product_name}}</p>
         {% if i.complete %}
@@ -32,12 +33,18 @@
           <p>Ya fue entregado</p>
           {% else %}
           <p>Cocina he terminado</p>
+          <button data-product="{{i.product_id}}" data-order="{{i.order_id}}" data-mode="item" class="btn-delivered">Entregar item</button>
           {% endif %}
         {% else %}
           <p>No esta listo.</p>
         {% endif %}
       {% endfor %}
-      <button data-product="1" data-order="{{i.order_id}}" data-mode="order" class="btn-delivered">Entregar el pedido</button>
+      {% if order.is_finished %}
+        <p>Completado y entregué</p>
+      {% else %}
+        <button data-product="1" data-order="{{order.get_items.0.order_id}}" data-mode="order" class="btn-delivered">Entregar el pedido</button>
+      {% endif %}
+
     <hr>
     {% endfor %}
     <script type="text/javascript">

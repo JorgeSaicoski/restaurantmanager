@@ -17,4 +17,5 @@ urlpatterns = [
 	path('<str:pk>/<str:table>/update_table/', views.updateTable, name="update_table"),
 	path('<str:pk>/<str:id>/update_order/', views.updateOrder, name="update_order"),
 	path('<str:pk>/<str:table>/process_table/', views.processTable, name="process_table"),
+	path('<str:pk>/<str:id>/close_order/', views.closeOrder, name="close_order"),
 ]
