@@ -163,8 +163,7 @@ def weiter(request, pk):
                 if i.get_items:
                     info.append(i.get_items_order)
             # The order that is not paid the weiter can change (put and sack products)
-            else:
-                todo.append(i.get_items_order)
+
     context = {
         'restaurant': restaurant,
         'todo': todo,
@@ -377,7 +376,7 @@ def closeOrder(request, pk, id):
     restaurant = Restaurant.objects.get(name=pk)
     data = json.loads(request.body)
     name = data['customer']
-    order = Order.objects.get(restaurant=restaurant, transaction_id = id)
+    order = Order.objects.get(restaurant=restaurant, transaction_id=id)
     order.closed = True
     order.save()
     # try to delete the Costumer. If it is not a local is will pass
