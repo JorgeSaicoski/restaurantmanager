@@ -380,13 +380,18 @@ def closeOrder(request, pk, id):
     order = Order.objects.get(restaurant=restaurant, transaction_id = id)
     order.closed = True
     order.save()
-    customer = Customer.objects.get(name=name, restaurant=restaurant)
-    for order in customer.get_orders:
-        for i in order["orders"]:
-            if i["transaction_id"]:
-                if not i["closed"]:
-                   return JsonResponse('Payment submitted..', safe=False)
-    customer.delete()
+    # try to delete the Costumer. If it is not a local is will pass
+    try:
+        customer = Customer.objects.get(name=name, restaurant=restaurant)
+        # if this customer have any open order it will not be deleted
+        for order in customer.get_orders:
+            for i in order["orders"]:
+                if i["transaction_id"]:
+                    if not i["closed"]:
+                       return JsonResponse('Payment submitted..', safe=False)
+        customer.delete()
+    except:
+        pass
 
 
 
