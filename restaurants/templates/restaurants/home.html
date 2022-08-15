@@ -9,11 +9,23 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     </head>
     <body>
-    	{% for restaurant in restaurants %}
-        <a href="/restaurant/{{restaurant.name}}" class="restaurant">
-          <p>{{restaurant.name}}</p>
-          <img src="{{restaurant.image.url}}" class="logo">
-        </a>
+      <div class="search">
+        <p>Buscador:</p>
+        <input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Nombre del restaurant o descricion" title="Type in a name">
+      </div>
+      <ul class="list" id="listToSearch">
+        {% for restaurant in restaurants %}
+          <li class="restaurant">
+            <a href="/restaurant/{{restaurant.name}}" class="restaurant-link">
+              <div class="focus">
+                <p>{{restaurant.name}}</p>
+                <p>{{restaurant.description}}</p>
+              </div>
+              <img src="{{restaurant.image.url}}" class="logo">
+            </a>
+          </li>
         {% endfor %}
+      </ul>
+    <script type="text/javascript" src="{% static 'js/search.js' %}"></script>
     </body>
 </html>

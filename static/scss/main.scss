@@ -1,4 +1,6 @@
-@use 'restaurant';
+@import 'variables';
+@import 'general';
+@import 'restaurant';
 
 
 *, *:before, *:after{
@@ -49,6 +51,3 @@ input{
 }
 
 /*# now, the scss */
-.logo{
-  width: 300px;
-}

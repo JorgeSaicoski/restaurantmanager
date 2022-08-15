@@ -1,4 +1,99 @@
-@use 'restaurant';
+p {
+  color: #103900;
+  padding: 1vh; }
+
+body {
+  background-color: #27FB6B; }
+  body::-webkit-scrollbar {
+    width: 10px;
+    height: 10px; }
+  body::-webkit-scrollbar-thumb {
+    background: #1B2CC1;
+    border-radius: 2vh; }
+  body::-webkit-scrollbar-track {
+    background: #0AD3FF; }
+  body {
+    scrollbar-face-color: #1B2CC1;
+    scrollbar-track-color: #0AD3FF; }
+
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  list-style-type: none; }
+  .list::-webkit-scrollbar {
+    width: 10px;
+    height: 10px; }
+  .list::-webkit-scrollbar-thumb {
+    background: #1B2CC1;
+    border-radius: 2vh; }
+  .list::-webkit-scrollbar-track {
+    background: #0AD3FF; }
+  .list {
+    scrollbar-face-color: #1B2CC1;
+    scrollbar-track-color: #0AD3FF; }
+
+.list-deital {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none; }
+
+#searchBar {
+  width: 80vh;
+  background-color: #D7263D;
+  padding: 2vw;
+  color: #0AD3FF;
+  border-radius: 2vh;
+  font-size: 24px; }
+
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 2vh; }
+
+/* When is necessary to hidde some information and show when hover */
+.focus {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 1;
+  background-color: #1B2CC1;
+  transition: width 1s, height 2.5s, opacity 2s;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .focus:hover {
+    opacity: 1; }
+
+.focus p {
+  color: #0AD3FF; }
+
+.restaurant {
+  height: 300px;
+  width: 300px;
+  margin: 2vw; }
+  .restaurant-link {
+    height: 300px;
+    width: 300px;
+    position: absolute;
+    border-radius: 20%;
+    overflow: hidden; }
+
+.logo {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0; }
+
 *, *:before, *:after {
   box-sizing: border-box; }
 
@@ -38,7 +133,5 @@ input {
   border-radius: 0; }
 
 /*# now, the scss */
-.logo {
-  width: 300px; }
 
 /*# sourceMappingURL=main.css.map */

@@ -1,4 +1,20 @@
-.logo{
+.restaurant{
   height: $image-default-size;
   width: $image-default-size;
+
+  margin: $margin-default;
+   &-link{
+     height: $image-default-size;
+     width: $image-default-size;
+     position: absolute;
+     border-radius: $rounded;
+     overflow: hidden;
+   }
+}
+.logo{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }

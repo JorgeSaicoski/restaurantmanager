@@ -1,0 +1,84 @@
+@mixin scrollbars($size, $foreground-color, $background-color: mix($foreground-color, white,  50%)) {
+  // For Google Chrome
+  &::-webkit-scrollbar {
+    width:  $size;
+    height: $size;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $foreground-color;
+    border-radius: $rounded-soft;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background-color;
+  }
+
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}
+
+p{
+  color: $font-color;
+  padding: 1vh;
+}
+body{
+  background-color: $base-color;
+  @include scrollbars(10px, $dark-color, $select-color);
+}
+
+.list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  list-style-type: none;
+  @include scrollbars(10px, $dark-color, $select-color);
+}
+.list-deital{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+}
+#searchBar{
+  width: 80vh;
+  background-color: $alert-color;
+  padding: 2vw;
+  color:$select-color;
+  border-radius: $rounded-soft;
+  font-size: 24px;
+}
+.search{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 2vh;
+}
+
+/* When is necessary to hidde some information and show when hover */
+.focus{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 1;
+  background-color: $dark-color;
+  transition: $transition;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+      opacity: 1;
+    }
+}
+.focus p{
+  color: $select-color;
+}
