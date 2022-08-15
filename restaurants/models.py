@@ -9,7 +9,7 @@ class Restaurant(models.Model):
     #how can add products and change the cash?
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     #restaurant image
-    restaurant_img = models.ImageField(null=False, blank=True, upload_to='restaurant/', default="/default/restaurant.png")
+    image = models.ImageField(null=False, blank=True, upload_to='restaurant/', default="/default/restaurant.png")
     #how can create order
     weiter = models.ManyToManyField(User, related_name="weiter")
     #how receive the order and change this state?

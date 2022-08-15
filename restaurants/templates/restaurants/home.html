@@ -12,7 +12,7 @@
     	{% for restaurant in restaurants %}
         <a href="/restaurant/{{restaurant.name}}" class="restaurant">
           <p>{{restaurant.name}}</p>
-          <img src="{{restaurant.restaurant_img.url}}" class="logo">
+          <img src="{{restaurant.image.url}}" class="logo">
         </a>
         {% endfor %}
     </body>
