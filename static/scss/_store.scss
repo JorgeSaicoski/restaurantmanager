@@ -1,0 +1,61 @@
+.card{
+  height: $card-heigth;
+  width: $card-width;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $dark-color;
+  transition: $transition;
+  margin: $margin-default;
+  padding: $margin-default;
+  border-radius: $rounded-soft;
+  &:hover {
+      background-color: $select-color;
+    }
+  &-title{
+    font-size: 24px;
+    color:$alert-color;
+  }
+  &-detail p{
+    font-size: 12px;
+    color: $dark-color;
+    text-align: center;
+  }
+}
+.add-btn{
+  background-color: $alert-color;
+  border-radius: $rounded-soft;
+  padding: 2px 15px 2px 15px;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.image-food{
+  height: $image-default-size;
+  width: $image-default-size;
+}
+
+.cart{
+  &-img{
+    width: $nav-images-default-site;
+  }
+  &-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 120px;
+  }
+}
+.cart p{
+  background-color: $alert-color;
+  border-radius: 9999px;
+  padding: 14px 19px;
+  font-size: 24px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+
+}

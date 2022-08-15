@@ -2,18 +2,24 @@
 {% load static %}
 {% block content %}
 	<div>
-		{% for product in products %}
-		<div>
-			<div>
-				<h6>{{product.name}}</h6>
-				<button data-product="{{product.id}}" data-action="add" class="add-btn update-cart">Add to Cart</button>
-				<a href="#">View</a>
-				<h4>{{product.price}}</h4>
-				<img src="{{product.image.url}}" alt="{{product.name}}">
-			</div>
+		<div class="search">
+			<input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Que vamos a pedir en {{restaurant.name}}?" title="Type in a name">
 		</div>
-		{% endfor %}
-		<a href="{% url 'cart' restaurant.name %}">Go to Cart</a>
+		<ul class="list" id="listToSearch">
+			{% for product in products %}
+			<li>
+				<a class="card">
+					<h3 class="card-title">{{product.name}}</h3>
+					<img src="{{product.image.url}}" alt="{{product.name}}" class="image-food">
+					<div class="card-detail">
+						<p>{{product.description}}</p>
+						<h4>UYU {{product.price}}</h4>
+					</div>
+					<button data-product="{{product.id}}" data-action="add" class="add-btn update-cart">Adicionar</button>
+				</a>
+			</li>
+			{% endfor %}
+		</ul>
 	</div>
-
+<script type="text/javascript" src="{% static 'js/search.js' %}"></script>
 {% endblock content %}

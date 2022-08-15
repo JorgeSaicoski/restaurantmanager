@@ -1,12 +1,13 @@
+let input = document.getElementById("searchBar");
+let ul = document.getElementById("listToSearch");
+let pos = ul.offsetTop
+
 function searchBar() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById("searchBar");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("listToSearch");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
+    let filter = input.value.toUpperCase();
+    let li = ul.getElementsByTagName("li");
+    for (let i = 0; i < li.length; i++) {
+        let a = li[i].getElementsByTagName("a")[0];
+        let txtValue = a.textContent || a.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
         } else {
@@ -14,3 +15,15 @@ function searchBar() {
         }
     }
 }
+
+input.addEventListener("keypress", function(event){
+  if (event.key === "Enter") {
+    event.preventDefault();
+    window.scroll({
+      top: pos,
+      left: 0,
+      behavior: 'smooth'
+    });
+    // document.getElementById("myBtn").click();
+  }
+})

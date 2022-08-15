@@ -16,7 +16,8 @@ def store(request,pk):
 	order = data['order']
 	items = data['items']
 	products = Product.objects.filter(restaurant=restaurant)
-	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant}
+
+	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant, 'order':order,}
 	return render(request, 'store/store.html', context)
 
 #send to cart
@@ -71,9 +72,10 @@ def checkout(request,pk):
 		cartItems = order.get_cart_items
 	else:
 		#Create empty cart for now for non-logged in user
-		items = []
-		order = {'get_cart_total':0, 'get_cart_items':0}
-		cartItems = order['get_cart_items']
+		data = cartData(request, restaurant)
+		cartItems = data['cartItems']
+		order = data['order']
+		items = data['items']
 
 	context = {'items':items, 'order':order, 'cartItems':cartItems, 'restaurant':restaurant}
 	return render(request, 'store/checkout.html', context)

@@ -9,9 +9,14 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     </head>
     <body>
-      <div class="search">
-        <p>Buscador:</p>
-        <input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Nombre del restaurant o descricion" title="Type in a name">
+      <div class="search restaurantBar">
+        {% if show_login %}
+          <ul class="login-register">
+            <li><a href="{% url 'register' %}">Registrar</a></li>
+            <li><a href="{% url 'login' %}">Entrar en mi cuenta</a></li>
+          </ul>
+        {% endif %}
+        <input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Que vamos a pedir? Donde?" title="Type in a name">
       </div>
       <ul class="list" id="listToSearch">
         {% for restaurant in restaurants %}
