@@ -10,10 +10,10 @@
     </head>
     <body>
     	{% for restaurant in restaurants %}
-        <a href="/restaurant/{{restaurant.name}}">{{restaurant.name}}</a>
-        {% if restaurant.image %}
-        <img src="{{restaurant.restaurant_img.url}}">
-        {% endif %}
+        <a href="/restaurant/{{restaurant.name}}" class="restaurant">
+          <p>{{restaurant.name}}</p>
+          <img src="{{restaurant.restaurant_img.url}}" class="logo">
+        </a>
         {% endfor %}
     </body>
 </html>
