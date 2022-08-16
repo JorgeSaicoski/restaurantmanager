@@ -30,23 +30,21 @@ body {
 .navbar a {
   color: #232528;
   text-decoration: none;
-  font-size: 24px;
-  text-align: center;
-  display: flex;
-  align-items: center; }
-
-.navbar li {
   height: 100%;
   background-color: #BB0A21;
   border-radius: 2vh;
   border: solid 3px #009FFD;
   padding: 2vw;
-  transition: width 1s, height 2.5s, opacity 2s, background-color 1s;
   display: flex;
-  align-items: center; }
-  .navbar li:hover {
+  align-items: center;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s; }
+  .navbar a:hover {
     background-color: #EAF6FF;
     cursor: pointer; }
+
+.navbar li {
+  font-size: 24px;
+  text-align: center; }
 
 .navbar img {
   width: 50px; }
@@ -96,6 +94,10 @@ body {
 
 .focus p {
   color: #EAF6FF; }
+
+.screen {
+  min-width: 100vw;
+  min-height: 100vh; }
 
 .restaurant {
   height: 300px;
@@ -169,15 +171,16 @@ body {
   height: 300px;
   width: 300px; }
 
-.cart-img {
+.cart-nav-img {
   width: 50px; }
-.cart-container {
+.cart-nav-container {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
   width: 120px; }
 
-.cart p {
+.cart-nav p {
   background-color: #BB0A21;
   border-radius: 9999px;
   padding: 14px 19px;
@@ -185,6 +188,37 @@ body {
   text-align: center;
   display: flex;
   align-items: center; }
+
+.cart-body {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 2vw; }
+
+.table-cart {
+  padding: 5px;
+  border: 5px solid #2A2A72;
+  color: #EAF6FF;
+  text-align: center; }
+  .table-cart-head {
+    background-color: #2A2A72;
+    border: 4px solid #232528; }
+  .table-cart-head th {
+    border: 2px solid #232528; }
+  .table-cart-body, .table-cart-body td {
+    background-color: #2A2A72;
+    border: 2px solid #232528; }
+  .table-cart-foot, .table-cart-foot td {
+    background-color: #EAF6FF;
+    border: 5px solid #2A2A72;
+    color: #232528; }
+  .table-cart th, .table-cart td {
+    padding: 5px; }
+  .table-cart a {
+    text-decoration: none; }
 
 *, *:before, *:after {
   box-sizing: border-box; }

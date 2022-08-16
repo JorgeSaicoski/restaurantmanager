@@ -1,44 +1,38 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
-	<div>
-		<div>
-			<div>
+<div class="screen">
+	<div class="cart-body">
+		<table class="table-cart">
+				<tr class="table-cart-head">
+					<th>Item</th>
+					<th>Precio</th>
+					<th>Cantidad</th>
+					<th>Total</th>
+					<th></th>
 
-				
-				<table>
-					<tr>
-						<th><h5>Items: {{order.get_cart_items}}</h5></th>
-						<th><h5>Total: UYU{{order.get_cart_total|floatformat:2}}</h5></th>
-						<th>
-							<a href="{% url 'checkout' restaurant.name %}">Checkout</a>
-						</th>
-					</tr>
-				</table>
-
-			</div>
-
-			<div>
-				<div>
-					<div></div>
-					<div>Item</div>
-					<div>Price</div>
-					<div>Quantity</div>
-					<div>Total</div>
-				</div>
+				</tr>
 				{% for item in items %}
-				<div>
-					<!--<div><img src="{{item.product.imageURL}}"></div>-->
-					<div><p>{{item.product.name}}</p></div>
-					<div><p>${{item.product.price|floatformat:2}}</p></div>
-					<div>
-						<button type="button" name="remove" data-product="{{item.product.id}}" data-action="remove" class="update-cart">-</button>
-						<p>{{item.quantity}}</p>
-						<button type="button" name="add" data-product="{{item.product.id}}" data-action="add" class="update-cart">+</button>
-					</div>
-				</div>
+					<tr class="table-cart-body">
+						<td>{{item.product.name}}</td>
+						<td>UYU{{item.product.price|floatformat:2}}</td>
+						<td>{{item.quantity}}</td>
+						<td>UYU{{order.get_cart_total|floatformat:2}}</td>
+						<td>
+							<button type="button" name="remove" data-product="{{item.product.id}}" data-action="remove" class="update-cart">-</button>
+							<button type="button" name="add" data-product="{{item.product.id}}" data-action="add" class="update-cart">+</button>
+						</td>
+					</tr>
 				{% endfor %}
-			</div>
-		</div>
+				<tr class="table-cart-foot">
+					<td>Total</td>
+					<td></td>
+					<td>{{order.get_cart_items}}</td>
+					<td>UYU{{order.get_cart_total|floatformat:2}}</td>
+					<td><a href="{% url 'checkout' restaurant.name %}">Completar pedido</a></td>
+				</tr>
+		</table>
 	</div>
+</div>
+
 {% endblock content %}

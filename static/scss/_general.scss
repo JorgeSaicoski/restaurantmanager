@@ -44,25 +44,26 @@ body{
 .navbar a{
   color: $font-color;
   text-decoration: none;
-  font-size: 24px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-}
-.navbar li{
   height: 100%;
   background-color: $alert-color;
   border-radius: $rounded-soft;
   border: solid 3px $base-color;
   padding: $margin-default;
-  transition: $transition;
   display: flex;
   align-items: center;
-
+  transition: $transition;
   &:hover {
       background-color: $select-color;
       cursor: pointer;
     }
+}
+.navbar li{
+  font-size: 24px;
+  text-align: center;
+
+
+
+
 }
 .navbar img{
   width: $nav-images-default-site;
@@ -116,4 +117,10 @@ body{
 }
 .focus p{
   color: $select-color;
+}
+
+.screen{
+  min-width: 100vw;
+  min-height: 100vh;
+
 }
