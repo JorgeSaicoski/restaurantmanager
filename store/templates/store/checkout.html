@@ -1,70 +1,74 @@
 {% extends 'store/main.html' %}
 {% load static %}
 {% block content %}
-     <div>
-		<div>
-			<div  id="form-wrapper">
-				<form id="form">
-          {% csrf_token %}
-					<div id="user-info">
-						<div class="form-field">
-							<input required class="form-control" type="text" name="name" placeholder="Name..">
-						</div>
-						<div class="form-field">
-							<input required class="form-control" type="email" name="email" placeholder="Email..">
-						</div>
-						<div class="form-field">
-							<input required class="form-control" type="tel" name="phone" placeholder="099555333" pattern="[0-9]{9}">
-						</div>
-					</div>
+<div id="checkout" class="screen">
+  <div class="checkout-information">
+  	<div  id="form-wrapper">
+  		<form id="form">
+        {% csrf_token %}
+  			<div id="user-info">
+          <p>Informacion de contacto:</p>
+  				<div class="form-field">
+            <label for="name">Nombre</label>
+  					<input required class="form-control" type="text" name="name" placeholder="Amalia ..">
+  				</div>
+  				<div class="form-field">
+            <label for="phone">Email</label>
+  					<input required class="form-control" type="email" name="email" placeholder="amalia@sarkis.dev">
+  				</div>
+  				<div class="form-field">
+            <label for="phone">Telefono (Whats)</label>
+  					<input required class="form-control" type="tel" name="phone" placeholder="099555333" pattern="[0-9]{9}">
+  				</div>
+  			</div>
 
-					<div id="delivery-info">
-						<hr>
-						<p>Shipping Information:</p>
-						<hr>
-						<div class="form-field">
-							<input class="form-control" type="text" name="address" placeholder="Address..">
-						</div>
-						<div class="form-field">
-							<input class="form-control" type="text" name="city" placeholder="City..">
-						</div>
-						<div class="form-field">
-							<input class="form-control" type="text" name="state" placeholder="State..">
-						</div>
-						<div class="form-field">
-							<input class="form-control" type="text" name="zipcode" placeholder="Zip code..">
-						</div>
-					</div>
-					<input id="form-button" type="submit" value="Continue">
-				</form>
-			</div>
+  			<div id="delivery-info">
+  				<p>Informacion para entrega:</p>
+  				<div class="form-field">
+            <label for="address">Direccion (y comentarios)</label>
+  					<input class="form-control" type="text" name="address" placeholder="Defensa 1550 esq. 18 de jul" required>
+  				</div>
+  				<div class="form-field">
+            <label for="city">Ciudad</label>
+  					<input class="form-control" type="text" name="city" placeholder="Montevideo">
+  				</div>
+  				<div class="form-field">
+            <label for="state">Provincia</label>
+  					<input class="form-control" type="text" name="state" placeholder="Montevideo">
+  				</div>
+  				<div class="form-field">
+            <label for="zipcode">CEP</label>
+  					<input class="form-control" type="text" name="zipcode" placeholder="11200">
+  				</div>
+  			</div>
+  			<input id="form-button" type="submit" value="Continue">
+  		</form>
+  	</div>
+  	<div class="box-element hidden" id="payment-info">
+      <button id="make-payment">realizar pedido</button>
+  	</div>
+
+  </div>
+
+  <div class="checkout-check">
+  	<div class="checkout-check-container">
 
 
-			<div class="box-element hidden" id="payment-info">
-        <button id="make-payment">realizar pedido</button>
-			</div>
+  		<h3>Order Summary</h3>
 
-		</div>
-
-		<div>
-			<div>
-				
-
-				<h3>Order Summary</h3>
-
-				{% for item in items %}
-				<div class="cart-row">
-					<!-- <div><img class="row-image" src="{{item.product.imageURL}}"></div> -->
-					<div><p>{{item.product.name}}</p></div>
-					<div><p>${{item.product.price|floatformat:2}}</p></div>
-					<div><p>x{{item.quantity}}</p></div>
-				</div>
-				{% endfor %}
-        		<h5>Items:    {{order.get_cart_items}}</h5>
-				<h5>Total:   ${{order.get_cart_total|floatformat:2}}</h5>
-			</div>
-		</div>
-	</div>
+  		{% for item in items %}
+  		<div class="cart-row">
+  			<!-- <div><img class="row-image" src="{{item.product.imageURL}}"></div> -->
+  			<div><p>{{item.product.name}}</p></div>
+  			<div><p>${{item.product.price|floatformat:2}}</p></div>
+  			<div><p>x{{item.quantity}}</p></div>
+  		</div>
+  		{% endfor %}
+      		<h5>Items:    {{order.get_cart_items}}</h5>
+  		<h5>Total:   ${{order.get_cart_total|floatformat:2}}</h5>
+  	</div>
+  </div>
+</div>
   <script type="text/javascript">
     let delivery = '{{order.delivery}}'
     /*how much is the order?*/
