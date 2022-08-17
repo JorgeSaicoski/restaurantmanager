@@ -1,10 +1,21 @@
 {% extends 'staff/main.html' %}
 {% load static %}
 {% block content %}
+<section id="table">
+
+<p class="title">Pedidos para el local</p>
+  <div class="container-orders">
   {% for table in tables %}
-    {{table.name}}
-    <a href="{% url 'table' restaurant.name table.name %}">Editar Pedido</a>
+    <div class="container-orders-card">
+      <p>{{table.name}}</p>
+      <a href="{% url 'table' restaurant.name table.name %}">Editar Pedido</a>
+    </div>
   {% endfor %}
-  <a href="{% url 'new_table' restaurant.name %}">Nuevo Pedido</a>
+  </div>
+  <div class="action">
+    <a href="{% url 'new_table' restaurant.name %}" class="action-button">Nuevo Pedido</a>
+  </div>
+
+</section>
 
 {% endblock content %}

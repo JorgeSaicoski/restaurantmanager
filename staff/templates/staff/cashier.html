@@ -1,32 +1,39 @@
 {% extends 'staff/main.html' %}
 {% load static %}
 {% block content %}
+<section id="cashier">
   {% if is_cashier %}
-    <p>Pedidos para local</p>
-    {% for orders in local_order %}
-      {% for order in orders %}
-          {{order.customer.name}}
-          {% for i in order.orders %}
-            {% if i.transaction_id and not i.closed %}
-            <p>pedido {{i.transaction_id}}</p>
-            <a href="{% url 'orderDetail' restaurant.name i.transaction_id %}">Detalles del pedido</a>
-            {% endif %}
+    <p class="title">Pedidos para local</p>
+    <div class="container-orders">
+      {% for orders in local_order %}
+        <div class="container-orders-card">
+          {% for order in orders %}
+              <p>{{order.customer.name}}</p>
+              {% for i in order.orders %}
+                {% if i.transaction_id and not i.closed %}
+                <p>pedido {{i.transaction_id}}</p>
+                <a href="{% url 'orderDetail' restaurant.name i.transaction_id %}">Detalles del pedido</a>
+                {% endif %}
+              {% endfor %}
           {% endfor %}
-        <hr>
+        </div>
       {% endfor %}
-    {% endfor %}
-    <p>Pedidos para delivery</p>
-    {% for order in orders %}
-        {{order.customer.name}}
+    </div>
+    <p class="title">Pedidos para delivery</p>
+    <div class="container-orders">
+      {% for order in orders %}
+        <div class="container-orders-card">
+          <p>{{order.customer.name}}</p>
 
-        {% if order.transaction_id %}
-        <p>pedido {{order.transaction_id}}</p>
-        <a href="{% url 'orderDetail' restaurant.name order.transaction_id %}">Detalles del pedido</a>
+          {% if order.transaction_id %}
+          <p>pedido {{order.transaction_id}}</p>
+          <a href="{% url 'orderDetail' restaurant.name order.transaction_id %}">Detalles del pedido</a>
 
-        {% endif %}
+          {% endif %}
+        </div>
+      {% endfor %}
+    </div>
 
-      <hr>
-
-    {% endfor %}
   {% endif %}
+</section>
 {% endblock content %}

@@ -1,0 +1,110 @@
+@import 'variables';
+@import 'general';
+
+body{
+  padding-top: 15vh;
+}
+
+.nav{
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 1vh;
+  z-index: 10;
+  background-color: $dark-color;
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  &-link{
+    padding: $margin-default;
+    display: flex;
+    & img{
+      width: $nav-images-default-site;
+      height: auto;
+    }
+    &:hover{
+      background-color: $select-color;
+    }
+  }
+}
+.title{
+  font-size: 24px;
+  text-align: center;
+}
+.action{
+  width: 100%;
+  border-top: 6px double $alert-color;
+  margin: $margin-default 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-button{
+    padding: $margin-default;
+    margin-top: $margin-default;
+    background-color: $alert-color;
+    color: $dark-color;
+    border: 2px solid $select-color;
+    border-radius: $rounded-soft;
+    font-size: 24px;
+    transition: $transition;
+    &:hover{
+      background-color: $select-color;
+      color: $alert-color;
+    }
+  }
+}
+.container-orders{
+  display: flex;
+  flex-direction: row;
+  padding: 2px;
+  flex-wrap: wrap;
+  &-card{
+    width: 25vw;
+    background-color: $dark-color;
+    margin: 1vw;
+    padding: 2.5vw;
+    border-radius: $rounded-soft;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: $transition;
+    &:hover{
+      background-color: $select-color;
+      border-radius: $rounded;
+      & p{
+          color: $dark-color;
+      }
+    }& p{
+      color:$select-color;
+    }
+  }
+}
+.form{
+  margin: $margin-default;
+  display: flex;
+  flex-direction: column;
+  &-section{
+    display: flex;
+    flex-direction: row;
+    transition: $transition;
+    &-label{
+      color: $dark-color;
+    }
+  }
+}
+input{
+  width: 100%;
+  height: 100%;
+  background-color: $base-color;
+  border: none;
+  border-bottom: 2px solid $dark-color;
+  transition: $transition;
+  &:focus{
+    border: none;
+    border-bottom: 2px solid $dark-color;
+  }
+  &:hover{
+    background-color: $select-color;
+  }
+}
