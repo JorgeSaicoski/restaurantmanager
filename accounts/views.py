@@ -24,7 +24,6 @@ def customer_request(request):
 		form = NewCustomerForm(request.POST)
 		if form.is_valid():
 			user = request.user
-			form.save()
 			email = request.POST["email"]
 			try:
 				customer = Customer.objects.get(email=email)
