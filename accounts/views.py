@@ -7,17 +7,30 @@ from accounts.models import Customer
 def register_request(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
+		form_customer = NewCustomerForm(request.POST)
+		email = request.POST["email"]
 		# If anything is alright
 		if form.is_valid():
 			user = form.save()
+			customer = form_customer.save()
+			customer.user = user
+			customer.email = email
+			customer.save()
 			login(request, user)
-			messages.success(request, "Registration successful." )
-			return redirect("customer_register")
+			return redirect("/")
+
 		# If the password is wrong (the another test is checked in front)
-		return render(request=request, template_name="accounts/register.html", context={"register_form": form, "message": "Las contraseñas no son iguales"})
-		messages.error(request, "Unsuccessful registration. Invalid information.")
+		try:
+			Customer.objects.get(email=email)
+			return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "Este email ya esta en uso"})
+		except:
+			print(request.POST)
+			if request.POST["password1"] != request.POST["password2"]:
+				return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer":form_customer, "message": "Las contraseñas no son iguales"})
+			return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "La contraseña no cumple los requisitos"})
 	form = NewUserForm()
-	return render (request=request, template_name="accounts/register.html", context={"register_form":form})
+	form_customer = NewCustomerForm()
+	return render (request=request, template_name="accounts/register.html", context={"register_form":form, "form_customer":form_customer})
 # Create a profile
 def customer_request(request):
 	if request.method == "POST":
@@ -32,9 +45,7 @@ def customer_request(request):
 			customer.user = user
 			customer.save()
 
-			messages.success(request, "Registration successful." )
 			return redirect("/")
-		messages.error(request, "Unsuccessful registration. Invalid information.")
 	form = NewCustomerForm(request.POST)
 	return render (request=request, template_name="accounts/customer.html", context={"register_form":form})
 

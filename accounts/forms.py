@@ -22,11 +22,16 @@ class NewUserForm(UserCreationForm):
 class NewCustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
-        fields = ("name", "email", "phone")
+        fields = ("name", "phone")
 
 
 class LoginForm(forms.Form):
     password = forms.CharField(widget=forms.PasswordInput())
     username = forms.CharField(max_length = 200)
+
+class UpdateCustomerForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ("name", "email", "phone")
 
 

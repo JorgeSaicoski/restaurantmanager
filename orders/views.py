@@ -37,7 +37,7 @@ def order_detail(request, pk, email):
         customer = Customer.objects.get(email=email)
 
     if order.customer == customer:
-        return render(request, 'orders/order.html', {'order': order})
+        return render(request, 'orders/order.html', {'order': order, 'customer': customer,})
     else:
         if request.user.is_authenticated:
             orders = Order.objects.filter(customer=customer).order_by('-date_ordered')
