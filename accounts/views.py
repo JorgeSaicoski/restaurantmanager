@@ -32,6 +32,9 @@ def register_request(request):
 			except:
 				if request.POST["password1"] != request.POST["password2"]:
 					return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer":form_customer, "message": "Las contraseñas no son iguales"})
+				for i in username:
+					if i == " ":
+						return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "El nombre no puede tener espacio"})
 				return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "La contraseña no cumple los requisitos"})
 	form = NewUserForm()
 	form_customer = NewCustomerForm()
