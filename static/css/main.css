@@ -279,6 +279,18 @@ body {
   #delivery-info p {
     color: #EAF6FF; }
 
+.staff-link {
+  background-color: #2A2A72;
+  margin: 2vw;
+  padding: 2em;
+  border-radius: 2vh;
+  color: #EAF6FF; }
+  .staff-link-container {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center; }
+
 *, *:before, *:after {
   box-sizing: border-box; }
 
