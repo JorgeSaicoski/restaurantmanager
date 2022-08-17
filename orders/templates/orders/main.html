@@ -11,5 +11,17 @@
     <body>
       {% block content %}
       {% endblock content %}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="text/javascript">
+    {% if message %}
+    message = '{{message}}'
+      Swal.fire(
+        'Erro!',
+        message,
+        'success'
+      )
+    {% endif %}
+    </script>
+
     </body>
 </html>
