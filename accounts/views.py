@@ -1,9 +1,11 @@
 from django.shortcuts import  render, redirect
-from .forms import NewUserForm, NewCustomerForm, LoginForm
+from .forms import NewUserForm, NewCustomerForm, LoginForm, UpdateCustomerForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from accounts.models import Customer
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+import json
 
 def register_request(request):
 	if request.method == "POST":
@@ -41,22 +43,11 @@ def register_request(request):
 	return render (request=request, template_name="accounts/register.html", context={"register_form":form, "form_customer":form_customer})
 # Update profile
 def customer_request(request):
-	if request.method == "POST":
-		form = UpdateCustomerForm(request.POST)
-		if form.is_valid():
-			user = request.user
-			email = request.POST["email"]
-			try:
-				customer = Customer.objects.get(email=email)
-			except:
-				return render(request=request, template_name="accounts/customer.html", context={"register_form": form, "message": "Este email ya esta en uso"})
-			customer.user = user
-			customer.save()
-
-			return redirect("/")
-	form = UpdateCustomerForm(request.POST)
-	return render (request=request, template_name="accounts/customer.html", context={"register_form":form})
-
+	if request.user.is_authenticated:
+		user = request.user
+		customer = Customer.objects.get(user=user)
+		return render(request=request, template_name="accounts/customer.html", context={"user":user, 'customer':customer})
+	return redirect("/account/register/")
 
 def login_request(request):
 
@@ -73,3 +64,41 @@ def login_request(request):
 	form = LoginForm()
 
 	return render(request, 'accounts/login.html', {'form': form})
+
+
+def updateCustomer(request):
+	user = request.user
+	customer = Customer.objects.get(user=user)
+	data = json.loads(request.body)
+	form = data["form"]
+	name = form["name"]
+	email = form["email"]
+	phone = form["phone"]
+	print(name)
+	print(email)
+	print(phone)
+	message = "Actualizado"
+	try:
+		customer_check = Customer.objects.get(name=name)
+		if customer_check != customer:
+			message = "Nombre ya esta en uso"
+			return JsonResponse('name', safe=False)
+	except:
+		pass
+	try:
+		customer_check = Customer.objects.get(email=email)
+		if customer_check != customer:
+			message="email ya esta en uso"
+			return JsonResponse('email', safe=False)
+	except:
+		pass
+
+	customer.email = email
+	customer.name = name
+	customer.phone = phone
+	user.username = name
+	user.email = email
+	customer.save()
+	user.save()
+
+	return JsonResponse('success', safe=False)
