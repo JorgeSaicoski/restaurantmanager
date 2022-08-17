@@ -3,12 +3,14 @@ from .forms import NewUserForm, NewCustomerForm, LoginForm
 from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from accounts.models import Customer
+from django.contrib.auth.models import User
 
 def register_request(request):
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
 		form_customer = NewCustomerForm(request.POST)
 		email = request.POST["email"]
+		username = request.POST["username"]
 		# If anything is alright
 		if form.is_valid():
 			user = form.save()
@@ -24,17 +26,20 @@ def register_request(request):
 			Customer.objects.get(email=email)
 			return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "Este email ya esta en uso"})
 		except:
-			print(request.POST)
-			if request.POST["password1"] != request.POST["password2"]:
-				return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer":form_customer, "message": "Las contraseñas no son iguales"})
-			return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "La contraseña no cumple los requisitos"})
+			try:
+				User.objects.get(username=username)
+				return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "Este nombre ya esta en uso"})
+			except:
+				if request.POST["password1"] != request.POST["password2"]:
+					return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer":form_customer, "message": "Las contraseñas no son iguales"})
+				return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "La contraseña no cumple los requisitos"})
 	form = NewUserForm()
 	form_customer = NewCustomerForm()
 	return render (request=request, template_name="accounts/register.html", context={"register_form":form, "form_customer":form_customer})
-# Create a profile
+# Update profile
 def customer_request(request):
 	if request.method == "POST":
-		form = NewCustomerForm(request.POST)
+		form = UpdateCustomerForm(request.POST)
 		if form.is_valid():
 			user = request.user
 			email = request.POST["email"]
@@ -46,7 +51,7 @@ def customer_request(request):
 			customer.save()
 
 			return redirect("/")
-	form = NewCustomerForm(request.POST)
+	form = UpdateCustomerForm(request.POST)
 	return render (request=request, template_name="accounts/customer.html", context={"register_form":form})
 
 
