@@ -1,0 +1,22 @@
+{% extends 'orders/main.html' %}
+{% load static %}
+
+{% block content %}
+  <h2>{{order.get_items.0.product_id}}</h2>
+  {% for item in order.get_items %}
+    <p>{{item.product_name}}</p>
+
+    {% if item.complete %}
+      {% if item.delivered %}
+      <p>Ya fue entregado</p>
+      {% else %}
+      <p>Cocina he terminado</p>
+      {% endif %}
+    {% else %}
+      <p>No esta listo.</p>
+      <div>
+        <p>{{item.quantity}}</p>
+      </div>
+    {% endif %}
+  {% endfor %}
+{% endblock content %}

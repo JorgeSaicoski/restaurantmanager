@@ -1,0 +1,34 @@
+{% extends 'orders/main.html' %}
+{% load static %}
+{% block content %}
+<div class="search">
+  <input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Numero de tu pedido o restaurante" title="Type in a name">
+</div>
+<ul class="list" id="listToSearch">
+  {% for order in orders %}
+    <li class="list-order">
+      <a href="/pedidos/{{customer.email}}/pedido/{{order.id}}" class="list-link">
+        <p>{{order.restaurant}}</p>
+        <p>{{order.restaurant.get_contact}}</p>
+        <p>Numero general: {{order.id}}</p>
+        <p>Total:UYU{{order.get_cart_total|floatformat:2}}</p>
+        {% if order.is_finished %}
+          {% if order.closed %}
+            <p>Pedido entregué</p>
+          {% else %}
+            {% if order.complete %}
+            <p>Pedido esta pronto</p>
+            {% else %}
+            <p>No he confirmado</p>
+            {% endif %}
+          {% endif %}
+        {% else %}
+        <p>Pedido esta sendo preparado</p>
+        {% endif %}
+      </a>
+    </li>
+  {% endfor %}
+
+</ul>
+<script type="text/javascript" src="{% static 'js/search.js' %}"></script>
+{% endblock content %}

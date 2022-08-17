@@ -1,0 +1,23 @@
+@import 'variables';
+@import 'general';
+.list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+  min-height: 90vh;
+  &-order{
+    width: 35vw;
+    background-color: $dark-color;
+    margin: $margin-default;
+    height: 35vh;
+    border-radius: $rounded-soft;
+    color: $select-color;
+  }
+  &-link{
+    text-decoration: none;
+    & p{
+      color: $select-color;
+    }
+  }
+}

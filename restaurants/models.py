@@ -53,5 +53,8 @@ class Restaurant(models.Model):
         list = [self.owner]
         return list
 
+    @property
+    def get_contact(self):
+        return self.contact
 
 
