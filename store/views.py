@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from restaurants.models import Restaurant
 from store.models import Product, Order, OrderItem, ShippingAddress
 from django.http import JsonResponse
@@ -11,7 +11,11 @@ def store(request,pk):
 	# Change to get a specif restaurant
 	restaurant = Restaurant.objects.get(name=pk)
 	#get cookies
-	data = cartData(request, restaurant)
+	# if the user havent a customer
+	try:
+		data = cartData(request, restaurant)
+	except:
+		return redirect("/account/register/customer")
 	cartItems = data['cartItems']
 	order = data['order']
 	items = data['items']
@@ -24,6 +28,7 @@ def store(request,pk):
 def cart(request, pk):
 	restaurant = Restaurant.objects.get(name=pk)
 	if request.user.is_authenticated:
+
 		customer = request.user.customer
 		order, created = Order.objects.get_or_create(customer=customer, closed=False, complete=False, restaurant=restaurant)
 		items = order.orderitem_set.all()
