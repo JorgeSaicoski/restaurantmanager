@@ -13,10 +13,21 @@ def register_request(request):
 		form_customer = NewCustomerForm(request.POST)
 		email = request.POST["email"]
 		username = request.POST["username"]
+		#first of all, check if the email is already in use
+		try:
+			customer_check = Customer.objects.get(email=email)
+			if customer_check.user:
+				return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "Este email ya esta en uso"})
+		except:
+			pass
 		# If anything is alright
 		if form.is_valid():
 			user = form.save()
-			customer = form_customer.save()
+			#if it already have some order
+			try:
+				customer = Customer.objects.get(email=email)
+			except:
+				customer = form_customer.save()
 			customer.user = user
 			customer.email = email
 			customer.save()
@@ -24,20 +35,17 @@ def register_request(request):
 			return redirect("/")
 
 		# If the password is wrong (the another test is checked in front)
+
 		try:
-			Customer.objects.get(email=email)
-			return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "Este email ya esta en uso"})
+			User.objects.get(username=username)
+			return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "Este nombre ya esta en uso"})
 		except:
-			try:
-				User.objects.get(username=username)
-				return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "Este nombre ya esta en uso"})
-			except:
-				if request.POST["password1"] != request.POST["password2"]:
-					return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer":form_customer, "message": "Las contraseñas no son iguales"})
-				for i in username:
-					if i == " ":
-						return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "El nombre no puede tener espacio"})
-				return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "La contraseña no cumple los requisitos"})
+			if request.POST["password1"] != request.POST["password2"]:
+				return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer":form_customer, "message": "Las contraseñas no son iguales"})
+			for i in username:
+				if i == " ":
+					return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "El nombre no puede tener espacio"})
+			return render(request=request, template_name="accounts/register.html", context={"register_form": form, "form_customer": form_customer, "message": "La contraseña no cumple los requisitos"})
 	form = NewUserForm()
 	form_customer = NewCustomerForm()
 	return render (request=request, template_name="accounts/register.html", context={"register_form":form, "form_customer":form_customer})
