@@ -122,7 +122,7 @@ def processOrder(request, pk):
 	#create id
 	transaction_id = restaurant.counter
 
-	restaurant.counter =  restaurant.counter + 1
+	restaurant.counter = restaurant.counter + 1
 	restaurant.save()
 	order.transaction_id = transaction_id
 
