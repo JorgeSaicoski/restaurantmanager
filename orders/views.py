@@ -12,7 +12,7 @@ def user_list(request, pk):
             customer = Customer.objects.get(email=pk)
         except:
             return render(request, 'orders/identify.html')
-    orders = Order.objects.filter(customer=customer)
+    orders = Order.objects.filter(customer=customer).order_by('-date_ordered')
     context = {
         'customer':customer,
         'orders': orders,
