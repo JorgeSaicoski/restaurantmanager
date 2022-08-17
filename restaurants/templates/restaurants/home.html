@@ -10,12 +10,15 @@
     </head>
     <body>
       <div class="search restaurantBar">
-        {% if show_login %}
-          <ul class="login-register">
+        <ul class="login-register">
+          {% if show_login %}
             <li><a href="{% url 'register' %}">Registrar</a></li>
             <li><a href="{% url 'login' %}">Entrar en mi cuenta</a></li>
-          </ul>
-        {% endif %}
+          {% else %}
+            <li><a href="{% url 'orders_customer' request.user.email %}">Mis pedidos</a></li>
+            <li><a href="{% url 'customer_page' %}">Actualizar dados</a></li>
+          {% endif %}
+        </ul>
         <input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Que vamos a pedir? Donde?" title="Type in a name">
       </div>
       <ul class="list" id="listToSearch">

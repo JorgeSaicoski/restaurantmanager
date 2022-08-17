@@ -82,29 +82,32 @@ def updateCustomer(request):
 	name = form["name"]
 	email = form["email"]
 	phone = form["phone"]
-	print(name)
-	print(email)
-	print(phone)
-	message = "Actualizado"
+	username = form["username"]
+
 	try:
 		customer_check = Customer.objects.get(name=name)
 		if customer_check != customer:
-			message = "Nombre ya esta en uso"
+
 			return JsonResponse('name', safe=False)
 	except:
 		pass
 	try:
 		customer_check = Customer.objects.get(email=email)
 		if customer_check != customer:
-			message="email ya esta en uso"
 			return JsonResponse('email', safe=False)
+	except:
+		pass
+	try:
+		user_check = User.objects.get(username=username)
+		if user_check != user:
+			return JsonResponse('login', safe=False)
 	except:
 		pass
 
 	customer.email = email
 	customer.name = name
 	customer.phone = phone
-	user.username = name
+	user.username = username
 	user.email = email
 	customer.save()
 	user.save()

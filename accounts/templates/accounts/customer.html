@@ -6,8 +6,10 @@
 <div class="container py-5">
 	<h1>Customer</h1>
 	<form method="POST" id="customer-form">
+		<label for="username">Login</label>
+		<input class="form-control" type="text" name="username" value="{{user.username}}">
 		<label for="name">Nombre</label>
-		<input class="form-control" type="text" name="name" value="{{user.username}}">
+		<input class="form-control" type="text" name="name" value="{{customer.name}}">
 		<label for="email">Email</label>
 		<input class="form-control" type="email" name="email" value="{{user.email}}">
 		<label for="phone">Telefono (Whats App)</label>

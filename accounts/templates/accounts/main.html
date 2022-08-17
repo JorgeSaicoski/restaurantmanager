@@ -9,6 +9,10 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     </head>
     <body>
+      <ul class="navbar">
+        <a href="{% url 'orders_customer' request.user.email %}"><li>Mis pedidos</li></a>
+        <a href="{% url 'home' %}"><li>Lista de restaurantes</li></a>
+      </ul>
       {% block content %}
       {% endblock %}
       <script type="text/javascript">

@@ -12,11 +12,13 @@
       <ul class="nav">
         {% if request.user.is_authenticated %}
           <a href="" class="nav-container"><li>Salir de su cuenta</li></a>
+          <a href="{% url 'customer_page' %}" class="nav-container"><li>Actualizar</li></a>
         {% else %}
           <a href="{% url 'register' %}" class="nav-container"><li>Registrar</li></a>
           <a href="{% url 'login' %}" class="nav-container"><li>Hacer login</li></a>
         {% endif %}
         <a href="{% url 'orders_customer' customer.email %}" class="nav-container"><li>Lista de Pedidos</li></a>
+        <a href="{% url 'home' %}" class="nav-container"><li>Lista de restaurantes</li></a>
       </ul>
       {% block content %}
       {% endblock content %}

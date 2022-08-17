@@ -4,12 +4,14 @@ let updatedInfo ={
   'name':null,
   'email':null,
   'phone': null,
+  'username': null,
 }
 
 function updateFormInfo(){
   updatedInfo.name = form.name.value
   updatedInfo.phone = form.phone.value
   updatedInfo.email = form.email.value
+  updatedInfo.username = form.username.value
 }
 
 
@@ -41,7 +43,13 @@ form.addEventListener('submit', function(e){
       Swal.fire({
           icon: 'error',
           title: 'Nombre ya esta en uso',
-          text: `El nombre (y login) ${form.name.value} ya esta en uso. Elija otro`,
+          text: `El nombre ${form.name.value} ya esta en uso. Elija otro`,
+      })
+    }else if (data == 'login'){
+      Swal.fire({
+          icon: 'error',
+          title: 'login ya esta en uso',
+          text: `El login ${form.username.value} ya esta en uso. Elija otro`,
       })
     }else{
       Swal.fire({
