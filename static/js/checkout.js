@@ -61,6 +61,9 @@ document.getElementById('make-payment').addEventListener('click', function(e){
     })
     .then((response) => response.json())
     .then((data) => {
+      console.log("data")
+      console.log(data)
+      console.log("data")
       Swal.fire(
         'Pedido realizado',
         `Entre en contato para cualquier alteracion ${restaurantContact}`,
@@ -68,7 +71,7 @@ document.getElementById('make-payment').addEventListener('click', function(e){
       ).then((result) => {
         document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
 
-        window.location.href = `/restaurant/${restaurant}`
+        window.location.href = `/pedidos/${userFormData.email}`
       })
       cart = {}
       }
