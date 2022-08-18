@@ -164,10 +164,6 @@ def weiter(request, pk):
                     if i.get_items:
                         info.append(i)
             # The order that is not paid the weiter can change (put and sack products)
-    for i in info:
-        print("--------------------")
-        print(i.get_order_info)
-        print("--------------------")
     context = {
         'restaurant': restaurant,
         'todo': todo,

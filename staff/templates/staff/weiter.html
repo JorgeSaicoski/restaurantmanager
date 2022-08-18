@@ -6,7 +6,10 @@
 		{% for order in info %}
 
 			<div class="delivery-list-card">
-				{% if order.is_finished %} <div class="finish"> {% endif %}
+				{% if order.is_finished %} <div class="finish">
+					<p class="title">Entregué, falta pago</p>
+
+				{% endif %}
 
 					<div class="delivery-list-card-info">
 						<p>Direccion:</p>

@@ -158,10 +158,11 @@ body {
 .container-orders {
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   padding: 2px;
   flex-wrap: wrap; }
   .container-orders-card {
-    width: 25vw;
+    width: 35vw;
     background-color: #2A2A72;
     margin: 1vw;
     padding: 2.5vw;

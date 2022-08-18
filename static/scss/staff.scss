@@ -60,10 +60,11 @@ body{
 .container-orders{
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   padding: 2px;
   flex-wrap: wrap;
   &-card{
-    width: 25vw;
+    width: 35vw;
     background-color: $dark-color;
     margin: 1vw;
     padding: 2.5vw;
