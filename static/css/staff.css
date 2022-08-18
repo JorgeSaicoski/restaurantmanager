@@ -131,6 +131,10 @@ body {
   font-size: 24px;
   text-align: center; }
 
+.sub-title {
+  font-size: 18px;
+  text-align: center; }
+
 .action {
   width: 100%;
   border-top: 6px double #BB0A21;
@@ -138,7 +142,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center; }
-  .action-button {
+  .action-button, .item-container button, .item-container-order button, .item-container-order-item button {
     padding: 2vw;
     margin-top: 2vw;
     background-color: #BB0A21;
@@ -147,7 +151,7 @@ body {
     border-radius: 2vh;
     font-size: 24px;
     transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
-    .action-button:hover {
+    .action-button:hover, .item-container button:hover, .item-container-order button:hover, .item-container-order-item button:hover {
       background-color: #EAF6FF;
       color: #BB0A21; }
 
@@ -198,5 +202,47 @@ input {
     border-bottom: 2px solid #2A2A72; }
   input:hover {
     background-color: #EAF6FF; }
+
+.item-container, .item-container-order, .item-container-order-item {
+  border-style: solid none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+  .item-container button, .item-container-order button, .item-container-order-item button {
+    margin: 1vh;
+    width: 45%; }
+  .item-container-buttons {
+    display: flex;
+    flex-direction: row; }
+    .item-container-buttons button {
+      width: 55px;
+      border-radius: 100%; }
+    .item-container-buttons-quantity {
+      font-size: 18px; }
+  .item-container-order {
+    flex-direction: column;
+    border: 2px double #EAF6FF;
+    border-bottom: none;
+    transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
+    border-radius: 2vh;
+    margin: 2vh; }
+    .item-container-order:hover {
+      background-color: #EAF6FF; }
+    .item-container-order-p {
+      border-bottom: 3px solid #2A2A72; }
+    .item-container-order-item {
+      border-top: none; }
+      .item-container-order-item-delivery {
+        width: 100% !important;
+        margin: 0 !important;
+        align-self: center; }
+        .item-container-order-item-delivery:hover {
+          cursor: pointer; }
+
+.item-list {
+  border-style: solid none;
+  padding: 2vw 0;
+  display: flex;
+  flex-direction: column; }
 
 /*# sourceMappingURL=staff.css.map */

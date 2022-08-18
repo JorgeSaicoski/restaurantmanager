@@ -31,6 +31,10 @@ body{
   font-size: 24px;
   text-align: center;
 }
+.sub-title{
+  font-size: 18px;
+  text-align: center;
+}
 .action{
   width: 100%;
   border-top: 6px double $alert-color;
@@ -107,4 +111,60 @@ input{
   &:hover{
     background-color: $select-color;
   }
+}
+
+.item-container{
+  border-style: solid none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  & button{
+    @extend .action-button;
+    margin: 1vh;
+    width: 45%;
+  }
+  &-buttons{
+    display: flex;
+    flex-direction: row;
+    & button{
+      width: 55px;
+      border-radius: 100%;
+    }
+    &-quantity{
+      font-size: 18px;
+    }
+  }
+  &-order{
+    @extend .item-container;
+    flex-direction: column;
+    border: 2px double $select-color;
+    border-bottom: none;
+    transition: $transition;
+    border-radius: $rounded-soft;
+    margin: 2vh;
+    &:hover{
+      background-color: $select-color;
+    }
+    &-p{
+      border-bottom: 3px solid $dark-color;
+    }
+    &-item{
+      @extend .item-container;
+      border-top: none;
+      &-delivery{
+        width: 100% !important;
+        margin: 0 !important;
+        align-self: center;
+        &:hover{
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+.item-list{
+  border-style: solid none;
+  padding: $margin-default 0;
+  display: flex;
+  flex-direction: column;
 }
