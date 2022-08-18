@@ -114,7 +114,7 @@ input{
 }
 
 .item-container{
-  border-style: solid none;
+  border-bottom: solid 3px $dark-color;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -137,7 +137,7 @@ input{
   &-order{
     @extend .item-container;
     flex-direction: column;
-    border: 2px double $select-color;
+    border: 5px double $select-color;
     border-bottom: none;
     transition: $transition;
     border-radius: $rounded-soft;
@@ -163,7 +163,7 @@ input{
   }
 }
 .item-list{
-  border-style: solid none;
+  border-bottom: solid 3px $dark-color;
   padding: $margin-default 0;
   display: flex;
   flex-direction: column;
