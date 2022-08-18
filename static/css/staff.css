@@ -19,7 +19,7 @@ body {
 .navbar {
   padding: 0;
   height: 10vh;
-  margin: 2vw 0 2vw 0;
+  margin: 2vh 0 2vh 0;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -34,7 +34,7 @@ body {
   background-color: #BB0A21;
   border-radius: 2vh;
   border: solid 3px #009FFD;
-  padding: 2vw;
+  padding: 2vh;
   display: flex;
   align-items: center;
   transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
@@ -119,7 +119,7 @@ body {
   flex-direction: row;
   height: auto; }
   .nav-link {
-    padding: 2vw;
+    padding: 2vh;
     display: flex; }
     .nav-link img {
       width: 50px;
@@ -138,13 +138,13 @@ body {
 .action {
   width: 100%;
   border-top: 6px double #BB0A21;
-  margin: 2vw 0;
+  margin: 2vh 0;
   display: flex;
   justify-content: center;
   align-items: center; }
   .action-button, .item-container button, .item-container-order button, .finish button, .delivery-list-card button, .item-container-order-item button, .delivery-list-card-detail {
-    padding: 2vw;
-    margin-top: 2vw;
+    padding: 2vh;
+    margin-top: 2vh;
     background-color: #BB0A21;
     color: #2A2A72;
     border: 2px solid #EAF6FF;
@@ -164,7 +164,6 @@ body {
   .container-orders-card {
     width: 35vw;
     background-color: #2A2A72;
-    margin: 1vw;
     padding: 2.5vw;
     border-radius: 2vh;
     display: flex;
@@ -173,9 +172,9 @@ body {
     align-items: center;
     transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
     .container-orders-card-button {
-      margin-top: 2vw;
+      margin-top: 2vh;
       background-color: #BB0A21;
-      padding: 10px 2vw;
+      padding: 10px 2vh;
       border-radius: 20%; }
       .container-orders-card-button:hover {
         cursor: pointer;
@@ -189,7 +188,7 @@ body {
       color: #EAF6FF; }
 
 .form {
-  margin: 2vw;
+  margin: 2vh;
   display: flex;
   flex-direction: column; }
   .form-section {
@@ -213,12 +212,12 @@ input {
     background-color: #EAF6FF; }
 
 .item-container, .item-container-order, .finish, .delivery-list-card, .item-container-order-item {
-  border-bottom: solid 3px #2A2A72;
+  border-bottom: solid 2px #2A2A72;
   display: flex;
   flex-direction: row;
   justify-content: space-between; }
   .item-container button, .item-container-order button, .finish button, .delivery-list-card button, .item-container-order-item button {
-    margin: 1vh;
+    margin: 2vh;
     width: 45%; }
   .item-container-buttons, .item-container-buttons button {
     display: flex;
@@ -234,7 +233,7 @@ input {
       font-size: 18px; }
   .item-container-order, .finish, .delivery-list-card {
     flex-direction: column;
-    border: 5px double #EAF6FF;
+    border: 6px double #EAF6FF;
     border-bottom: none;
     transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
     border-radius: 2vh;
@@ -242,7 +241,7 @@ input {
     .item-container-order:hover, .finish:hover, .delivery-list-card:hover {
       background-color: #EAF6FF; }
     .item-container-order-p {
-      border-bottom: 3px solid #2A2A72; }
+      border-bottom: 2px solid #2A2A72; }
     .item-container-order-item {
       border-top: none; }
       .item-container-order-item-delivery {
@@ -253,8 +252,8 @@ input {
           cursor: pointer; }
 
 .item-list {
-  border-bottom: solid 3px #2A2A72;
-  padding: 2vw 0;
+  border-bottom: solid 2px #2A2A72;
+  padding: 2vh 0;
   display: flex;
   flex-direction: column;
   overflow: hidden; }
@@ -289,7 +288,7 @@ input {
         align-self: center;
         background-color: #2A2A72;
         border-radius: 2vh;
-        padding: 1vh;
+        padding: 2.5vw;
         margin-bottom: 2vh;
         text-decoration: none;
         text-align: center;
@@ -307,7 +306,7 @@ input {
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px solid #2A2A72; }
+      border-bottom: 2px 2px #2A2A72; }
       .delivery-list-card-item p {
         border: none; }
       .delivery-list-card-item button {

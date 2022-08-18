@@ -37,7 +37,7 @@ body{
 }
 .action{
   width: 100%;
-  border-top: 6px double $alert-color;
+  border-top: $border-big double $alert-color;
   margin: $margin-default 0;
   display: flex;
   justify-content: center;
@@ -47,9 +47,9 @@ body{
     margin-top: $margin-default;
     background-color: $alert-color;
     color: $dark-color;
-    border: 2px solid $select-color;
+    border: $border-default solid $select-color;
     border-radius: $rounded-soft;
-    font-size: 24px;
+    font-size: $font-big;
     transition: $transition;
     &:hover{
       background-color: $select-color;
@@ -61,13 +61,13 @@ body{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 2px;
+  padding: $padding-small;
   flex-wrap: wrap;
   &-card{
-    width: 35vw;
+    width: $card-width;
     background-color: $dark-color;
-    margin: 1vw;
-    padding: 2.5vw;
+    $margin-small: 1vw;
+    padding: $padding-default;
     border-radius: $rounded-soft;
     display: flex;
     flex-direction: column;
@@ -113,11 +113,11 @@ input{
   height: 100%;
   background-color: $base-color;
   border: none;
-  border-bottom: 2px solid $dark-color;
+  border-bottom: $border-default solid $dark-color;
   transition: $transition;
   &:focus{
     border: none;
-    border-bottom: 2px solid $dark-color;
+    border-bottom: $border-default solid $dark-color;
   }
   &:hover{
     background-color: $select-color;
@@ -125,13 +125,13 @@ input{
 }
 
 .item-container{
-  border-bottom: solid 3px $dark-color;
+  border-bottom: solid $border-default $dark-color;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   & button{
     @extend .action-button;
-    margin: 1vh;
+    margin: $margin-default;
     width: 45%;
   }
   &-buttons{
@@ -147,22 +147,22 @@ input{
       border-radius: 100%;
     }
     &-quantity{
-      font-size: 18px;
+      font-size: $font-size;
     }
   }
   &-order{
     @extend .item-container;
     flex-direction: column;
-    border: 5px double $select-color;
+    border: $border-big double $select-color;
     border-bottom: none;
     transition: $transition;
     border-radius: $rounded-soft;
-    margin: 2vh;
+    margin: $margin-default;
     &:hover{
       background-color: $select-color;
     }
     &-p{
-      border-bottom: 3px solid $dark-color;
+      border-bottom: $border-default solid $dark-color;
     }
     &-item{
       @extend .item-container;
@@ -179,7 +179,7 @@ input{
   }
 }
 .item-list{
-  border-bottom: solid 3px $dark-color;
+  border-bottom: solid $border-default $dark-color;
   padding: $margin-default 0;
   display: flex;
   flex-direction: column;
@@ -209,7 +209,7 @@ input{
       flex-direction: column;
       justify-content: center;
       flex-wrap: wrap;
-      border-bottom: 2px solid $dark-color;
+      border-bottom: $border-default solid $dark-color;
       & p{
         padding: 0;
         padding-left: 1vw;
@@ -219,8 +219,8 @@ input{
         align-self: center;
         background-color: $dark-color;
         border-radius: $rounded-soft;
-        padding: 1vh;
-        margin-bottom: 2vh;
+        padding: $padding-default;
+        margin-bottom: $margin-default;
         text-decoration: none;
         text-align: center;
         color: $alert-color;
@@ -231,7 +231,7 @@ input{
       }
       &-address{
         width: 100%;
-        font-size: 24px;
+        font-size: $font-big;
         text-align: center;
       }
     }
@@ -241,7 +241,7 @@ input{
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px solid $dark-color;
+      border-bottom: 2px $border-default $dark-color;
       & p{
         @extend .delivery-list-card-item;
         border: none;
