@@ -45,7 +45,7 @@
     {% endif %}
   {% endif %}
   {% if is_cashier %}
-  <p>Numero del pedido {{order.get_items.0.order_id}}</p>
+  <p>Numero del pedido {{order.transaction_id}}</p>
     {% for i in order.get_items %}
 
       <p>{{i.quantity}} {{i.product_name}}</p>
@@ -64,12 +64,9 @@
       <th><h5>Items: {{order.get_cart_items}}</h5></th>
       <th><h5>Total: UYU{{order.get_cart_total|floatformat:2}}</h5></th>
       <th>
-        <button data-customer="{{customer.name}}" id="btn-paid">Pagar</button>
+        <button data-customer="{{customer.name}}" data-order="{{order.transaction_id}}" id="btn-paid">Pagar</button>
       </th>
     </tr>
   {% endif %}
-  <script type="text/javascript">
-    let order = '{{order.get_items.0.order_id}}'
-  </script>
   <script type="text/javascript" src="{% static 'js/order.js' %}"></script>
 {% endblock content %}

@@ -74,6 +74,16 @@ body{
     justify-content: center;
     align-items: center;
     transition: $transition;
+    &-button{
+      margin-top: $margin-default;
+      background-color: $alert-color;
+      padding: 10px $margin-default;
+      border-radius: $rounded;
+      &:hover{
+        cursor: pointer;
+        background-color: $dark-color;
+      }
+    }
     &:hover{
       background-color: $select-color;
       border-radius: $rounded;

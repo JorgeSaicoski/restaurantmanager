@@ -172,6 +172,14 @@ body {
     justify-content: center;
     align-items: center;
     transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+    .container-orders-card-button {
+      margin-top: 2vw;
+      background-color: #BB0A21;
+      padding: 10px 2vw;
+      border-radius: 20%; }
+      .container-orders-card-button:hover {
+        cursor: pointer;
+        background-color: #2A2A72; }
     .container-orders-card:hover {
       background-color: #EAF6FF;
       border-radius: 20%; }

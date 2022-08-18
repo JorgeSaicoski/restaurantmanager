@@ -32,11 +32,12 @@ let payBtn = document.getElementById('btn-paid')
 
 payBtn.addEventListener('click', function(){
 	let customer = this.dataset.customer
-	payUserOrder(customer)
+	let order = this.dataset.order
+	payUserOrder(customer, order)
 	}
 )
 
-function payUserOrder(customer){
+function payUserOrder(customer, order){
 		let url = `/staff/${restaurant}/${order}/close_order/`
 		fetch(url, {
 			method:'POST',
