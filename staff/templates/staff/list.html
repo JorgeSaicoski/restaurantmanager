@@ -9,8 +9,30 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     </head>
     <body>
-    	{% for restaurant in restaurants %}
-        <a href="/staff/{{restaurant.name}}">{{restaurant.name}}</a>
-      {% endfor %}
+      <div class="search">
+        {% if not request.user.is_authenticated %}
+        <ul class="navbar">
+            <a href="{% url 'register' %}" class="nav-link"><li>Registrar</li></a>
+            <a href="{% url 'login' %}" class="nav-link"><li>Entrar en mi cuenta</li></a>
+        </ul>
+        {% endif %}
+        <input type="text" id="searchBar" onkeyup="searchBar()" placeholder="En que restaurante trabajas?" title="Type in a name">
+      </div>
+      <ul class="list" id="listToSearch">
+        {% for restaurant in restaurants %}
+          <li class="restaurant">
+            <a href="/staff/{{restaurant.name}}" class="restaurant-link">
+              <div class="focus">
+                <p>{{restaurant.name}}</p>
+              </div>
+              <img src="{{restaurant.image.url}}" class="logo">
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+      <div class="staff-link-container">
+        <a href="{% url 'home' %}" class="staff-link">Quiero pedir</a>
+      </div>
+    <script type="text/javascript" src="{% static 'js/search.js' %}"></script>
     </body>
 </html>

@@ -160,10 +160,14 @@ def weiter(request, pk):
         for i in orders:
             # Separate the cart that is already paid to the cart that is not paid
             if i.complete:
-                if i.get_items:
-                    info.append(i.get_items_order)
+                if i.is_delivery:
+                    if i.get_items:
+                        info.append(i)
             # The order that is not paid the weiter can change (put and sack products)
-
+    for i in info:
+        print("--------------------")
+        print(i.get_order_info)
+        print("--------------------")
     context = {
         'restaurant': restaurant,
         'todo': todo,

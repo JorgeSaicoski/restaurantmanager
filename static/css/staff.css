@@ -142,7 +142,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center; }
-  .action-button, .item-container button, .item-container-order button, .item-container-order-item button {
+  .action-button, .item-container button, .item-container-order button, .finish button, .delivery-list-card button, .item-container-order-item button, .delivery-list-card-detail {
     padding: 2vw;
     margin-top: 2vw;
     background-color: #BB0A21;
@@ -151,7 +151,7 @@ body {
     border-radius: 2vh;
     font-size: 24px;
     transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
-    .action-button:hover, .item-container button:hover, .item-container-order button:hover, .item-container-order-item button:hover {
+    .action-button:hover, .item-container button:hover, .item-container-order button:hover, .finish button:hover, .delivery-list-card button:hover, .item-container-order-item button:hover, .delivery-list-card-detail:hover {
       background-color: #EAF6FF;
       color: #BB0A21; }
 
@@ -203,30 +203,34 @@ input {
   input:hover {
     background-color: #EAF6FF; }
 
-.item-container, .item-container-order, .item-container-order-item {
+.item-container, .item-container-order, .finish, .delivery-list-card, .item-container-order-item {
   border-bottom: solid 3px #2A2A72;
   display: flex;
   flex-direction: row;
   justify-content: space-between; }
-  .item-container button, .item-container-order button, .item-container-order-item button {
+  .item-container button, .item-container-order button, .finish button, .delivery-list-card button, .item-container-order-item button {
     margin: 1vh;
     width: 45%; }
-  .item-container-buttons {
+  .item-container-buttons, .item-container-buttons button {
     display: flex;
-    flex-direction: row; }
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; }
     .item-container-buttons button {
-      width: 55px;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
       border-radius: 100%; }
     .item-container-buttons-quantity {
       font-size: 18px; }
-  .item-container-order {
+  .item-container-order, .finish, .delivery-list-card {
     flex-direction: column;
     border: 5px double #EAF6FF;
     border-bottom: none;
     transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
     border-radius: 2vh;
     margin: 2vh; }
-    .item-container-order:hover {
+    .item-container-order:hover, .finish:hover, .delivery-list-card:hover {
       background-color: #EAF6FF; }
     .item-container-order-p {
       border-bottom: 3px solid #2A2A72; }
@@ -243,6 +247,64 @@ input {
   border-bottom: solid 3px #2A2A72;
   padding: 2vw 0;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  overflow: hidden; }
+
+.finish {
+  margin: auto;
+  border: none;
+  height: 100%;
+  width: 100%;
+  background-color: #2A2A72; }
+  .finish .title {
+    color: #BB0A21;
+    background-color: #EAF6FF; }
+
+.delivery-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  .delivery-list-card {
+    justify-content: center; }
+    .delivery-list-card-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #2A2A72; }
+      .delivery-list-card-info p {
+        padding: 0;
+        padding-left: 1vw; }
+      .delivery-list-card-info a {
+        width: 50%;
+        align-self: center;
+        background-color: #2A2A72;
+        border-radius: 2vh;
+        padding: 1vh;
+        margin-bottom: 2vh;
+        text-decoration: none;
+        text-align: center;
+        color: #BB0A21; }
+        .delivery-list-card-info a:hover {
+          background-color: #BB0A21;
+          color: #EAF6FF; }
+      .delivery-list-card-info-address {
+        width: 100%;
+        font-size: 24px;
+        text-align: center; }
+    .delivery-list-card-item, .delivery-list-card-item p {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #2A2A72; }
+      .delivery-list-card-item p {
+        border: none; }
+      .delivery-list-card-item button {
+        padding: 0; }
+    .delivery-list-card-detail {
+      text-align: center;
+      text-decoration-color: none; }
 
 /*# sourceMappingURL=staff.css.map */

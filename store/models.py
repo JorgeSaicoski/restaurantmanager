@@ -73,9 +73,9 @@ class Order(models.Model):
 			if not item["delivered"]:
 				return False
 		return True
-	# Get cart items to print to weiter
+	# Get cart info to print to weiter
 	@property
-	def get_items_order(self):
+	def get_order_info(self):
 		order = []
 		if self.delivery:
 			shipping_address = ShippingAddress.objects.filter(order=self.id)
@@ -88,10 +88,8 @@ class Order(models.Model):
 			order.append({"shipping": False})
 
 
-
-		items = self.get_items
 		custumer = self.customer.get_customer
-		order.append({"items":items, "customer":custumer})
+		order.append({"customer":custumer})
 		return order
 class OrderItem(models.Model):
 	product = models.ForeignKey(Product, on_delete=models.SET_NULL, null=True)

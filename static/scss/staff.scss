@@ -126,8 +126,13 @@ input{
   &-buttons{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     & button{
-      width: 55px;
+      @extend .item-container-buttons;
+      justify-content: center;
+      width: $nav-images-default-site;
+      height: $nav-images-default-site;
       border-radius: 100%;
     }
     &-quantity{
@@ -167,4 +172,78 @@ input{
   padding: $margin-default 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
+}
+.finish{
+  @extend .item-container-order;
+  margin: auto;
+  border: none;
+  height: 100%;
+  width: 100%;
+  background-color: $dark-color;
+  & .title{
+    color: $alert-color;
+    background-color: $select-color;
+  }
+}
+.delivery-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &-card{
+    @extend .item-container-order;
+    justify-content: center;
+    &-info{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-wrap: wrap;
+      border-bottom: 2px solid $dark-color;
+      & p{
+        padding: 0;
+        padding-left: 1vw;
+      }
+      & a{
+        width: 50%;
+        align-self: center;
+        background-color: $dark-color;
+        border-radius: $rounded-soft;
+        padding: 1vh;
+        margin-bottom: 2vh;
+        text-decoration: none;
+        text-align: center;
+        color: $alert-color;
+        &:hover{
+          background-color: $alert-color;
+          color: $select-color;
+        }
+      }
+      &-address{
+        width: 100%;
+        font-size: 24px;
+        text-align: center;
+      }
+    }
+    &-item{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid $dark-color;
+      & p{
+        @extend .delivery-list-card-item;
+        border: none;
+      }
+      & button{
+        padding: 0;
+      }
+    }
+    &-detail{
+      @extend .action-button;
+      text-align: center;
+      text-decoration-color: none;
+    }
+
+  }
 }

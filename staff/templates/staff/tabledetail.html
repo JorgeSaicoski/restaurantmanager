@@ -36,33 +36,35 @@
       <div class="item-list">
         {% for order in orders_closed %}
           <div class="item-container-order">
+            {% if order.is_finished %} <div class="finish"> {% endif %}
               <p class="sub-title item-container-order-p">Numero del pedido {{order.get_items.0.order_id}}</p>
                 {% for i in order.get_items %}
                 <div class="item-container-order-item">
-                  <p>{{i.quantity}} {{i.product_name}}</p>
+                  <p class="sub-title">{{i.quantity}} {{i.product_name}}</p>
                   {% if i.complete %}
                     {% if i.delivered %}
-                    <p>Ya fue entregado</p>
+                    <p class="sub-title">Ya fue entregado</p>
                     {% else %}
-                    <p>Cocina he terminado</p>
+                    <p class="sub-title">Cocina he terminado</p>
                     <button data-product="{{i.product_id}}" data-order="{{i.order_id}}" data-mode="item" class="btn-delivered">Entregar item</button>
                     {% endif %}
                   {% else %}
-                    <p>No esta listo.</p>
+                    <p class="sub-title">No esta listo.</p>
                   {% endif %}
                 </div>
                 {% endfor %}
                 {% if order.is_finished %}
-                  <p>Completado y entregué</p>
+                  <p class="title">Completado y entregué</p>
                 {% else %}
                   <button data-product="1" data-order="{{order.get_items.0.order_id}}" data-mode="order" class="btn-delivered item-container-order-item-delivery">Entregar el pedido</button>
                 {% endif %}
+              {% if order.is_finished %}</div>{% endif %}
             </div>
+
           {% endfor %}
         </div>
     <script type="text/javascript">
       let table = '{{table}}'
-      console.log(table)
     </script>
     <script type="text/javascript" src="{% static 'js/table.js' %}"></script>
   {% endif %}
