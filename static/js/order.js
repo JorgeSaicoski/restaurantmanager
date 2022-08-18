@@ -28,15 +28,15 @@ function updateUserOrder(productId, action){
 		});
 }
 //payment button
-let payBtn = document.getElementById('btn-paid')
-
-payBtn.addEventListener('click', function(){
-	let customer = this.dataset.customer
-	let order = this.dataset.order
-	payUserOrder(customer, order)
-	}
-)
-
+let payBtn = document.getElementsByClassName('btn-paid')
+for (i = 0; i < payBtn.length; i++){
+	payBtn[i].addEventListener('click', function(){
+		let customer = this.dataset.customer
+		let order = this.dataset.order
+		payUserOrder(customer, order)
+		}
+	)
+}
 function payUserOrder(customer, order){
 		let url = `/staff/${restaurant}/${order}/close_order/`
 		fetch(url, {

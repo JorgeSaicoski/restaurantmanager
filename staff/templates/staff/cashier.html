@@ -13,7 +13,7 @@
                 {% if i.transaction_id and not i.closed %}
                 <p>pedido {{i.transaction_id}}</p>
                 <a href="{% url 'orderDetail' restaurant.name i.transaction_id %}">Detalles del pedido</a>
-                <button data-customer="{{order.customer.name}}" data-order="{{i.transaction_id}}" id="btn-paid" class="container-orders-card-button">Pagar</button>
+                <button data-customer="{{order.customer.name}}" data-order="{{i.transaction_id}}" class="container-orders-card-button btn-paid">Pagar</button>
                 {% endif %}
               {% endfor %}
           {% endfor %}
@@ -29,7 +29,7 @@
           {% if order.transaction_id %}
           <p>pedido {{order.transaction_id}}</p>
           <a href="{% url 'orderDetail' restaurant.name order.transaction_id %}">Detalles del pedido</a>
-
+          <button data-customer="{{order.customer.name}}" data-order="{{order.transaction_id}}" class="container-orders-card-button btn-paid">Pagar</button>
           {% endif %}
         </div>
       {% endfor %}
