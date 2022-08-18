@@ -57,6 +57,7 @@ def cartData(request, restaurant):
 def guestOrder(request, data, restaurant):
     name = data['form']['name']
     email = data['form']['email']
+    phone = data['form']['phone']
 
     cookieData = cookieCart(request)
     items = cookieData['items']
@@ -64,6 +65,7 @@ def guestOrder(request, data, restaurant):
     customer, created = Customer.objects.get_or_create(
         email=email,
     )
+    customer.phone = phone
     customer.name = name
     customer.save()
 
