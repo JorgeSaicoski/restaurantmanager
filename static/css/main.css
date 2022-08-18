@@ -143,27 +143,6 @@ body {
   border-radius: 2vh;
   margin: 10vh; }
 
-.login-font, .register-font {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 20px;
-}
-
-.reg-view, .log-view {
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-weight: bold;
-  font-size: 18px;
-}
-
-.btn {
-  background-color: #b17d97;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 18px;
-  border-radius: 15px;
-  width: 100px;
-  height: 50px;
-
-}
-
 .card {
   height: 60vh;
   width: 45vh;

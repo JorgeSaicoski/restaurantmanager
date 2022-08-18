@@ -10,12 +10,6 @@
     </head>
     <body>
       <div class="search restaurantBar">
-        {% if show_login %}
-          <ul class="login-register">
-            <li class="login-font"><a href="{% url 'register' %}">Registrar</a></li>
-            <li class="register-font"><a href="{% url 'login' %}">Ingresar</a></li>
-          </ul>
-        {% endif %}
         <ul class="login-register">
           {% if show_login %}
             <li><a href="{% url 'register' %}">Registrar</a></li>
