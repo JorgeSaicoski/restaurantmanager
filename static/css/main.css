@@ -25,7 +25,7 @@ body {
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
-  transition: width 1s, height 2.5s, opacity 2s, background-color 1s; }
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
 
 .navbar a {
   color: #232528;
@@ -37,7 +37,7 @@ body {
   padding: 2vw;
   display: flex;
   align-items: center;
-  transition: width 1s, height 2.5s, opacity 2s, background-color 1s; }
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
   .navbar a:hover {
     background-color: #EAF6FF;
     cursor: pointer; }
@@ -63,7 +63,7 @@ body {
   color: #232528;
   border-radius: 2vh;
   font-size: 24px;
-  transition: width 1s, height 2.5s, opacity 2s, background-color 1s; }
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
   #searchBar:focus {
     width: 85%; }
 
@@ -83,7 +83,7 @@ body {
   opacity: 0;
   z-index: 1;
   background-color: #2A2A72;
-  transition: width 1s, height 2.5s, opacity 2s, background-color 1s;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -173,7 +173,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: #2A2A72;
-  transition: width 1s, height 2.5s, opacity 2s, background-color 1s;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
   margin: 2vw;
   padding: 2vw;
   border-radius: 2vh; }
@@ -299,6 +299,18 @@ body {
   margin: 0 0 2vw 0; }
   #delivery-info p {
     color: #EAF6FF; }
+
+.staff-link {
+  background-color: #2A2A72;
+  margin: 2vw;
+  padding: 2em;
+  border-radius: 2vh;
+  color: #EAF6FF; }
+  .staff-link-container {
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center; }
 
 *, *:before, *:after {
   box-sizing: border-box; }

@@ -9,6 +9,12 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     </head>
     <body>
+      <ul class="navbar">
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'orders_customer' request.user.email %}"><li>Mis pedidos</li></a>
+        {% endif %}
+        <a href="{% url 'home' %}"><li>Lista de restaurantes</li></a>
+      </ul>
       {% block content %}
       {% endblock %}
       <script type="text/javascript">

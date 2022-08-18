@@ -1,0 +1,310 @@
+p {
+  color: #232528;
+  padding: 1vh; }
+
+body {
+  background-color: #009FFD; }
+  body::-webkit-scrollbar {
+    width: 10px;
+    height: 10px; }
+  body::-webkit-scrollbar-thumb {
+    background: #2A2A72;
+    border-radius: 2vh; }
+  body::-webkit-scrollbar-track {
+    background: #EAF6FF; }
+  body {
+    scrollbar-face-color: #2A2A72;
+    scrollbar-track-color: #EAF6FF; }
+
+.navbar {
+  padding: 0;
+  height: 10vh;
+  margin: 2vw 0 2vw 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+
+.navbar a {
+  color: #232528;
+  text-decoration: none;
+  height: 100%;
+  background-color: #BB0A21;
+  border-radius: 2vh;
+  border: solid 3px #009FFD;
+  padding: 2vw;
+  display: flex;
+  align-items: center;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+  .navbar a:hover {
+    background-color: #EAF6FF;
+    cursor: pointer; }
+
+.navbar li {
+  font-size: 24px;
+  text-align: center; }
+
+.navbar img {
+  width: 50px; }
+
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none; }
+
+#searchBar {
+  width: 50%;
+  border: double 1vh;
+  border-color: #BB0A21;
+  padding: 1vw;
+  color: #232528;
+  border-radius: 2vh;
+  font-size: 24px;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+  #searchBar:focus {
+    width: 85%; }
+
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+/* When is necessary to hidde some information and show when hover */
+.focus {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 1;
+  background-color: #2A2A72;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .focus:hover {
+    opacity: 1; }
+
+.focus p {
+  color: #EAF6FF; }
+
+.screen {
+  min-width: 100%;
+  min-height: 100vh; }
+
+.hidden {
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important; }
+
+body {
+  padding-top: 15vh; }
+
+.nav {
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 1vh;
+  z-index: 10;
+  background-color: #2A2A72;
+  display: flex;
+  flex-direction: row;
+  height: auto; }
+  .nav-link {
+    padding: 2vw;
+    display: flex; }
+    .nav-link img {
+      width: 50px;
+      height: auto; }
+    .nav-link:hover {
+      background-color: #EAF6FF; }
+
+.title {
+  font-size: 24px;
+  text-align: center; }
+
+.sub-title {
+  font-size: 18px;
+  text-align: center; }
+
+.action {
+  width: 100%;
+  border-top: 6px double #BB0A21;
+  margin: 2vw 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+  .action-button, .item-container button, .item-container-order button, .finish button, .delivery-list-card button, .item-container-order-item button, .delivery-list-card-detail {
+    padding: 2vw;
+    margin-top: 2vw;
+    background-color: #BB0A21;
+    color: #2A2A72;
+    border: 2px solid #EAF6FF;
+    border-radius: 2vh;
+    font-size: 24px;
+    transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+    .action-button:hover, .item-container button:hover, .item-container-order button:hover, .finish button:hover, .delivery-list-card button:hover, .item-container-order-item button:hover, .delivery-list-card-detail:hover {
+      background-color: #EAF6FF;
+      color: #BB0A21; }
+
+.container-orders {
+  display: flex;
+  flex-direction: row;
+  padding: 2px;
+  flex-wrap: wrap; }
+  .container-orders-card {
+    width: 25vw;
+    background-color: #2A2A72;
+    margin: 1vw;
+    padding: 2.5vw;
+    border-radius: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+    .container-orders-card:hover {
+      background-color: #EAF6FF;
+      border-radius: 20%; }
+      .container-orders-card:hover p {
+        color: #2A2A72; }
+    .container-orders-card p {
+      color: #EAF6FF; }
+
+.form {
+  margin: 2vw;
+  display: flex;
+  flex-direction: column; }
+  .form-section {
+    display: flex;
+    flex-direction: row;
+    transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+    .form-section-label {
+      color: #2A2A72; }
+
+input {
+  width: 100%;
+  height: 100%;
+  background-color: #009FFD;
+  border: none;
+  border-bottom: 2px solid #2A2A72;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+  input:focus {
+    border: none;
+    border-bottom: 2px solid #2A2A72; }
+  input:hover {
+    background-color: #EAF6FF; }
+
+.item-container, .item-container-order, .finish, .delivery-list-card, .item-container-order-item {
+  border-bottom: solid 3px #2A2A72;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+  .item-container button, .item-container-order button, .finish button, .delivery-list-card button, .item-container-order-item button {
+    margin: 1vh;
+    width: 45%; }
+  .item-container-buttons, .item-container-buttons button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; }
+    .item-container-buttons button {
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 100%; }
+    .item-container-buttons-quantity {
+      font-size: 18px; }
+  .item-container-order, .finish, .delivery-list-card {
+    flex-direction: column;
+    border: 5px double #EAF6FF;
+    border-bottom: none;
+    transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
+    border-radius: 2vh;
+    margin: 2vh; }
+    .item-container-order:hover, .finish:hover, .delivery-list-card:hover {
+      background-color: #EAF6FF; }
+    .item-container-order-p {
+      border-bottom: 3px solid #2A2A72; }
+    .item-container-order-item {
+      border-top: none; }
+      .item-container-order-item-delivery {
+        width: 100% !important;
+        margin: 0 !important;
+        align-self: center; }
+        .item-container-order-item-delivery:hover {
+          cursor: pointer; }
+
+.item-list {
+  border-bottom: solid 3px #2A2A72;
+  padding: 2vw 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden; }
+
+.finish {
+  margin: auto;
+  border: none;
+  height: 100%;
+  width: 100%;
+  background-color: #2A2A72; }
+  .finish .title {
+    color: #BB0A21;
+    background-color: #EAF6FF; }
+
+.delivery-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; }
+  .delivery-list-card {
+    justify-content: center; }
+    .delivery-list-card-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-wrap: wrap;
+      border-bottom: 2px solid #2A2A72; }
+      .delivery-list-card-info p {
+        padding: 0;
+        padding-left: 1vw; }
+      .delivery-list-card-info a {
+        width: 50%;
+        align-self: center;
+        background-color: #2A2A72;
+        border-radius: 2vh;
+        padding: 1vh;
+        margin-bottom: 2vh;
+        text-decoration: none;
+        text-align: center;
+        color: #BB0A21; }
+        .delivery-list-card-info a:hover {
+          background-color: #BB0A21;
+          color: #EAF6FF; }
+      .delivery-list-card-info-address {
+        width: 100%;
+        font-size: 24px;
+        text-align: center; }
+    .delivery-list-card-item, .delivery-list-card-item p {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #2A2A72; }
+      .delivery-list-card-item p {
+        border: none; }
+      .delivery-list-card-item button {
+        padding: 0; }
+    .delivery-list-card-detail {
+      text-align: center;
+      text-decoration-color: none; }
+
+/*# sourceMappingURL=staff.css.map */

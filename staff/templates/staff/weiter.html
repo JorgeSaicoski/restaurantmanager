@@ -1,40 +1,47 @@
 {% extends 'staff/main.html' %}
 {% load static %}
 {% block content %}
-	<div>
+<section id="delivery">
+	<div class="delivery-list">
 		{% for order in info %}
-			{% if order.0.shipping.address %}
-				<p>Direccion</p>
-				<p>{{order.0.shipping.address}}</p>
-				<p>{{order.0.shipping.city}}</p>
-				<p>Pedidos</p>
-				<p>Numero de pedido {{order.1.items.0.order_id}}</p>
-				{% for i in order.1.items %}
-					<p>{{i.product_name}}</p>
-					<p>Cantitad {{i.quantity}}</p>
-					<p>Listo para entrega</p>
-						{% if i.complete%}
-						<p>si</p>
-							{% if i.delivered%}
-								<p>Entregue</p>
-							{% else %}
-								<button data-product="{{i.product_id}}" data-order="{{i.order_id}}" data-mode="item" class="btn-delivered">Entregar item</button>
-							{% endif %}
-						{% endif %}
-						{% if i.complete == False%}
-						<p>no</p>
-						{% endif %}
-				{% endfor %}
-				<a href="{% url 'orderDetail' restaurant.name order.1.items.0.order_id %}">Detalles del pedido</a>
-				<p>Costumer</p>
-				<p>{{order.1.customer.name}}</p>
-				<p>{{order.1.customer.email}}</p>
-				<hr>
 
-			{% endif %}
+			<div class="delivery-list-card">
+				{% if order.is_finished %} <div class="finish"> {% endif %}
+
+					<div class="delivery-list-card-info">
+						<p>Direccion:</p>
+						<p class="delivery-list-card-info-address">{{order.get_order_info.0.shipping.address}}, {{order.get_order_info.0.shipping.city}}</p>
+						<p>Numero de pedido {{order.transaction_id}}</p>
+					</div>
+					{% for i in order.get_items %}
+						<div class="delivery-list-card-item">
+							<p>{{i.product_name}}</p>
+							<p>Cantitad {{i.quantity}}</p>
+							<p>Listo para entrega:
+								{% if i.complete%}
+								si
+									{% if i.delivered%}
+									y	entregue
+									{% else %}
+										<button data-product="{{i.product_id}}" data-order="{{i.order_id}}" data-mode="item" class="btn-delivered">Entregar item</button>
+									{% endif %}
+								{% endif %}
+								{% if i.complete == False%}
+								no
+								{% endif %}
+							</p>
+						</div>
+					{% endfor %}
+					<div class="delivery-list-card-info">
+						<p>Nombre de cliente: {{order.get_order_info.1.customer.name}}</p>
+						<p>Contacto: Whats App: 0{{order.get_order_info.1.customer.phone}}, email:{{order.get_order_info.1.customer.email}}</p>
+						<a href="https://wa.me/598{{order.get_order_info.1.customer.phone}}">Link Whats App</a>
+					</div>
+					<a href="{% url 'orderDetail' restaurant.name order.transaction_id %}" class="delivery-list-card-detail">Detalles del pedido</a>
+
+				{% if order.is_finished %} </div> {% endif %}
+			</div>
 		{% endfor %}
-
-
 	</div>
-
+</section>
 {% endblock content %}

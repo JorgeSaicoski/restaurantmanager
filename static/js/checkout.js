@@ -61,9 +61,6 @@ document.getElementById('make-payment').addEventListener('click', function(e){
     })
     .then((response) => response.json())
     .then((data) => {
-      console.log("data")
-      console.log(data)
-      console.log("data")
       Swal.fire(
         'Pedido realizado',
         `Entre en contato para cualquier alteracion ${restaurantContact}`,

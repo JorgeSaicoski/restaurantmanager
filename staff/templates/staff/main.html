@@ -6,11 +6,9 @@
 
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
 
-        <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'css/staff.css' %}">
     </head>
     <body>
-    	<nav>Navbar Placeholder</nav>
-
         <script>
           //get user
           let user = '{{request.user}}'
@@ -37,16 +35,16 @@
           let csrftoken = getToken('csrftoken')
 
         </script>
-        <nav>
+        <nav class="nav">
             {% if is_kitchen %}
-            <a href="{% url 'kitchen' restaurant.name %}">Cocina</a>
+            <a href="{% url 'kitchen' restaurant.name %}" class="nav-link"><img src="/static/images/admin/kitchen.png" alt="kitchen"></a>
             {% endif %}
             {% if is_weiter %}
-            <a href="{% url 'weiter' restaurant.name %}">Delivery</a>
-            <a href="{% url 'tables' restaurant.name %}">Mesas</a>
+            <a href="{% url 'weiter' restaurant.name %}" class="nav-link"><img src="/static/images/admin/delivery.png" alt="delivery"></a>
+            <a href="{% url 'tables' restaurant.name %}" class="nav-link"><img src="/static/images/admin/local.png" alt="local"></a>
             {% endif %}
             {% if is_cashier %}
-            <a href="{% url 'cashier' restaurant.name %}">Caja</a>
+            <a href="{% url 'cashier' restaurant.name %}" class="nav-link"><img src="/static/images/admin/cashier.png" alt="cashier"></a>
             {% endif %}
         </nav>
         <div>

@@ -4,11 +4,20 @@
 
 <!--Register-->
 <div class="container py-5">
-	<h1>Mesa</h1>
+	<h1 class="title">Pedido</h1>
 	<form method="POST">
 		{% csrf_token %}
-		{{ register_form }}
-		<button class="btn btn-primary" type="submit">Actualizar</button>
+
+		<div class="form">
+			<div class="form-section">
+				<label for="name" class="form-section-label">Nombre:</label>
+				{{ register_form.name }}
+			</div>
+
+		</div>
+		<div class="action">
+			<button class="action-button" type="submit">Crear</button>
+		</div>
 	</form>
 </div>
 

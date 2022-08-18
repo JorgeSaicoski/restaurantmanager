@@ -1,15 +1,43 @@
 {% extends 'accounts/main.html' %}
+{% load static %}
 {% block content %}
-
 
 <!--Register-->
 <div class="container py-5">
 	<h1>Customer</h1>
-	<form method="POST">
-		{% csrf_token %}
-		{{ register_form }}
+	<form method="POST" id="customer-form">
+		<label for="username">Login</label>
+		<input class="form-control" type="text" name="username" value="{{user.username}}">
+		<label for="name">Nombre</label>
+		<input class="form-control" type="text" name="name" value="{{customer.name}}">
+		<label for="email">Email</label>
+		<input class="form-control" type="email" name="email" value="{{user.email}}">
+		<label for="phone">Telefono (Whats App)</label>
+		<input class="form-control" type="tel" name="phone" value="0{{customer.phone}}" pattern="[0-9]{9}">
+
 		<button class="btn btn-primary" type="submit">Actualizar</button>
 	</form>
 </div>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+	//get token
+	function getToken(name) {
+			let cookieValue = null;
+			if (document.cookie && document.cookie !== '') {
+					let cookies = document.cookie.split(';');
+					for (let i = 0; i < cookies.length; i++) {
+							let cookie = cookies[i].trim();
+							// Does this cookie string begin with the name we want?
+							if (cookie.substring(0, name.length + 1) === (name + '=')) {
+									cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+									break;
+							}
+					}
+			}
+			return cookieValue;
+	}
+	let csrftoken = getToken('csrftoken')
+</script>
+<script type="text/javascript" src="{% static 'js/customer.js' %}"></script>
 
 {% endblock %}

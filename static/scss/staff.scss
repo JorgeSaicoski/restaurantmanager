@@ -1,0 +1,249 @@
+@import 'variables';
+@import 'general';
+
+body{
+  padding-top: 15vh;
+}
+
+.nav{
+  position: fixed;
+  width: 100%;
+  left: 0;
+  top: 1vh;
+  z-index: 10;
+  background-color: $dark-color;
+  display: flex;
+  flex-direction: row;
+  height: auto;
+  &-link{
+    padding: $margin-default;
+    display: flex;
+    & img{
+      width: $nav-images-default-site;
+      height: auto;
+    }
+    &:hover{
+      background-color: $select-color;
+    }
+  }
+}
+.title{
+  font-size: 24px;
+  text-align: center;
+}
+.sub-title{
+  font-size: 18px;
+  text-align: center;
+}
+.action{
+  width: 100%;
+  border-top: 6px double $alert-color;
+  margin: $margin-default 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &-button{
+    padding: $margin-default;
+    margin-top: $margin-default;
+    background-color: $alert-color;
+    color: $dark-color;
+    border: 2px solid $select-color;
+    border-radius: $rounded-soft;
+    font-size: 24px;
+    transition: $transition;
+    &:hover{
+      background-color: $select-color;
+      color: $alert-color;
+    }
+  }
+}
+.container-orders{
+  display: flex;
+  flex-direction: row;
+  padding: 2px;
+  flex-wrap: wrap;
+  &-card{
+    width: 25vw;
+    background-color: $dark-color;
+    margin: 1vw;
+    padding: 2.5vw;
+    border-radius: $rounded-soft;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: $transition;
+    &:hover{
+      background-color: $select-color;
+      border-radius: $rounded;
+      & p{
+          color: $dark-color;
+      }
+    }& p{
+      color:$select-color;
+    }
+  }
+}
+.form{
+  margin: $margin-default;
+  display: flex;
+  flex-direction: column;
+  &-section{
+    display: flex;
+    flex-direction: row;
+    transition: $transition;
+    &-label{
+      color: $dark-color;
+    }
+  }
+}
+input{
+  width: 100%;
+  height: 100%;
+  background-color: $base-color;
+  border: none;
+  border-bottom: 2px solid $dark-color;
+  transition: $transition;
+  &:focus{
+    border: none;
+    border-bottom: 2px solid $dark-color;
+  }
+  &:hover{
+    background-color: $select-color;
+  }
+}
+
+.item-container{
+  border-bottom: solid 3px $dark-color;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  & button{
+    @extend .action-button;
+    margin: 1vh;
+    width: 45%;
+  }
+  &-buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    & button{
+      @extend .item-container-buttons;
+      justify-content: center;
+      width: $nav-images-default-site;
+      height: $nav-images-default-site;
+      border-radius: 100%;
+    }
+    &-quantity{
+      font-size: 18px;
+    }
+  }
+  &-order{
+    @extend .item-container;
+    flex-direction: column;
+    border: 5px double $select-color;
+    border-bottom: none;
+    transition: $transition;
+    border-radius: $rounded-soft;
+    margin: 2vh;
+    &:hover{
+      background-color: $select-color;
+    }
+    &-p{
+      border-bottom: 3px solid $dark-color;
+    }
+    &-item{
+      @extend .item-container;
+      border-top: none;
+      &-delivery{
+        width: 100% !important;
+        margin: 0 !important;
+        align-self: center;
+        &:hover{
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+.item-list{
+  border-bottom: solid 3px $dark-color;
+  padding: $margin-default 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.finish{
+  @extend .item-container-order;
+  margin: auto;
+  border: none;
+  height: 100%;
+  width: 100%;
+  background-color: $dark-color;
+  & .title{
+    color: $alert-color;
+    background-color: $select-color;
+  }
+}
+.delivery-list{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  &-card{
+    @extend .item-container-order;
+    justify-content: center;
+    &-info{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      flex-wrap: wrap;
+      border-bottom: 2px solid $dark-color;
+      & p{
+        padding: 0;
+        padding-left: 1vw;
+      }
+      & a{
+        width: 50%;
+        align-self: center;
+        background-color: $dark-color;
+        border-radius: $rounded-soft;
+        padding: 1vh;
+        margin-bottom: 2vh;
+        text-decoration: none;
+        text-align: center;
+        color: $alert-color;
+        &:hover{
+          background-color: $alert-color;
+          color: $select-color;
+        }
+      }
+      &-address{
+        width: 100%;
+        font-size: 24px;
+        text-align: center;
+      }
+    }
+    &-item{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid $dark-color;
+      & p{
+        @extend .delivery-list-card-item;
+        border: none;
+      }
+      & button{
+        padding: 0;
+      }
+    }
+    &-detail{
+      @extend .action-button;
+      text-align: center;
+      text-decoration-color: none;
+    }
+
+  }
+}

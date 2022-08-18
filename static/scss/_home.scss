@@ -1,0 +1,13 @@
+.staff-link{
+  background-color: $dark-color;
+  margin: $margin-default;
+  padding: 2em;
+  border-radius: $rounded-soft;
+  color: $select-color;
+  &-container{
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+}

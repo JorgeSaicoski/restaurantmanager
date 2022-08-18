@@ -10,12 +10,24 @@
     </head>
     <body>
       <div class="search restaurantBar">
+<<<<<<< HEAD
         {% if show_login %}
           <ul class="login-register">
             <li class="login-font"><a href="{% url 'register' %}">Registrar</a></li>
             <li class="register-font"><a href="{% url 'login' %}">Ingresar</a></li>
           </ul>
         {% endif %}
+=======
+        <ul class="login-register">
+          {% if show_login %}
+            <li><a href="{% url 'register' %}">Registrar</a></li>
+            <li><a href="{% url 'login' %}">Entrar en mi cuenta</a></li>
+          {% else %}
+            <li><a href="{% url 'orders_customer' request.user.email %}">Mis pedidos</a></li>
+            <li><a href="{% url 'customer_page' %}">Actualizar dados</a></li>
+          {% endif %}
+        </ul>
+>>>>>>> 79d667fbbb3ce1d374f36bac48985c7351de0392
         <input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Que vamos a pedir? Donde?" title="Type in a name">
       </div>
       <ul class="list" id="listToSearch">
@@ -31,6 +43,9 @@
           </li>
         {% endfor %}
       </ul>
+      <div class="staff-link-container">
+        <a href="{% url 'list' %}" class="staff-link">Soy empleado</a>
+      </div>
     <script type="text/javascript" src="{% static 'js/search.js' %}"></script>
     </body>
 </html>

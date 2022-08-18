@@ -4,7 +4,6 @@
 {% block content %}
   {% if is_weiter %}
     <h2>{{customer.name}}</h2>
-    <a href="{% url 'weiter' restaurant.name %}">; Volver</a>
     {% for item in items %}
       <div>
         <p>{{item.name}}</p><button data-product="{{item.id}}" data-action="add" class="update-order">Pedir</button>
