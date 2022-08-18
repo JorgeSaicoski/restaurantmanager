@@ -12,8 +12,8 @@
       <div class="search restaurantBar">
         {% if show_login %}
           <ul class="login-register">
-            <li><a href="{% url 'register' %}">Registrar</a></li>
-            <li><a href="{% url 'login' %}">Entrar en mi cuenta</a></li>
+            <li class="login-font"><a href="{% url 'register' %}">Registrar</a></li>
+            <li class="register-font"><a href="{% url 'login' %}">Ingresar</a></li>
           </ul>
         {% endif %}
         <input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Que vamos a pedir? Donde?" title="Type in a name">
