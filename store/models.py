@@ -5,12 +5,15 @@ from accounts.models import Customer
 
 
 
-
+class Category(models.Model):
+	name = models.CharField(max_length=200)
+	image = models.ImageField(null=False, blank=True, upload_to='category/')
 class Product(models.Model):
 	name = models.CharField(max_length=200)
 	price = models.FloatField()
 	restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
 	description = models.TextField(max_length=2000, default="")
+	category = models.ManyToManyField(Category, related_name="category")
 	image = models.ImageField(null=False, blank=True, upload_to='restaurant/',default="/default/food.svg")
 	def __str__(self):
 		return self.name
