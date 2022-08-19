@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from restaurants.models import Restaurant
-from store.models import Product, Order, OrderItem, ShippingAddress
+from store.models import Product, Order, OrderItem, ShippingAddress, Category
 from django.http import JsonResponse
 import json
 from .utils import cookieCart, cartData, guestOrder
@@ -10,6 +10,21 @@ from .utils import cookieCart, cartData, guestOrder
 def store(request,pk):
 	# Change to get a specif restaurant
 	restaurant = Restaurant.objects.get(name=pk)
+	categories = Category.objects.all()
+	products = Product.objects.filter(restaurant=restaurant)
+	categories_list = []
+	for i in categories:
+		check = i.get_products
+		put = False
+		for product_check in check:
+			if product_check in products:
+				put = True
+		if put:
+			categories_list.append(i)
+
+
+
+
 	#get cookies
 	# if the user havent a customer
 	try:
@@ -19,9 +34,9 @@ def store(request,pk):
 	cartItems = data['cartItems']
 	order = data['order']
 	items = data['items']
-	products = Product.objects.filter(restaurant=restaurant)
 
-	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant, 'order':order,}
+
+	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant, 'order':order, 'categories':categories_list}
 	return render(request, 'store/store.html', context)
 
 #send to cart

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from store.models import Customer, Product, Order, OrderItem, ShippingAddress
+from store.models import Customer, Product, Order, OrderItem, ShippingAddress, Category
 # Register your models here.
 
 #preparing to put on Restaurant admin
@@ -21,4 +21,5 @@ admin.site.register(Customer)
 admin.site.register(Product,ProductAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(OrderItem)
+admin.site.register(Category)
 admin.site.register(ShippingAddress)

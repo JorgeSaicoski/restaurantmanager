@@ -8,6 +8,13 @@ from accounts.models import Customer
 class Category(models.Model):
 	name = models.CharField(max_length=200)
 	image = models.ImageField(null=False, blank=True, upload_to='category/')
+	def __str__(self):
+		return self.name
+	@property
+	def get_products(self):
+		products = Product.objects.filter(category=self.id)
+		return products
+
 class Product(models.Model):
 	name = models.CharField(max_length=200)
 	price = models.FloatField()
