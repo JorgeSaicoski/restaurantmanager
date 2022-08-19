@@ -16,10 +16,10 @@
             <li><a href="{% url 'login' %}">Entrar en mi cuenta</a></li>
           {% else %}
             <li><a href="{% url 'orders_customer' request.user.email %}">Mis pedidos</a></li>
-            <li><a href="{% url 'customer_page' %}">Actualizar dados</a></li>
+            <li><a href="{% url 'customer_page' %}">Actualizar datos</a></li>
           {% endif %}
         </ul>
-        <input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Que vamos a pedir? Donde?" title="Type in a name">
+        <input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Que quieres ordenar?" title="Type in a name">
       </div>
       <ul class="list" id="listToSearch">
         {% for restaurant in restaurants %}
