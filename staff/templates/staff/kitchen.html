@@ -1,14 +1,14 @@
 {% extends 'staff/main.html' %}
 {% load static %}
 {% block content %}
-	<div>
-		<h2>Pedidos para delivery</h2>
+	<section class="kitchen">
+		<h2 class="title">Pedidos para delivery</h2>
 		{% for i in delivery %}
-			<p>Pedido {{i.0.order_id}}</p>
+			<h6>Pedido {{i.0.order_id}}</h6>
 			{% for item in i%}
 	      {% if item.complete == False %}
-	        <div class="">
-	            <div class="">
+	        <div class="kitchen-card">
+	            <div class="kitchen-card-items">
 	              <p>Plato</p>
 	              <p>{{item.product_id}}</p>
 	              <p>{{item.product_name}}</p>
@@ -20,13 +20,13 @@
 	      {% endif %}
 			{% endfor %}
 		{% endfor %}
-		<h2>Pedidos locales</h2>
+		<h2 class="title">Pedidos locales</h2>
 		{% for i in local %}
-			<p>Pedido {{i.0.order_id}}</p>
+			<h6>Pedido {{i.0.order_id}}</h6>
 			{% for item in i%}
 	      {% if item.complete == False %}
-	        <div class="">
-	            <div class="">
+	        <div class="kitchen-card">
+	            <div class="kitchen-card-items">
 	              <p>Plato</p>
 	              <p>{{item.product_id}}</p>
 	              <p>{{item.product_name}}</p>
@@ -38,23 +38,25 @@
 	      {% endif %}
 			{% endfor %}
 		{% endfor %}
-			<h2>Platos terminados<h2>
+		<h2 class="title">Platos terminados<h2>
 			<h4>Pedidos para delivery</h4>
 			{% for i in delivery %}
-				<p>Pedido {{i.0.order_id}}</p>
+				<h6>Pedido {{i.0.order_id}}</h6>
 				{% for item in i%}
 					{% if item.complete %}
 
-							<div class="">
-									<div class="">
-										<p>Plato</p>
-										<p>{{item.product_id}}</p>
-										<p>{{item.product_name}}</p>
-										<p>Quantidade</p>
-										<p>{{item.quantity}}</p>
-									</div>
-									<button data-product="{{item.product_id}}" data-order="{{item.order_id}}" data-action="return" class="add-btn update-order">Retorno</button>
+						<div class="kitchen-card">
+							<div class="finish">
+								<div class="kitchen-card-items">
+									<p>Plato</p>
+									<p>{{item.product_id}}</p>
+									<p>{{item.product_name}}</p>
+									<p>Quantidade</p>
+									<p>{{item.quantity}}</p>
+								</div>
+								<button data-product="{{item.product_id}}" data-order="{{item.order_id}}" data-action="return" class="add-btn update-order">Retorno</button>
 							</div>
+						</div>
 						{% endif %}
 					{% endfor %}
 			{% endfor %}
@@ -62,22 +64,18 @@
 			{% for i in local %}
 			{% for item in i%}
 				{% if item.complete %}
-
-						<div class="">
-								<div class="">
+						<h6>Pedido {{i.0.order_id}}</h6>
+						<div class="kitchen-card">
+							<div class="finish">
+								<div class="kitchen-card-items">
 									<p>Plato</p>
 									<p>{{item.product_id}}</p>
 									<p>{{item.product_name}}</p>
-								</div>
-								<div class="">
-									<p>Pedido</p>
-									<p>{{item.order_id}}</p>
-								</div>
-								<div class="">
-										<p>Quantidade</p>
-										<p>{{item.quantity}}</p>
+									<p>Quantidade</p>
+									<p>{{item.quantity}}</p>
 								</div>
 								<button data-product="{{item.product_id}}" data-order="{{item.order_id}}" data-action="return" class="add-btn update-order">Retorno</button>
+							</div>
 						</div>
 					{% endif %}
 			{% endfor %}
@@ -85,6 +83,6 @@
 
 
 
-	</div>
+	</section>
 
 {% endblock content %}

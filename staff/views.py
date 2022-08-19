@@ -186,7 +186,7 @@ def weiter(request, pk):
 def orderDetail(request, pk, id):
     restaurant = Restaurant.objects.get(name=pk)
     user = request.user
-    if is_weiter(user, restaurant) or is_owner(user, restaurant):
+    if is_weiter(user, restaurant) or is_owner(user, restaurant) or is_cashier(user, restaurant):
         order = Order.objects.get(transaction_id=id, restaurant=restaurant)
         customer = order.customer.get_customer
         products = Product.objects.filter(restaurant=restaurant)

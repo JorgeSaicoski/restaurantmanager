@@ -7,14 +7,16 @@
   {% if is_weiter or is_cashier %}
     {% if shipping %}
       <div class="order-detail-weiter-shipping">
-        <h5>Direction: {{shipping.city}}, direccion {{shipping.address}}</h5>
+        <h5>Direction: {{shipping.address}}, {{shipping.city}}</h5>
         <div class="order-detail-weiter-shipping-info">
           <h5>Contacto</h5>
           <p>Nombre: {{customer.name}}</p>
           <p>Email: {{customer.email}}</p>
           <p>Telefono: {{customer.phone}}</p>
         </div>
-
+        <div class="delivery-list-card-info">
+          <a href="https://wa.me/598{{customer.phone}}">Link Whats App</a>
+        </div>
       {% if order.is_finished %}
         <p>Completado y entregué</p>
       {% else %}
@@ -68,22 +70,25 @@
             <p>Ya fue entregado</p>
             {% else %}
             <p>Cocina he terminado</p>
+            <p>UYU {{i.total}}</p>
             <button data-product="{{i.product_id}}" data-order="{{i.order_id}}" data-mode="item" class="btn-delivered">Entregar item</button>
             {% endif %}
           {% else %}
             <p>No esta listo.</p>
+            <p>UYU {{i.total}}</p>
           {% endif %}
-          <p>UYU {{i.total}}</p>
         </div>
       {% endfor %}
       <div class="order-detail-cashier-total">
-        <tr class="order-detail-cashier-total-table">
-          <th class="order-detail-cashier-total-item"><h5>Items: {{order.get_cart_items}}</h5></th>
-          <th class="order-detail-cashier-total-item"><h5>Total: UYU{{order.get_cart_total|floatformat:2}}</h5></th>
-          <th class="order-detail-cashier-total-button">
-            <button data-customer="{{customer.name}}" data-order="{{order.transaction_id}}" class="btn-paid">Pagar</button>
-          </th>
-        </tr>
+        <table>
+          <tr class="order-detail-cashier-total-table">
+            <th class="order-detail-cashier-total-item"><h5>Items: {{order.get_cart_items}}</h5></th>
+            <th class="order-detail-cashier-total-item"><h5>Total: UYU{{order.get_cart_total|floatformat:2}}</h5></th>
+          </tr>
+        </table>
+        <div class="order-detail-cashier-total-button">
+          <button data-customer="{{customer.name}}" data-order="{{order.transaction_id}}" class="btn-paid">Pagar</button>
+        </div>
       </div>
     </div>
   {% endif %}

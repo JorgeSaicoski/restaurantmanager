@@ -2,7 +2,9 @@
 @import 'general';
 
 body{
-  padding-top: 15vh;
+  padding: 15vh 0 0 0;
+  margin: 0;
+
 }
 
 
@@ -251,7 +253,7 @@ input{
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px $border-default $dark-color;
+      border-bottom: $border-default solid $dark-color;
       & p{
         @extend .delivery-list-card-item;
         border: none;
@@ -329,13 +331,17 @@ input{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: $border-big double $alert-color;
-    border-style: double none;
+    border-top:$border-big double $alert-color;
     border-radius: 5%;
     margin-top: $margin-default;
+    & button{
+      @extend .action-button;
+      width: 100%;
+    }
     &-item{
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: baseline;
       border-bottom: $border-default solid $dark-color;
@@ -345,10 +351,50 @@ input{
       flex-direction: column;
       justify-content: space-between;
       border-top: $border-default solid $dark-color;
-      & button{
-        @extend .action-button;
-        width: 100%;
+
+      & tr{
+        border: $border-default solid $dark-color;
+
+      }
+      &-item{
+        font-size: $font-big;
       }
     }
+  }
+}
+.kitchen{
+  & h6{
+    border-bottom: $border-default solid $dark-color;
+    font-size: $font-size;
+  }
+  & h2{
+    margin:$margin-default 0;
+    padding: $padding-default 0;
+    border: $border-default solid $dark-color;
+    background-color: $dark-color;
+    color: $select-color;
+    border-style: solid none;
+  }
+  &-card{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: $border-default solid $dark-color;
+  border-bottom: none;
+  border-radius: $rounded-soft;
+  margin: $margin-default 0;
+  &-items{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    }
+  & button{
+    @extend .action-button;
+    height: $font-size;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
   }
 }

@@ -106,7 +106,8 @@ body {
   opacity: 0 !important; }
 
 body {
-  padding-top: 15vh; }
+  padding: 15vh 0 0 0;
+  margin: 0; }
 
 .nav {
   position: fixed;
@@ -142,7 +143,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center; }
-  .action-button, .item-container button, .item-container-order button, .finish button, .delivery-list-card button, .order-detail-weiter-shipping button, .item-container-order-item button, .order-detail-weiter-list-container button, .delivery-list-card-detail, .order-detail-cashier-total button {
+  .action-button, .item-container button, .item-container-order button, .finish button, .delivery-list-card button, .order-detail-weiter-shipping button, .item-container-order-item button, .order-detail-weiter-list-container button, .delivery-list-card-detail, .order-detail-cashier button, .kitchen-card button {
     padding: 2vh;
     margin-top: 2vh;
     background-color: #BB0A21;
@@ -151,7 +152,7 @@ body {
     border-radius: 2vh;
     font-size: 24px;
     transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
-    .action-button:hover, .item-container button:hover, .item-container-order button:hover, .finish button:hover, .delivery-list-card button:hover, .order-detail-weiter-shipping button:hover, .item-container-order-item button:hover, .order-detail-weiter-list-container button:hover, .delivery-list-card-detail:hover, .order-detail-cashier-total button:hover {
+    .action-button:hover, .item-container button:hover, .item-container-order button:hover, .finish button:hover, .delivery-list-card button:hover, .order-detail-weiter-shipping button:hover, .item-container-order-item button:hover, .order-detail-weiter-list-container button:hover, .delivery-list-card-detail:hover, .order-detail-cashier button:hover, .kitchen-card button:hover {
       background-color: #EAF6FF;
       color: #BB0A21; }
 
@@ -314,7 +315,7 @@ input {
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 2px 2px #2A2A72; }
+      border-bottom: 2px solid #2A2A72; }
       .delivery-list-card-item p {
         border: none; }
       .delivery-list-card-item button {
@@ -360,13 +361,15 @@ input {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    border: 6px double #BB0A21;
-    border-style: double none;
+    border-top: 6px double #BB0A21;
     border-radius: 5%;
     margin-top: 2vh; }
+    .order-detail-cashier button {
+      width: 100%; }
     .order-detail-cashier-item {
       display: flex;
       flex-direction: row;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: baseline;
       border-bottom: 2px solid #2A2A72; }
@@ -375,7 +378,37 @@ input {
       flex-direction: column;
       justify-content: space-between;
       border-top: 2px solid #2A2A72; }
-      .order-detail-cashier-total button {
-        width: 100%; }
+      .order-detail-cashier-total tr {
+        border: 2px solid #2A2A72; }
+      .order-detail-cashier-total-item {
+        font-size: 24px; }
+
+.kitchen h6 {
+  border-bottom: 2px solid #2A2A72;
+  font-size: 18px; }
+.kitchen h2 {
+  margin: 2vh 0;
+  padding: 2.5vw 0;
+  border: 2px solid #2A2A72;
+  background-color: #2A2A72;
+  color: #EAF6FF;
+  border-style: solid none; }
+.kitchen-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid #2A2A72;
+  border-bottom: none;
+  border-radius: 2vh;
+  margin: 2vh 0; }
+  .kitchen-card-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; }
+  .kitchen-card button {
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
 
 /*# sourceMappingURL=staff.css.map */
