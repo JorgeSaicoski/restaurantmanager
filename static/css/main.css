@@ -143,6 +143,29 @@ body {
   border-radius: 2vh;
   margin: 10vh; }
 
+.action, .card-button {
+  width: 100%;
+  border-top: 6px double #BB0A21;
+  margin: 2vh 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  text-align: center; }
+  .action-button, .card-button-action {
+    padding: 2vh;
+    margin-top: 2vh;
+    background-color: #BB0A21;
+    color: #2A2A72;
+    border: 2px solid #EAF6FF;
+    border-radius: 2vh;
+    font-size: 24px;
+    transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
+    width: 100%; }
+    .action-button:hover, .card-button-action:hover {
+      background-color: #EAF6FF;
+      color: #BB0A21; }
+
 .card {
   height: 55vh;
   display: flex;
@@ -185,13 +208,11 @@ body {
     .card-image img {
       height: 300px;
       width: 300px; }
-
-.add-btn {
-  background-color: #BB0A21;
-  border-radius: 2vh;
-  padding: 2px 15px 2px 15px; }
-  .add-btn:hover {
-    cursor: pointer; }
+  .card-button {
+    margin-bottom: 0;
+    border: none; }
+    .card-button-action {
+      border-color: #2A2A72; }
 
 .cart-nav-img {
   width: 50px; }

@@ -20,10 +20,11 @@
       </div>
       <ul class="list" id="listToSearch">
         {% for restaurant in restaurants %}
-          <li class="restaurant">
-            <a href="/staff/{{restaurant.name}}" class="restaurant-link">
+          <li class="list-restaurant">
+            <a href="/restaurant/{{restaurant.name}}" class="list-restaurant-link">
               <div class="focus">
                 <p>{{restaurant.name}}</p>
+                <p>{{restaurant.description}}</p>
               </div>
               <img src="{{restaurant.image.url}}" class="logo">
             </a>

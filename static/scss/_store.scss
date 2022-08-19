@@ -1,3 +1,31 @@
+.action{
+  width: 100%;
+  border-top: $border-big double $alert-color;
+  margin: $margin-default 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  text-align: center;
+  &-button{
+    padding: $margin-default;
+    margin-top: $margin-default;
+    background-color: $alert-color;
+    color: $dark-color;
+    border: $border-default solid $select-color;
+    border-radius: $rounded-soft;
+    font-size: $font-big;
+    transition: $transition;
+    width: 100%;
+
+    &:hover{
+      background-color: $select-color;
+      color: $alert-color;
+    }
+  }
+}
+
+
 .card{
   height: $card-heigth;
   display: flex;
@@ -47,13 +75,14 @@
       width: $image-width;
     }
   }
-}
-.add-btn{
-  background-color: $alert-color;
-  border-radius: $rounded-soft;
-  padding: 2px 15px 2px 15px;
-  &:hover{
-    cursor: pointer;
+  &-button{
+      @extend .action;
+      margin-bottom: 0;
+      border: none;
+      &-action{
+        @extend .action-button;
+        border-color: $dark-color;
+      }
   }
 }
 

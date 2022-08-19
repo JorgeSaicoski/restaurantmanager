@@ -14,7 +14,6 @@
       {% for item in order.get_items %}
         <div class="order-detail-weiter-item">
           <p>{{item.product_name}}</p>
-
           {% if item.complete %}
             {% if item.delivered %}
             <p>Ya fue entregado</p>
