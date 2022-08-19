@@ -1,11 +1,11 @@
 .restaurant{
-  height: $image-default-size;
-  width: $image-default-size;
+  height: $image-width;
+  width: $image-width;
 
   margin: $margin-default;
    &-link{
-     height: $image-default-size;
-     width: $image-default-size;
+     height: $image-width;
+     width: $image-width;
      position: absolute;
      border-radius: $rounded;
      overflow: hidden;

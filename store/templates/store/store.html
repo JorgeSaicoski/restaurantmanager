@@ -8,15 +8,18 @@
 		<ul class="list" id="listToSearch">
 			{% for product in products %}
 			<li>
-				<a class="card">
+				<div class="card">
+					<div class="card-image">
+						<img src="{{product.image.url}}" alt="{{product.name}}" >
+					</div>
+
 					<h3 class="card-title">{{product.name}}</h3>
-					<img src="{{product.image.url}}" alt="{{product.name}}" class="image-food">
 					<div class="card-detail">
 						<p>{{product.description}}</p>
 						<h4>UYU {{product.price}}</h4>
 					</div>
 					<button data-product="{{product.id}}" data-action="add" class="add-btn update-cart">Adicionar</button>
-				</a>
+				</div>
 			</li>
 			{% endfor %}
 		</ul>

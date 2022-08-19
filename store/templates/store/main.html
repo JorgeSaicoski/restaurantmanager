@@ -10,7 +10,7 @@
     </head>
     <body>
     	<ul class="navbar">
-        <a href="{% url 'home' %}"><li>Lista de restaurantes</li></a>
+        <a href="{% url 'home' %}"><li>Inicio</li></a>
         <a href="{% url 'store' restaurant.name %}"><li>Pedir {% if order.get_cart_items > 0 %}mas!{% else %} algo!{% endif %}</li></a>
         {% if order.get_cart_items > 0 %}<a href="{% url 'checkout' restaurant.name %}"><li>Realizar Pedido</li></a>{% endif %}
         <a href="{% url 'cart' restaurant.name %}" class="cart-nav"><li class="cart-nav-container"><img src="/static/images/cart.png" alt="cart" class="cart-nav-img"> {% if order.get_cart_items > 0 %}<p>{{order.get_cart_items}}</p>{% endif %}</li></a>
