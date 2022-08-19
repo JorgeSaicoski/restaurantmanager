@@ -5,12 +5,13 @@ for (i = 0; i < updateOrderBtn.length; i++) {
 	updateOrderBtn[i].addEventListener('click', function(){
 		let productId = this.dataset.product
 		let action = this.dataset.action
-		updateUserOrder(productId, action)
+		let order = this.dataset.order
+		updateUserOrder(productId, action, order)
 
 	})
 }
 
-function updateUserOrder(productId, action){
+function updateUserOrder(productId, action, order){
 		let url = `/staff/${restaurant}/${order}/update_order/`
 		fetch(url, {
 			method:'POST',

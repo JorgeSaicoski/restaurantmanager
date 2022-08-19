@@ -3,55 +3,63 @@
 
 {% block content %}
 <div class="order-detail">
+  <h3 class="title">Numero del pedido {{order.transaction_id}}</h3>
+  {% if is_weiter or is_cashier %}
+    {% if shipping %}
+      <div class="order-detail-weiter-shipping">
+        <h5>Ciudad: {{shipping.city}}, direccion {{shipping.address}}</h5>
+        <div class="order-detail-weiter-shipping-info">
+          <h5>Contacto</h5>
+          <p>Nombre: {{customer.name}}</p>
+          <p>Email: {{customer.email}}</p>
+          <p>Telefono: {{customer.phone}}</p>
+        </div>
+
+      {% if order.is_finished %}
+        <p>Completado y entregué</p>
+      {% else %}
+        <button data-product="{{order.get_items.0.product_id}}" data-order="{{order.get_items.0.order_id}}" data-mode="all" class="btn-delivered">Entregar pedido</button>
+      {% endif %}
+      </div>
+    {% endif %}
+  {% endif %}
   {% if is_weiter %}
     <div class="order-detail-weiter">
-      <h2>{{customer.name}}</h2>
-      {% for item in items %}
-        <div class="order-detail-weiter-product">
-            <p>{{item.name}}</p><button data-product="{{item.id}}" data-action="add" class="update-order">Pedir</button>
-        </div>
-      {% endfor %}
-      {% for item in order.get_items %}
-        <div class="order-detail-weiter-item">
-          <p>{{item.product_name}}</p>
-          {% if item.complete %}
-            {% if item.delivered %}
-            <p>Ya fue entregado</p>
-            {% else %}
-            <p>Cocina he terminado</p>
-            {% endif %}
-          {% else %}
-            <p>No esta listo.</p>
-            <div class="order-detail-weiter-item-buttons">
-              <button type="button" name="remove" data-product="{{item.product_id}}" data-action="remove" class="update-order">-</button>
-              <p>{{item.quantity}}</p>
-              <button type="button" name="add" data-product="{{item.product_id}}" data-action="add" class="update-order">+</button>
+      <h2 class="title">{{customer.name}}</h2>
+        <div class="order-detail-weiter-list">
+          {% for item in items %}
+            <div class="order-detail-weiter-list-container">
+                <p>{{item.name}}</p>
+                <button data-product="{{item.id}}" data-action="add" data-order="{{order.transaction_id}}" class="update-order">Pedir</button>
             </div>
-          {% endif %}
+          {% endfor %}
         </div>
-      {% endfor %}
-      {% if shipping %}
-        <div class="order-detail-weiter-shipping">
-          <p>Ciudad {{shipping.city}}, direccion {{shipping.address}}</p>
-          <div class="order-detail-weiter-shipping-info">
-            <p>Contacto</p>
-            <p>Nombre: {{customer.name}}</p>
-            <p>Email: {{customer.email}}</p>
-            <p>Telefono: {{customer.phone}}</p>
-          </div>
-
-        {% if order.is_finished %}
-          <p>Completado y entregué</p>
-        {% else %}
-          <button data-product="{{order.get_items.0.product_id}}" data-order="{{order.get_items.0.order_id}}" data-mode="all" class="btn-delivered">Entregar pedido</button>
-        {% endif %}
+        <div class="order-detail-weiter-list">
+          {% for item in order.get_items %}
+            <div class="order-detail-weiter-list-container">
+              <p>{{item.product_name}}</p>
+              {% if item.complete %}
+                {% if item.delivered %}
+                <p>Ya fue entregado</p>
+                {% else %}
+                <p>Cocina he terminado</p>
+                {% endif %}
+              {% else %}
+                <p>No esta listo.</p>
+                <div class="order-detail-weiter-list-container-buttons">
+                  <button type="button" name="remove" data-product="{{item.product_id}}" data-action="remove" data-order="{{item.order_id}}" class="update-order">-</button>
+                  <p class="order-detail-weiter-list-container-buttons-quantity">{{item.quantity}}</p>
+                  <button type="button" name="add" data-product="{{item.product_id}}" data-action="add" data-order="{{item.order_id}}" class="update-order">+</button>
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
         </div>
-      {% endif %}
     {% endif %}
   </div>
   {% if is_cashier %}
   <div class="order-detail-cashier">
-    <p>Numero del pedido {{order.transaction_id}}</p>
+      <p class="title">Resumen del pedido</p>
       {% for i in order.get_items %}
         <div class="order-detail-cashier-item">
           <p>{{i.quantity}} {{i.product_name}}</p>
@@ -65,6 +73,7 @@
           {% else %}
             <p>No esta listo.</p>
           {% endif %}
+          <p>UYU {{i.total}}</p>
         </div>
       {% endfor %}
       <div class="order-detail-cashier-total">

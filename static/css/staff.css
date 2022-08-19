@@ -142,16 +142,16 @@ body {
   display: flex;
   justify-content: center;
   align-items: center; }
-  .action-button, .item-container button, .item-container-order button, .finish button, .delivery-list-card button, .item-container-order-item button, .delivery-list-card-detail {
+  .action-button, .item-container button, .item-container-order button, .finish button, .delivery-list-card button, .order-detail-weiter-shipping button, .item-container-order-item button, .order-detail-weiter-list-container button, .delivery-list-card-detail, .order-detail-cashier-total button {
     padding: 2vh;
     margin-top: 2vh;
     background-color: #BB0A21;
-    color: #2A2A72;
+    color: #EAF6FF;
     border: 2px solid #EAF6FF;
     border-radius: 2vh;
     font-size: 24px;
     transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
-    .action-button:hover, .item-container button:hover, .item-container-order button:hover, .finish button:hover, .delivery-list-card button:hover, .item-container-order-item button:hover, .delivery-list-card-detail:hover {
+    .action-button:hover, .item-container button:hover, .item-container-order button:hover, .finish button:hover, .delivery-list-card button:hover, .order-detail-weiter-shipping button:hover, .item-container-order-item button:hover, .order-detail-weiter-list-container button:hover, .delivery-list-card-detail:hover, .order-detail-cashier-total button:hover {
       background-color: #EAF6FF;
       color: #BB0A21; }
 
@@ -171,6 +171,10 @@ body {
     justify-content: center;
     align-items: center;
     transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+    .container-orders-card-order {
+      background-color: black;
+      border: 2px solid #EAF6FF;
+      border-radius: 2vh; }
     .container-orders-card-button {
       margin-top: 2vh;
       background-color: #BB0A21;
@@ -211,34 +215,34 @@ input {
   input:hover {
     background-color: #EAF6FF; }
 
-.item-container, .item-container-order, .finish, .delivery-list-card, .item-container-order-item {
+.item-container, .item-container-order, .finish, .delivery-list-card, .order-detail-weiter-shipping, .item-container-order-item, .order-detail-weiter-list-container {
   border-bottom: solid 2px #2A2A72;
   display: flex;
   flex-direction: row;
   justify-content: space-between; }
-  .item-container button, .item-container-order button, .finish button, .delivery-list-card button, .item-container-order-item button {
+  .item-container button, .item-container-order button, .finish button, .delivery-list-card button, .order-detail-weiter-shipping button, .item-container-order-item button, .order-detail-weiter-list-container button {
     margin: 2vh;
     width: 45%; }
-  .item-container-buttons, .item-container-buttons button {
+  .item-container-buttons, .item-container-buttons button, .order-detail-weiter-list-container-buttons, .order-detail-weiter-list-container-buttons button {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between; }
-    .item-container-buttons button {
+    .item-container-buttons button, .order-detail-weiter-list-container-buttons button {
       justify-content: center;
       width: 50px;
       height: 50px;
       border-radius: 100%; }
-    .item-container-buttons-quantity {
+    .item-container-buttons-quantity, .order-detail-weiter-list-container-buttons-quantity {
       font-size: 18px; }
-  .item-container-order, .finish, .delivery-list-card {
+  .item-container-order, .finish, .delivery-list-card, .order-detail-weiter-shipping {
     flex-direction: column;
     border: 6px double #EAF6FF;
     border-bottom: none;
     transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
     border-radius: 2vh;
     margin: 2vh; }
-    .item-container-order:hover, .finish:hover, .delivery-list-card:hover {
+    .item-container-order:hover, .finish:hover, .delivery-list-card:hover, .order-detail-weiter-shipping:hover {
       background-color: #EAF6FF; }
     .item-container-order-p {
       border-bottom: 2px solid #2A2A72; }
@@ -251,7 +255,7 @@ input {
         .item-container-order-item-delivery:hover {
           cursor: pointer; }
 
-.item-list {
+.item-list, .order-detail-weiter-list {
   border-bottom: solid 2px #2A2A72;
   padding: 2vh 0;
   display: flex;
@@ -272,18 +276,18 @@ input {
   display: flex;
   flex-direction: column;
   justify-content: space-between; }
-  .delivery-list-card {
+  .delivery-list-card, .order-detail-weiter-shipping {
     justify-content: center; }
-    .delivery-list-card-info {
+    .delivery-list-card-info, .order-detail-weiter-shipping-info {
       display: flex;
       flex-direction: column;
       justify-content: center;
       flex-wrap: wrap;
       border-bottom: 2px solid #2A2A72; }
-      .delivery-list-card-info p {
+      .delivery-list-card-info p, .order-detail-weiter-shipping-info p {
         padding: 0;
         padding-left: 1vw; }
-      .delivery-list-card-info a {
+      .delivery-list-card-info a, .order-detail-weiter-shipping-info a {
         width: 50%;
         align-self: center;
         background-color: #2A2A72;
@@ -293,7 +297,7 @@ input {
         text-decoration: none;
         text-align: center;
         color: #BB0A21; }
-        .delivery-list-card-info a:hover {
+        .delivery-list-card-info a:hover, .order-detail-weiter-shipping-info a:hover {
           background-color: #BB0A21;
           color: #EAF6FF; }
       .delivery-list-card-info-address {
@@ -314,5 +318,60 @@ input {
     .delivery-list-card-detail {
       text-align: center;
       text-decoration-color: none; }
+
+.order-detail {
+  display: flex;
+  flex-direction: column; }
+  .order-detail-weiter {
+    display: flex;
+    flex-direction: column; }
+    .order-detail-weiter-list {
+      border: none; }
+      .order-detail-weiter-list-container {
+        align-items: center; }
+        .order-detail-weiter-list-container button {
+          height: 24px;
+          display: flex;
+          justify-content: center;
+          align-items: center; }
+        .order-detail-weiter-list-container-buttons button {
+          justify-content: center;
+          width: 50px;
+          height: 50px;
+          border-radius: 100%; }
+    .order-detail-weiter-shipping h5 {
+      width: 100%;
+      text-align: center;
+      font-size: 18px; }
+    .order-detail-weiter-shipping button {
+      width: 100%;
+      margin: 0; }
+    .order-detail-weiter-shipping-info {
+      border: 2px #2A2A72;
+      border-style: none;
+      border-top-style: solid;
+      flex-direction: column;
+      flex-wrap: wrap; }
+  .order-detail-cashier {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: 6px double #BB0A21;
+    border-style: double none;
+    border-radius: 5%;
+    margin-top: 2vh; }
+    .order-detail-cashier-item {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: 2px solid #2A2A72; }
+    .order-detail-cashier-total {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-top: 2px solid #2A2A72; }
+      .order-detail-cashier-total button {
+        width: 100%; }
 
 /*# sourceMappingURL=staff.css.map */

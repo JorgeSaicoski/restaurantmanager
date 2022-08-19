@@ -130,10 +130,21 @@ def cashier(request, pk):
     all_orders = Order.objects.filter(restaurant=restaurant, closed=False)
     if is_cashier(user, restaurant) or is_owner(user, restaurant):
         for customer in customers_list:
-            local_order.append(customer.get_orders)
+            list = []
+            orders_customer = customer.get_orders
+            custo = orders_customer[0]["customer"]["name"]
+            for i in orders_customer[0]["orders"]:
+                transaction_id = i["transaction_id"]
+                this_orders = Order.objects.filter(restaurant=restaurant, transaction_id=transaction_id)
+                for item in this_orders:
+                    list.append(item)
+
+            local_order.append({"name": custo, "item":list})
         for order in all_orders:
             if order.complete and order.delivery:
                 orders.append(order)
+    for i in local_order[0]["item"]:
+        print(i.transaction_id)
     context = {
         'local_order': local_order,
         'orders': orders,
@@ -196,7 +207,6 @@ def orderDetail(request, pk, id):
             shipping = ShippingAddress.objects.get(order=order).get_shipping
         except:
             shipping = False
-
     context = {
         'items': items,
         'restaurant': restaurant,
@@ -315,7 +325,10 @@ def updateOrder(request, pk, id):
     product = Product.objects.get(id=productId)
     order = Order.objects.get(restaurant=restaurant, transaction_id=id)
 
-    orderItem, created = OrderItem.objects.get_or_create(order=order, product=product)
+    try:
+        orderItem = OrderItem.objects.get(order=order, product=product)
+    except:
+        orderItem = OrderItem.objects.create(order=order, product=product)
 
     if action == 'add':
         orderItem.quantity = (orderItem.quantity + 1)

@@ -69,7 +69,9 @@ class Order(models.Model):
 			quantity = i["quantity"]
 			product = Product.objects.get(id=i["product_id"])
 			product_name = product.get_name
-			list.append({'product_id': id, 'order_id': order_id, 'complete': complete, 'quantity':quantity, 'product_name':product_name, 'delivered':delivered})
+			order_item = OrderItem.objects.get(order=self, product=product)
+			total = order_item.get_total
+			list.append({'product_id': id, 'order_id': order_id, 'complete': complete, 'quantity':quantity, 'product_name':product_name, 'delivered':delivered,"total":total})
 		return list
 
 	@property

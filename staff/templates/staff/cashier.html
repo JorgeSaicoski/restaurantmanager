@@ -6,18 +6,21 @@
     <p class="title">Pedidos para local</p>
     <div class="container-orders">
       {% for orders in local_order %}
-        <div class="container-orders-card">
-          {% for order in orders %}
-              <p>{{order.customer.name}}</p>
-              {% for i in order.orders %}
-                {% if i.transaction_id and not i.closed %}
+      <div class="container-orders-card">
+        <p>{{orders.name}}</p>
+        {% for i in orders.item %}
+          {% if i.transaction_id %}
+            <div class="container-orders-card-order">
+              {% if i.transaction_id and not order.closed %}
                 <p>pedido {{i.transaction_id}}</p>
+                <p>UYU {{i.get_cart_total|floatformat:2}}</p>
                 <a href="{% url 'orderDetail' restaurant.name i.transaction_id %}">Detalles del pedido</a>
-                <button data-customer="{{order.customer.name}}" data-order="{{i.transaction_id}}" class="container-orders-card-button btn-paid">Pagar</button>
-                {% endif %}
-              {% endfor %}
-          {% endfor %}
-        </div>
+                <button data-customer="{{order.customer.name}}" data-order="{{order.transaction_id}}" class="container-orders-card-button btn-paid">Pagar</button>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
       {% endfor %}
     </div>
     <p class="title">Pedidos para delivery</p>

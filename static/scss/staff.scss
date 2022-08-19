@@ -47,7 +47,7 @@ body{
     padding: $margin-default;
     margin-top: $margin-default;
     background-color: $alert-color;
-    color: $dark-color;
+    color: $select-color;
     border: $border-default solid $select-color;
     border-radius: $rounded-soft;
     font-size: $font-big;
@@ -75,6 +75,11 @@ body{
     justify-content: center;
     align-items: center;
     transition: $transition;
+    &-order{
+      background-color: black;
+      border: $border-default solid $select-color;
+      border-radius: $rounded-soft;
+    }
     &-button{
       margin-top: $margin-default;
       background-color: $alert-color;
@@ -257,5 +262,89 @@ input{
       text-decoration-color: none;
     }
 
+  }
+}
+
+.order-detail{
+  display: flex;
+  flex-direction: column;
+  &-weiter{
+    display: flex;
+    flex-direction: column;
+    &-list{
+      @extend .item-list;
+      border: none;
+      &-container{
+        @extend .item-container;
+        align-items: center;
+        & button{
+          height: $font-big;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        &-buttons{
+          @extend .item-container-buttons;
+          & button{
+            @extend .item-container-buttons;
+            justify-content: center;
+            width: $nav-images-default-site;
+            height: $nav-images-default-site;
+            border-radius: 100%;
+
+          }
+          &-quantity{
+            @extend .item-container-buttons-quantity;
+          }
+        }
+      }
+    }
+    &-shipping{
+      @extend .delivery-list-card;
+      & h5{
+        width: 100%;
+        text-align: center;
+        font-size: $font-size;
+      }
+      & button{
+        width: 100%;
+        margin: 0;
+      }
+      &-info{
+        @extend .delivery-list-card-info;
+        border: $border-default $dark-color;
+        border-style: none;
+        border-top-style: solid;
+        flex-direction:column;
+        flex-wrap: wrap;
+
+      }
+    }
+  }
+  &-cashier{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border: $border-big double $alert-color;
+    border-style: double none;
+    border-radius: 5%;
+    margin-top: $margin-default;
+    &-item{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: $border-default solid $dark-color;
+    }
+    &-total{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-top: $border-default solid $dark-color;
+      & button{
+        @extend .action-button;
+        width: 100%;
+      }
+    }
   }
 }
