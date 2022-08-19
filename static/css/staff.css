@@ -172,9 +172,13 @@ body {
     align-items: center;
     transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
     .container-orders-card-order {
-      background-color: black;
       border: 2px solid #EAF6FF;
-      border-radius: 2vh; }
+      border-radius: 2vh;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }
     .container-orders-card-button {
       margin-top: 2vh;
       background-color: #BB0A21;

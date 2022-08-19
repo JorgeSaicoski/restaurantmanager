@@ -73,17 +73,15 @@ def kitchen(request, pk):
         # get the todo itens (will get only the todo itens for this restaurant)
 
         for i in orders:
+            if i.transaction_id:
             # function to detail any item for a order
-            if i.is_delivery:
-                product = i.get_items
-                # loop for get only dictonary
-                for i in product:
-                    delivery.append(i)
-            else:
-                product = i.get_items
-                # loop for get only dictonary
-                for i in product:
-                    local.append(i)
+                if i.is_delivery:
+                    product = i.get_items
+                    delivery.append(product)
+                else:
+                    product = i.get_items
+                    local.append(product)
+
 
     context = {
         'restaurant': restaurant,
@@ -143,8 +141,6 @@ def cashier(request, pk):
         for order in all_orders:
             if order.complete and order.delivery:
                 orders.append(order)
-    for i in local_order[0]["item"]:
-        print(i.transaction_id)
     context = {
         'local_order': local_order,
         'orders': orders,

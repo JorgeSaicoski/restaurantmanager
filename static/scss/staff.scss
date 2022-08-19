@@ -76,9 +76,13 @@ body{
     align-items: center;
     transition: $transition;
     &-order{
-      background-color: black;
       border: $border-default solid $select-color;
       border-radius: $rounded-soft;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
     &-button{
       margin-top: $margin-default;
