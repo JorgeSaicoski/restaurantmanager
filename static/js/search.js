@@ -10,7 +10,7 @@ function searchBar() {
         let div = li[i].getElementsByTagName("div")[0];
         let p = li[i].getElementsByTagName("p")[0];
         let h4 = li[i].getElementsByTagName("h4")[0];
-        let txtValue = a.textContent && a.innerText && div.textContent && div.innerText && p.textContent && p.innerText && h4.textContent && h4.innerText;
+        let txtValue = a.textContent || a.innerText || div.textContent || div.innerText || p.textContent || p.innerText || h4.textContent || h4.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
             li[i].style.display = "";
         } else {
@@ -22,6 +22,10 @@ function searchBar() {
 input.addEventListener("keypress", function(event){
   if (event.key === "Enter") {
     event.preventDefault();
+    console.log(input.title)
+    if (input.title === "category"){
+      console.log("ss")
+    }
     window.scroll({
       top: pos,
       left: 0,

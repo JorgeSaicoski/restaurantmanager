@@ -82,7 +82,6 @@ def kitchen(request, pk):
                     product = i.get_items
                     local.append(product)
 
-
     context = {
         'restaurant': restaurant,
         'local': local,

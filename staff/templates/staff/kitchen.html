@@ -38,30 +38,29 @@
 	      {% endif %}
 			{% endfor %}
 		{% endfor %}
-		<h2 class="title">Platos terminados<h2>
-			<h4>Pedidos para delivery</h4>
-			{% for i in delivery %}
-				<h6>Pedido {{i.0.order_id}}</h6>
-				{% for item in i%}
-					{% if item.complete %}
-
-						<div class="kitchen-card">
-							<div class="finish">
-								<div class="kitchen-card-items">
-									<p>Plato</p>
-									<p>{{item.product_id}}</p>
-									<p>{{item.product_name}}</p>
-									<p>Quantidade</p>
-									<p>{{item.quantity}}</p>
-								</div>
-								<button data-product="{{item.product_id}}" data-order="{{item.order_id}}" data-action="return" class="add-btn update-order">Retorno</button>
+		<h2>Platos terminados</h2>
+		<h4>Pedidos para delivery</h4>
+		{% for i in delivery %}
+			{% for item in i%}
+				{% if item.complete %}
+					<h6>Pedido {{i.0.order_id}}</h6>
+					<div class="kitchen-card">
+						<div class="finish">
+							<div class="kitchen-card-items">
+								<p>Plato</p>
+								<p>{{item.product_id}}</p>
+								<p>{{item.product_name}}</p>
+								<p>Quantidade</p>
+								<p>{{item.quantity}}</p>
 							</div>
+							<button data-product="{{item.product_id}}" data-order="{{item.order_id}}" data-action="return" class="add-btn update-order">Retorno</button>
 						</div>
-						{% endif %}
-					{% endfor %}
-			{% endfor %}
-			<h4>Pedidos locales</h4>
-			{% for i in local %}
+					</div>
+					{% endif %}
+				{% endfor %}
+		{% endfor %}
+		<h4>Pedidos locales</h4>
+		{% for i in local %}
 			{% for item in i%}
 				{% if item.complete %}
 						<h6>Pedido {{i.0.order_id}}</h6>
@@ -79,7 +78,7 @@
 						</div>
 					{% endif %}
 			{% endfor %}
-			{% endfor %}
+		{% endfor %}
 
 
 

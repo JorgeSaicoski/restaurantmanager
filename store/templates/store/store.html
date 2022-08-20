@@ -3,37 +3,38 @@
 {% block content %}
 	<div>
 		<div class="search">
-			<input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Que vamos a pedir en {{restaurant.name}}?" title="Type in a name">
+			<input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Que vamos a pedir en {{restaurant.name}}?" title="category">
 		</div>
 		<ul class="list-store" id="listToSearch">
 				{% for category in categories %}
 
-					<li class="list-store-container">
-						<h4 class="list-store-category-title">{{category.name}}</h4>
-						<div class="list-store-category">
-						{% for product in products %}
-							{% if product in category.get_products %}
-									<a class="card">
-										<div class="card-image">
-											<img src="{{product.image.url}}" alt="{{product.name}}" >
-										</div>
-
-										<h3 class="card-title">{{product.name}}</h3>
-										<div class="card-detail">
-											<p>{{product.description}}</p>
-											<h4>UYU {{product.price}}</h4>
-										</div>
-										<div class="card-button">
-											<button data-product="{{product.id}}" data-action="add" class="add-btn update-cart card-button-action">Adicionar</button>
-										</div>
-									</a>
-							{% endif %}
-						{% endfor %}
-						</div>
+					<li class="list-store-category">
+						<a class="list-store-category-title" href="url 'store_category' restaurant.name category.name">{{category.name}}</a>
 					</li>
+					<li class="list-store-category-items">
+					{% for product in products %}
+						{% if product in category.get_products %}
+								<a class="card">
+									<div class="card-image">
+										<img src="{{product.image.url}}" alt="{{product.name}}" >
+									</div>
+
+									<h3 class="card-title">{{product.name}}</h3>
+									<div class="card-detail">
+										<p>{{product.description}}</p>
+										<h4>UYU {{product.price}}</h4>
+									</div>
+									<div class="card-button">
+										<button data-product="{{product.id}}" data-action="add" class="add-btn update-cart card-button-action">Adicionar</button>
+									</div>
+								</a>
+						{% endif %}
+					{% endfor %}
+					</li>
+
 				{% endfor %}
 		</ul>
-		<a href="{% url 'cart' restaurant.name %}" class="action"><p class="action-button">Carrito</p></a>
+		{% if order.get_cart_items > 0 %}<a href="{% url 'cart' restaurant.name %}" class="action"><p class="action-button">Carrito</p></a>{% endif %}
 	</div>
 <script type="text/javascript" src="{% static 'js/search.js' %}"></script>
 {% endblock content %}

@@ -322,13 +322,13 @@ body {
   flex-wrap: wrap;
   list-style-type: none; }
   .list-store-container {
-    width: 100%; }
+    width: 100%;
+    margin-top: 2vh; }
   .list-store-category {
     display: flex;
     flex-direction: row;
     overflow-x: scroll;
-    width: 100%;
-    min-height: 600px; }
+    width: 100%; }
     .list-store-category::-webkit-scrollbar {
       width: 10px;
       height: 10px; }
@@ -343,12 +343,30 @@ body {
     .list-store-category-title {
       margin-top: 2vh;
       width: 100%;
-      padding: 2.5vw;
+      padding: 0;
       text-align: center;
       border: 6px #EAF6FF;
       border-style: double none;
       color: #2A2A72;
-      font-size: 24px; }
+      font-size: 24px;
+      height: 36px; }
+    .list-store-category-items {
+      display: flex;
+      flex-direction: row;
+      overflow-x: scroll;
+      width: 100%;
+      min-height: 600px; }
+      .list-store-category-items::-webkit-scrollbar {
+        width: 10px;
+        height: 10px; }
+      .list-store-category-items::-webkit-scrollbar-thumb {
+        background: #2A2A72;
+        border-radius: 2vh; }
+      .list-store-category-items::-webkit-scrollbar-track {
+        background: #009FFD; }
+      .list-store-category-items {
+        scrollbar-face-color: #2A2A72;
+        scrollbar-track-color: #009FFD; }
 
 .staff-link {
   background-color: #2A2A72;

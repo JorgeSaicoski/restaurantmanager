@@ -39,6 +39,24 @@ def store(request,pk):
 	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant, 'order':order, 'categories':categories_list}
 	return render(request, 'store/store.html', context)
 
+def store_category(request,pk,category):
+	# Change to get a specif restaurant
+	restaurant = Restaurant.objects.get(name=pk)
+	category_select = Category.objects.get(name=category)
+	products = Product.objects.filter(restaurant=restaurant, category=category_select)
+
+	#get cookies
+	# if the user havent a customer
+	try:
+		data = cartData(request, restaurant)
+	except:
+		return redirect("/account/customer/")
+	cartItems = data['cartItems']
+	order = data['order']
+
+	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant, 'order':order, 'categories':[category_select]}
+	return render(request, 'store/store.html', context)
+
 #send to cart
 def cart(request, pk):
 	restaurant = Restaurant.objects.get(name=pk)
