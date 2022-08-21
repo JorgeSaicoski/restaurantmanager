@@ -1,5 +1,9 @@
 @import 'variables';
 @import 'general';
+body{
+  margin: 0;
+  padding: 0;
+}
 .list{
   display: flex;
   flex-direction: row;
@@ -25,13 +29,12 @@
   width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   list-style-type: none;
   padding: 0;
   text-align: center;
-  height: 10vh;
   font-size: 2em;
   align-items: baseline;
-
 
   &-container{
     text-decoration: none;
@@ -43,6 +46,55 @@
     align-items: flex-end;
     &:hover{
       background-color: $select-color;
+    }
+  }
+}
+.order-detail{
+  display: flex;
+  flex-direction: column;
+  &-number{
+    width: 100%;
+    border: $border-default $dark-color;
+    border-style: solid none;
+
+  }
+  &-info{
+    display: flex;
+    flex-direction: column;
+    background-color: $dark-color;
+    & p{
+      border-bottom: $border-default solid $alert-color;
+      color: $select-color;
+    }
+  }
+  &-items{
+    margin: $margin-default 0;
+    border: $border-big $dark-color;
+    border-style: double none;
+    border-radius: $rounded-soft;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &-item{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
+      border-bottom: $border-default solid $dark-color;
+      margin-bottom: $margin-small;
+      border-radius: $rounded-soft;
+    }
+  }
+  &-contact{
+    @extend .order-detail-items;
+    flex-direction: row;
+    justify-content: center;
+    font-size: $font-size;
+    background-color: $dark-color;
+    border-color: $alert-color;
+    & p{
+      color: $select-color;
     }
   }
 }

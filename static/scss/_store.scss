@@ -209,6 +209,74 @@
   }
 }
 
+.box-element{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#form{
+  display: flex;
+  flex-direction: column;
+}
+#make-payment{
+  font-size: $font-big;
+  width: 50%;
+  padding: $padding-default;
+  background-color: $alert-color;
+  color: $select-color;
+  border-radius: $rounded-soft;
+  border: $border-big solid $dark-color;
+  border-style: none solid;
+  &:hover{
+    background-color: $select-color;
+    color: $alert-color;
+    border-style: none;
+    cursor: pointer;
+  }
+
+}
+.delivery-info-button{
+    @extend #make-payment;
+    align-self: center;
+}
+.checkout-check{
+  background-color: $dark-color;
+  padding: $padding-default;
+  color: $select-color;
+  &-container{
+    display: flex;
+    flex-direction: column;
+    width: 80vw;
+    & h3{
+      width: 100%;
+      text-align: center;
+      margin-bottom: $margin-default;
+      border-bottom: $border-big double $select-color;
+      border-radius: $rounded-soft;
+    }
+    &-table{
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      justify-content: space-between;
+      margin: $margin-small;
+      border-bottom: $border-default solid $select-color;
+      &-item p{
+          color: $select-color;
+      }
+      &-total{
+        font-size: $font-big;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: $alert-color;
+        padding: $padding-small;
+      }
+    }
+  }
+}
+
 .list-store{
   display: flex;
   flex-direction: column;

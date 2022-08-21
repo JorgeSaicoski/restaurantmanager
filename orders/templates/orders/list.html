@@ -11,6 +11,7 @@
         <p>{{order.restaurant}}</p>
         <p>{{order.restaurant.get_contact}}</p>
         <p>Numero general: {{order.id}}</p>
+        <p>Numero en restaurante: {{order.transaction_id}}</p>
         <p>Total:UYU{{order.get_cart_total|floatformat:2}}</p>
         {% if order.is_finished %}
           {% if order.closed %}

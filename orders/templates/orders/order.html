@@ -5,30 +5,33 @@
 <div class="order-detail">
 
 
-    <h2 class="order-detail-number">Numero de pedido en el restaurante {{order.get_items.0.product_id}}</h2>
+    <h2 class="order-detail-number">Numero de pedido en el restaurante {{order.transaction_id}}</h2>
     <div class="order-detail-info">
-      <p>Pedido creado en {{order.date_ordered}}</p>
+      <p>Pedido creado en {{order.date_ordered|date:'d-m-Y'}} a las {{order.date_ordered|date:'G:i'}}</p>
       <p>{{order.get_cart_items}} itens por UYU{{order.get_cart_total}}</p>
-      <p>Detalles de entrega:</p>
-      <p>{{order.get_items_order.0.shipping.address}}, {{order.get_items_order.0.shipping.city}}</p>
+      <p>Detalles de entrega: {{shipping.address}}, {{shipping.city}}</p>
     </div>
-    <div class="order-detail-itens">
+    <div class="order-detail-items">
       {% for item in order.get_items %}
-        <p>{{item.product_name}}</p>
+        <div class="order-detail-items-item">
+          <p>{{item.quantity}} {{item.product_name}}</p>
 
-        {% if item.complete %}
-          {% if item.delivered %}
-          <p>Ya fue entregado</p>
+          {% if item.complete %}
+            {% if item.delivered %}
+            <p>Ya fue entregado</p>
+            {% else %}
+            <p>Cocina he terminado</p>
+            {% endif %}
           {% else %}
-          <p>Cocina he terminado</p>
+            <p>No esta listo.</p>
           {% endif %}
-        {% else %}
-          <p>No esta listo.</p>
-          <div>
-            <p>{{item.quantity}}</p>
-          </div>
-        {% endif %}
+          <p>UYU {{item.total}}</p>
+        </div>
       {% endfor %}
+    </div>
+    <div class="order-detail-contact">
+      <p>Contato del restaurante:</p>
+      <p>{{order.restaurant.contact}}</p>
     </div>
   </div>
 {% endblock content %}

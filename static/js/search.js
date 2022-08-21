@@ -22,9 +22,10 @@ function searchBar() {
 input.addEventListener("keypress", function(event){
   if (event.key === "Enter") {
     event.preventDefault();
-    console.log(input.title)
-    if (input.title === "category"){
-      console.log("ss")
+    console.log(categories)
+    if (input.title === "category" && categories.includes(input.value.toLowerCase())){
+
+        window.location.href = `/restaurant/${restaurant}/category/${input.value}`;
     }
     window.scroll({
       top: pos,

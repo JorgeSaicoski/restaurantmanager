@@ -34,7 +34,7 @@ def store(request,pk):
 	cartItems = data['cartItems']
 	order = data['order']
 	items = data['items']
-
+	print(categories)
 
 	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant, 'order':order, 'categories':categories_list}
 	return render(request, 'store/store.html', context)
@@ -42,7 +42,7 @@ def store(request,pk):
 def store_category(request,pk,category):
 	# Change to get a specif restaurant
 	restaurant = Restaurant.objects.get(name=pk)
-	category_select = Category.objects.get(name=category)
+	category_select = Category.objects.get(name=category.title())
 	products = Product.objects.filter(restaurant=restaurant, category=category_select)
 
 	#get cookies

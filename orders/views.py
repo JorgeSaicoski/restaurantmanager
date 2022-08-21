@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from accounts.models import Customer
-from store.models import Order
+from store.models import Order, ShippingAddress
 # Create your views here.
 def user_list(request, pk):
     # Change to get a specif restaurant
@@ -30,6 +30,9 @@ def user_list(request, pk):
 def order_detail(request, pk, email):
     order = Order.objects.get(id=pk)
 
+    shipping = ShippingAddress.objects.get(order=order).get_shipping
+
+
     if request.user.is_authenticated:
         user = request.user
         customer = Customer.objects.get(user=user)
@@ -37,7 +40,7 @@ def order_detail(request, pk, email):
         customer = Customer.objects.get(email=email)
 
     if order.customer == customer:
-        return render(request, 'orders/order.html', {'order': order, 'customer': customer,})
+        return render(request, 'orders/order.html', {'order': order, 'customer': customer, 'shipping': shipping,})
     else:
         if request.user.is_authenticated:
             orders = Order.objects.filter(customer=customer).order_by('-date_ordered')

@@ -9,7 +9,7 @@
 				{% for category in categories %}
 
 					<li class="list-store-category">
-						<a class="list-store-category-title" href="url 'store_category' restaurant.name category.name">{{category.name}}</a>
+						<a class="list-store-category-title" href="{% url 'store_category' restaurant.name category.name %}">{{category.name}}</a>
 					</li>
 					<li class="list-store-category-items">
 					{% for product in products %}
@@ -37,4 +37,16 @@
 		{% if order.get_cart_items > 0 %}<a href="{% url 'cart' restaurant.name %}" class="action"><p class="action-button">Carrito</p></a>{% endif %}
 	</div>
 <script type="text/javascript" src="{% static 'js/search.js' %}"></script>
+<script type="text/javascript">
+	let categories = []
+</script>
+{% for i in categories %}
+	<script type="text/javascript">
+
+			categories.push("{{i|lower}}")
+
+
+	</script>
+{% endfor %}
+
 {% endblock content %}
