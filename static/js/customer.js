@@ -15,7 +15,7 @@ function updateFormInfo(){
 }
 
 
-let form = document.getElementById('form-section-input')
+let form = document.getElementById('customer-form')
 /*submit funcionality*/
 form.addEventListener('submit', function(e){
   e.preventDefault()

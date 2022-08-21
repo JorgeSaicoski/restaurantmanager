@@ -6,15 +6,43 @@
 
 <!--Register-->
 <div class="container">
-	<h1>Registro</h1>
-	<form method="POST">
+	<form method="POST" class="form">
 		{% csrf_token %}
-		{{ register_form|crispy }}
-		{{ form_customer }}
-		<button class="btn btn-primary" type="submit">Registrate</button>
+		<div class="form-section">
+			<label class="form-section-label" for="username">Usuario:</label>
+			{{ register_form.username }}
+		</div>
+		<div class="form-section">
+			<label class="form-section-label" for="email">Email:</label>
+			{{ register_form.email }}
+		</div>
+		<div class="form-section">
+			<label class="form-section-label" for="password1">Contraseña:</label>
+			{{ register_form.password1 }}
+		</div>
+		<div class="form-section">
+			<label class="form-section-label" for="password2">Confirmar contraseña:</label>
+			{{ register_form.password2 }}
+		</div>
+		<div class="form-section">
+			<label class="form-section-label" for="name">Nombre:</label>
+			{{ form_customer.name }}
+		</div>
+		<div class="form-section">
+			<label class="form-section-label" for="phone">Telefono:</label>
+			{{ form_customer.phone }}
+		</div>
+
+
+
+
+
+		<div class="form-section-button">
+			<button class="form-button" type="submit">Registrate</button>
+			<p class="text-center">Si ya tienes una cuenta, <a href="{% url 'login'%}">Ingresa.</a></p>
+		</div>
 	</form>
-	<br>
-	<p class="text-center">Si ya tienes una cuenta, <a href="{% url 'login'%}">Ingresa.</a></p>
+
 </div>
 
 {% endblock %}

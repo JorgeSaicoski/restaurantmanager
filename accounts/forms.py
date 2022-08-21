@@ -17,12 +17,22 @@ class NewUserForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    def __init__(self, *args, **kwargs):
+        super(NewUserForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-section-input'
 
 
 class NewCustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ("name", "phone")
+        
+
+    def __init__(self, *args, **kwargs):
+        super(NewCustomerForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'form-section-input'
 
 
 class LoginForm(forms.Form):
