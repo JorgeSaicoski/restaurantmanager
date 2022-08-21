@@ -5,37 +5,56 @@
 {% load crispy_forms_tags %}
 
 <!--Register-->
-<div class="container">
+<section class="register">
 	<form method="POST" class="form">
 		{% csrf_token %}
 		<div class="form-section">
 			<label class="form-section-label" for="username">Usuario:</label>
 			{{ register_form.username }}
 		</div>
+		<ul class="hidden form-help" id="form-help-username">
+			<li>Nombre para login</li>
+			<li>Sin espacios o caracteres que no sean letras</li>
+		</ul>
 		<div class="form-section">
 			<label class="form-section-label" for="email">Email:</label>
 			{{ register_form.email }}
 		</div>
+		<ul class="hidden form-help" id="form-help-email">
+			<li>Email para asociar pedidos</li>
+		</ul>
 		<div class="form-section">
 			<label class="form-section-label" for="password1">Contraseña:</label>
 			{{ register_form.password1 }}
 		</div>
+		<ul class="hidden form-help" id="form-help-password1">
+			<li>Su contraseña no puede ser similar a tu informacion.</li>
+			<li>Su contraseña debe tener al menos 8 caracteres.</li>
+			<li>Su contraseña no podrá ser comun</li>
+			<li>Su contraseña no puede tener solo numeros.</li>
+		</ul>
 		<div class="form-section">
 			<label class="form-section-label" for="password2">Confirmar contraseña:</label>
 			{{ register_form.password2 }}
 		</div>
+		<ul class="hidden form-help" id="form-help-password2">
+			<li>Confirmar contraseña</li>
+		</ul>
 		<div class="form-section">
 			<label class="form-section-label" for="name">Nombre:</label>
 			{{ form_customer.name }}
 		</div>
+		<ul class="hidden form-help" id="form-help-name">
+			<li>Nombre para identificacion</li>
+		</ul>
 		<div class="form-section">
 			<label class="form-section-label" for="phone">Telefono:</label>
 			{{ form_customer.phone }}
 		</div>
-
-
-
-
+		<ul class="hidden form-help" id="form-help-phone">
+			<li>Numero de contacto.</li>
+			<li>De preferencia con Whats App.</li>
+		</ul>
 
 		<div class="form-section-button">
 			<button class="form-button" type="submit">Registrate</button>
@@ -43,6 +62,7 @@
 		</div>
 	</form>
 
-</div>
+</section>
+<script type="text/javascript" src="{% static 'js/register.js' %}"></script>
 
 {% endblock %}

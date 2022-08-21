@@ -27,7 +27,7 @@ class NewCustomerForm(forms.ModelForm):
     class Meta:
         model = Customer
         fields = ("name", "phone")
-        
+
 
     def __init__(self, *args, **kwargs):
         super(NewCustomerForm, self).__init__(*args, **kwargs)

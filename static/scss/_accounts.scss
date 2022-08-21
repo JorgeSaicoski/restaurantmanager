@@ -55,4 +55,11 @@
       border: $border-big solid $dark-color;
     }
   }
+  &-help{
+    transition: $transition;
+    list-style-type: circle;
+    & li{
+      color: $alert-color;
+    }
+  }
 }

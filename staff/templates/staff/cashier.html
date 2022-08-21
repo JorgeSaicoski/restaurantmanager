@@ -14,6 +14,9 @@
               {% if i.transaction_id and not order.closed %}
                 <p>pedido {{i.transaction_id}}</p>
                 <p>UYU {{i.get_cart_total|floatformat:2}}</p>
+                {% for item_order in i.get_items %}
+                <p>{{item_order.quantity}} {{item_order.product_name}}</p>
+                {% endfor %}
                 <a href="{% url 'orderDetail' restaurant.name i.transaction_id %}">Detalles del pedido</a>
                 <button data-customer="{{orders.name}}" data-order="{{i.transaction_id}}" class="container-orders-card-button btn-paid">Pagar</button>
               {% endif %}

@@ -103,7 +103,8 @@ body {
   width: 0 !important;
   height: 0 !important;
   overflow: hidden !important;
-  opacity: 0 !important; }
+  opacity: 0 !important;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
 
 .list-restaurant {
   height: 300px;
@@ -489,6 +490,11 @@ body {
       color: #2A2A72;
       cursor: pointer;
       border: 6px solid #2A2A72; }
+  .form-help {
+    transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
+    list-style-type: circle; }
+    .form-help li {
+      color: #BB0A21; }
 
 *, *:before, *:after {
   box-sizing: border-box; }

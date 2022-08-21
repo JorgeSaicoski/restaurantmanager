@@ -103,7 +103,8 @@ body {
   width: 0 !important;
   height: 0 !important;
   overflow: hidden !important;
-  opacity: 0 !important; }
+  opacity: 0 !important;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
 
 body {
   margin: 0;
