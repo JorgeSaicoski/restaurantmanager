@@ -100,6 +100,7 @@ def cart(request, pk):
 				items.append(item)
 			except:
 				pass
+	print(items)
 	context = {
 		'items':items,
 		'order':order,
