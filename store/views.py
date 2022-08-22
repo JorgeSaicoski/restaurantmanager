@@ -34,9 +34,17 @@ def store(request,pk):
 	cartItems = data['cartItems']
 	order = data['order']
 	items = data['items']
-	print(categories)
+	for i in products:
+		for b in items:
+			if i.id == b["id"]:
+				print("in")
+				print(i.id)
+				print("in")
 
-	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant, 'order':order, 'categories':categories_list}
+
+
+
+	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant, 'order':order, 'categories':categories_list, "items":items}
 	return render(request, 'store/store.html', context)
 
 def store_category(request,pk,category):

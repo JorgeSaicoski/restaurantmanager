@@ -60,13 +60,14 @@
     height: 20vh;
     padding: $padding-small;
     overflow: auto;
+    @include scrollbars(10px, $select-color, $dark-color);
     & p{
-    font-size: 12px;
-    color: $select-color;
-    text-align: center;
-    height: 80%;
+      font-size: 12px;
+      color: $select-color;
+      text-align: center;
+      height: 80%;
+    }
   }
-}
   &-image{
     height: $image-height;
     width: $image-width;
@@ -78,10 +79,19 @@
   &-button{
       @extend .action;
       margin-bottom: 0;
-      border: none;
+      border: $border-default $select-color;
+      border-style: solid none;
+      border-radius: $rounded-soft;
+      background: $alert-color;
+      padding: auto $padding-small;
       &-action{
         @extend .action-button;
         border-color: $dark-color;
+        margin: 0;
+      }
+      &-text{
+        width: 120%;
+
       }
   }
 }

@@ -198,6 +198,17 @@ body {
     height: 20vh;
     padding: 2px;
     overflow: auto; }
+    .card-detail::-webkit-scrollbar {
+      width: 10px;
+      height: 10px; }
+    .card-detail::-webkit-scrollbar-thumb {
+      background: #EAF6FF;
+      border-radius: 2vh; }
+    .card-detail::-webkit-scrollbar-track {
+      background: #2A2A72; }
+    .card-detail {
+      scrollbar-face-color: #EAF6FF;
+      scrollbar-track-color: #2A2A72; }
     .card-detail p {
       font-size: 12px;
       color: #EAF6FF;
@@ -211,9 +222,16 @@ body {
       width: 300px; }
   .card-button {
     margin-bottom: 0;
-    border: none; }
+    border: 2px #EAF6FF;
+    border-style: solid none;
+    border-radius: 2vh;
+    background: #BB0A21;
+    padding: auto 2px; }
     .card-button-action {
-      border-color: #2A2A72; }
+      border-color: #2A2A72;
+      margin: 0; }
+    .card-button-text {
+      width: 120%; }
 
 .cart-nav-img {
   width: 50px; }

@@ -21,11 +21,25 @@
 
 									<h3 class="card-title">{{product.name}}</h3>
 									<div class="card-detail">
+										<p class="hidden">{{category.name}}</p>
 										<p>{{product.description}}</p>
 										<h4>UYU {{product.price}}</h4>
 									</div>
 									<div class="card-button">
-										<button data-product="{{product.id}}" data-action="add" class="add-btn update-cart card-button-action">Adicionar</button>
+										{% for item in items %}
+											{% if item.id == product.id %}
+												<button type="button" name="remove" data-product="{{product.id}}" data-action="remove" class="update-cart card-button-action">-</button>
+												<p class="card-button-text">{{item.quantity}}</p>
+												<button type="button" name="add" data-product="{{product.id}}" data-action="add" class="update-cart card-button-action">+</button>
+												<div class="hidden">
+											{% endif %}
+										{% endfor %}
+										<button data-product="{{product.id}}" data-action="add" class="update-cart card-button-action">Adicionar</button>
+										{% for item in items %}
+											{% if item.id == product.id %}
+												</div>
+											{% endif %}
+										{% endfor %}
 									</div>
 								</a>
 						{% endif %}

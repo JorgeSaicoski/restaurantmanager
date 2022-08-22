@@ -22,7 +22,6 @@ function searchBar() {
 input.addEventListener("keypress", function(event){
   if (event.key === "Enter") {
     event.preventDefault();
-    console.log(categories)
     if (input.title === "category" && categories.includes(input.value.toLowerCase())){
 
         window.location.href = `/restaurant/${restaurant}/category/${input.value}`;
