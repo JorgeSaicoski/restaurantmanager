@@ -17,8 +17,17 @@ let form = document.getElementById('form')
 /*submit funcionality*/
 form.addEventListener('submit', function(e){
   e.preventDefault()
-  document.getElementById('form-button').classList.add("hidden");
+  document.getElementById("check-address").innerText =`${form.address.value}`
+  if (form.name.value){
+    document.getElementById("check-name").innerText =`${form.name.value}`
+    document.getElementById("check-phone").innerText =`${form.phone.value}`
+  }
+  document.getElementById('form').classList.add("hidden");
   document.getElementById('payment-info').classList.remove("hidden");
+})
+document.getElementById('fix-id').addEventListener('click', function(e){
+  document.getElementById('form').classList.remove("hidden");
+  document.getElementById('payment-info').classList.add("hidden");
 })
 let userFormData ={
   'name':null,

@@ -44,13 +44,10 @@
   			<input id="form-button" type="submit" class="delivery-info-button" value="Confirmar">
   		</form>
   	</div>
-  	<div class="box-element hidden" id="payment-info">
-      <button id="make-payment">realizar pedido</button>
-  	</div>
 
   </div>
 
-  <div class="checkout-check">
+  <div class="checkout-check hidden" id="payment-info">
   	<div class="checkout-check-container">
 
 
@@ -58,18 +55,45 @@
 
   		{% for item in items %}
   		<div class="checkout-check-container-table">
-  			<!-- <div><img class="row-image" src="{{item.product.imageURL}}"></div> -->
   			<div class="checkout-check-container-table-item"><p>{{item.product.name}}</p></div>
   			<div class="checkout-check-container-table-item"><p>${{item.product.price|floatformat:2}}x{{item.quantity}}</p></div>
   			<div class="checkout-check-container-table-item"><p>{{item.get_total}}</p></div>
   		</div>
   		{% endfor %}
       <div class="checkout-check-container-table-total">
-        <h5>Items:    {{order.get_cart_items}}</h5>
-        <h5>Total:   ${{order.get_cart_total|floatformat:2}}</h5>
+        <h5>Items: {{order.get_cart_items}}</h5>
+        <h5>Total: UYU {{order.get_cart_total|floatformat:2}}</h5>
       </div>
+    </div>
+    <div class="checkout-check-container-check">
+      <h3>Resumen de entrega</h3>
+      <div class="checkout-check-container-table-check"><p>Direccion: </p><p id="check-address"></p></div>
+      {% if request.user.is_authenticated %}
+        <div class="checkout-check-container-table-check"><p>Nombre: </p><p>{{customer.name}}</p></div>
+        <div class="checkout-check-container-table-check"><p>Telefono: </p><p>{{customer.phone}}</p></div>
+        <div class="checkout-check-container-table-check">
+          <a href="{% url 'customer_page' %}">Arreglar info personal</a>
+          <button id="fix-id">Arreglar direccion</button>
+        </div>
+      {% else %}
+        <div class="checkout-check-container-table-check">
+          <p>Nombre: </p>
+          <p id="check-name"></p>
+        </div>
+        <div class="checkout-check-container-table-check">
+          <p>Telefono: </p>
+          <p id="check-phone" class="checkout-check-container-table-check"></p>
+        </div>
 
-  	</div>
+        <button id="fix-id">Arreglar Info</button>
+      {% endif %}
+      <div class="checkout-check-container-table-check">
+        <button id="make-payment" class="checkout-check-container-table-check-total">Realizar pedido</button>
+        <p class="checkout-check-container-table-check-total">UYU {{order.get_cart_total|floatformat:2}}</p>
+      </div>
+    </div>
+
+
   </div>
 </div>
   <script type="text/javascript">

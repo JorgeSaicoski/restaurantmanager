@@ -1,6 +1,6 @@
 from django.shortcuts import  render, redirect
 from .forms import NewUserForm, NewCustomerForm, LoginForm, UpdateCustomerForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from accounts.models import Customer
 from django.contrib.auth.models import User
@@ -73,7 +73,7 @@ def login_request(request):
 
 	return render(request, 'accounts/login.html', {'form': form})
 
-
+def
 def updateCustomer(request):
 	user = request.user
 	customer = Customer.objects.get(user=user)

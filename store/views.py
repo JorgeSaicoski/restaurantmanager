@@ -118,8 +118,9 @@ def checkout(request,pk):
 		cartItems = data['cartItems']
 		order = data['order']
 		items = data['items']
+		customer = False
 
-	context = {'items':items, 'order':order, 'cartItems':cartItems, 'restaurant':restaurant}
+	context = {'items':items, 'order':order, 'cartItems':cartItems, 'restaurant':restaurant, "customer":customer}
 	return render(request, 'store/checkout.html', context)
 
 # link to update items in the cart
