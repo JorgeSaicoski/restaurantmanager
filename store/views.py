@@ -34,13 +34,8 @@ def store(request,pk):
 	cartItems = data['cartItems']
 	order = data['order']
 	items = data['items']
-	for i in products:
-		for b in items:
-			if i.id == b["id"]:
-				print("in")
-				print(i.id)
-				print("in")
-
+	if request.user.is_authenticated:
+		items = order.get_items
 
 
 
@@ -100,7 +95,7 @@ def cart(request, pk):
 				items.append(item)
 			except:
 				pass
-	print(items)
+
 	context = {
 		'items':items,
 		'order':order,
