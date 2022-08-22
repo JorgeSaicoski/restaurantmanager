@@ -1,0 +1,47 @@
+{% extends 'staff/main.html' %}
+{% load static %}
+{% block content %}
+  <section class="owner">
+    <div class="owner-section-info">
+      <img src="{{restaurant.image.url}}" alt="{{restaurant.name}}" class="owner-section-image">
+      <div class="owner-section-items">
+        <a href="{% url 'new_product' restaurant.name %}">Alterar Info/Empleado</a>
+        <a href="{% url 'new_product' restaurant.name %}">Alterar Producto</a>
+        <a href="{% url 'new_product' restaurant.name %}">Nuevo Empleado</a>
+        <a href="{% url 'new_product' restaurant.name %}">Nuevo Producto</a>
+      </div>
+    </div>
+    <ul class="owner-section">
+      <h3>Pedidos en abierto.</h3>
+      {% for order in orders %}
+        {% if not order.closed and order.transaction_id %}
+
+            <li class="owner-section-card">
+                <p>pedido {{order.transaction_id}}</p>
+                <p>UYU {{order.get_cart_total|floatformat:2}}</p>
+                {% for item_order in order.get_items %}
+                  <p>{{item_order.quantity}} {{item_order.product_name}}</p>
+                {% endfor %}
+                <a href="{% url 'orderDetail' restaurant.name order.transaction_id %}">Detalles del pedido</a>
+            </li>
+
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <div class="owner-section">
+      <h3>Pedidos cerrados</h3>
+      {% for order in orders %}
+        {% if order.closed and order.transaction_id %}
+          <li class="owner-section-card">
+              <p>pedido {{order.transaction_id}}</p>
+              <p>UYU {{order.get_cart_total|floatformat:2}}</p>
+              {% for item_order in order.get_items %}
+                <p>{{item_order.quantity}} {{item_order.product_name}}</p>
+              {% endfor %}
+              <a href="{% url 'orderDetail' restaurant.name order.transaction_id %}">Detalles del pedido</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+{% endblock content %}

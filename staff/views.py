@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from restaurants.models import Restaurant
-from store.models import OrderItem, Order, Product, ShippingAddress
-from .forms import NewTableForm
+from store.models import OrderItem, Order, Product, ShippingAddress, Category
+from .forms import NewTableForm, NewProdutcForm
 from accounts.models import Customer
 from django.http import JsonResponse
 import json
@@ -180,6 +180,71 @@ def weiter(request, pk):
         'is_owner': is_owner(user, restaurant)
     }
     return render(request, 'staff/weiter.html', context)
+
+# Owner page
+def owner(request, pk):
+    restaurant = Restaurant.objects.get(name=pk)
+    user = request.user
+    # check if user is auth to kitchen
+    if  is_owner(user, restaurant):
+        # get the orders of this restaurant
+        orders = Order.objects.filter(restaurant=restaurant).order_by('-date_ordered')
+
+    context = {
+        'restaurant': restaurant,
+        "orders": orders,
+        'is_kitchen': is_kitchen(user, restaurant),
+        'is_weiter': is_weiter(user, restaurant),
+        'is_cashier': is_cashier(user, restaurant),
+        'is_owner': is_owner(user, restaurant)
+    }
+    return render(request, 'staff/owner.html', context)
+
+# Owner forms!!
+# Create new product
+def new_product(request, pk):
+    restaurant = Restaurant.objects.get(name=pk)
+    form = NewProdutcForm(request.POST)
+    user = request.user
+    if is_owner(user, restaurant):
+        if request.method == "POST":
+            #get information
+            name = request.POST["name"]
+            price = request.POST["price"]
+            description = request.POST["description"]
+            categories = request.POST["category"]
+            #list to add category correctly
+            category = []
+            for i in categories:
+                cat = Category.objects.get(id=i)
+                category.append(cat)
+            #create product and add category (restaurant add too)
+            try:
+                Product.objects.get(name=name, restaurant=restaurant)
+                return render(request=request, template_name="staff/newproduct.html",
+                              context={"form": form, "message": "Este producto ya existe"})
+            except:
+                pass
+            product = Product.objects.create(name=name, price=price, restaurant=restaurant, description=description)
+            product.category.set(category)
+            return redirect("/staff/{}".format(restaurant))
+
+        return render(request=request, template_name="staff/newproduct.html", context={"form": form})
+    #if it is not owner:
+    restaurant = Restaurant.objects.get(name=pk)
+    context = {
+        'restaurant': restaurant,
+        'is_kitchen': is_kitchen(user, restaurant),
+        'is_weiter': is_weiter(user, restaurant),
+        'is_cashier': is_cashier(user, restaurant),
+        'is_owner': is_owner(user, restaurant),
+        "message": "No tenes permiso para crear un producto",
+    }
+    return render(request, 'staff/main.html', context)
+def restaurant_update(request, pk):
+    restaurant = Restaurant.objects.get(name=pk)
+    data = json.loads(request.body)
+    return JsonResponse('Item was added', safe=False)
 
 #detail of a order
 def orderDetail(request, pk, id):

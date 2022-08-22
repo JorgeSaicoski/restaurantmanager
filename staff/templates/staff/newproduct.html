@@ -1,0 +1,31 @@
+{% extends 'staff/main.html' %}
+{% block content %}
+
+
+<!--Register-->
+<div class="container py-5">
+	<h1 class="title">Pedido</h1>
+	<form method="POST">
+		{% csrf_token %}
+		<div class="form">
+			<div class="form-section">
+				<label for="name">Nombre: </label>{{ form.name }}
+			</div>
+			<div class="form-section">
+				<label for="price">Precio: </label>{{ form.price }}
+			</div>
+			<div class="form-section">
+				<label for="description">Descricion: </label>{{ form.description }}
+			</div>
+			<div class="form-section">
+				<label for="category">Categoria: </label>{{ form.category }}
+			</div>
+
+		</div>
+		<div class="action">
+			<button class="action-button" type="submit">Crear</button>
+		</div>
+	</form>
+</div>
+
+{% endblock %}

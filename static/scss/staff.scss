@@ -112,6 +112,7 @@ body{
   display: flex;
   flex-direction: column;
   &-section{
+    margin: $margin-default 0;
     display: flex;
     flex-direction: row;
     transition: $transition;
@@ -133,6 +134,27 @@ input{
   }
   &:hover{
     background-color: $select-color;
+  }
+}
+textarea{
+  @extend input;
+  border: $border-default solid $dark-color;
+}
+#id_category{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  & label{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin: 0 $margin-small;
+  }
+  & input{
+    width:25px;
+    height: 25px;
   }
 }
 
@@ -394,7 +416,79 @@ input{
     display: flex;
     justify-content: center;
     align-items: center;
+    }
+  }
+}
+.owner{
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  &-section{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0;
+    list-style-type:none;
+    width: 40vw;
+    justify-content: center;
+    & h3{
+      width: 100%;
+      text-align: center;
+    }
+    &-card{
+      border: $border-default solid $select-color;
+      margin: $margin-small;
+      padding: $padding-default*0.55;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: $dark-color;
+      & p, a {
+        color: $select-color;
+      }
+    }
+    &-info{
+      @extend .owner-section;
+      align-self:flex-start;
+      background-color: $dark-color;
+      height: 100vh;
+    }
+    &-image{
+      width: $image-width;
+      height: $image-width;
+      border-radius: 100%;
+      margin: $margin-default auto;
+    }
+    &-items{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: $margin-default auto;
+      padding: $padding-default*0.85;
+      width: $image-width;
+      & a{
+        border-bottom: $border-default solid $alert-color;
+        margin-top: $margin-default;
+        text-align: center;
+        text-decoration: none;
+        color: $select-color;
+        width: 50%;
+        border-radius: $rounded-soft;
+      }
+    }
+  }
+}
 
-  }
-  }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
 }

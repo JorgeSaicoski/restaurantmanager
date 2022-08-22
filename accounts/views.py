@@ -58,7 +58,8 @@ def customer_request(request):
 	return redirect("/account/register/")
 
 def login_request(request):
-
+	if request.user.is_authenticated:
+		logout(request)
 	if request.method == 'POST':
 		username = request.POST['username']
 		password = request.POST['password']
@@ -73,7 +74,9 @@ def login_request(request):
 
 	return render(request, 'accounts/login.html', {'form': form})
 
-def
+def logout_request(request):
+	logout(request)
+	return redirect("/account/login/")
 def updateCustomer(request):
 	user = request.user
 	customer = Customer.objects.get(user=user)
