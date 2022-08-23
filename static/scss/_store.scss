@@ -333,6 +333,7 @@
     flex-direction: row;
     overflow-x: scroll;
     width: 100%;
+    transition: $transition;
     &-title{
       margin-top: $margin-default;
       width: 100%;
@@ -343,6 +344,7 @@
       color: $dark-color;
       font-size: $font-big;
       height: $font-big*1.5;
+      transition: $transition;
     }
     &-items{
       @include scrollbars(10px, $dark-color, $base-color);
@@ -350,7 +352,8 @@
       flex-direction: row;
       overflow-x: scroll;
       width: 100%;
-      min-height: $image-height*2;
+      height: 600px;
+      transition: $transition;
     }
   }
 }

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from restaurants.models import Restaurant
 from store.models import OrderItem, Order, Product, ShippingAddress, Category
-from .forms import NewTableForm, NewProdutcForm
+from .forms import NewTableForm, NewProdutcForm, UptadeRestaurant
 from accounts.models import Customer
 from django.http import JsonResponse
 import json
@@ -242,9 +242,13 @@ def new_product(request, pk):
     }
     return render(request, 'staff/main.html', context)
 def restaurant_update(request, pk):
-    restaurant = Restaurant.objects.get(name=pk)
-    data = json.loads(request.body)
-    return JsonResponse('Item was added', safe=False)
+    instance = get_object_or_404(Restaurant, name=pk)
+    form = UptadeRestaurant(request.POST or None, instance=instance)
+    if form.is_valid():
+        form.save()
+        return redirect('/')
+    return render(request, 'my_template.html', {'form': form})
+
 
 #detail of a order
 def orderDetail(request, pk, id):

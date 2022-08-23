@@ -12,9 +12,11 @@ function searchBar() {
         let h4 = li[i].getElementsByTagName("h4")[0];
         let txtValue = a.textContent || a.innerText || div.textContent || div.innerText || p.textContent || p.innerText || h4.textContent || h4.innerText;
         if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
+            //li[i].style.display = "";
+            li[i].classList.remove("hidden")
         } else {
-            li[i].style.display = "none";
+            //li[i].style.display = "none";
+            li[i].classList.add("hidden")
         }
     }
 }

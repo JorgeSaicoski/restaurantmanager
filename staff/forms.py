@@ -1,6 +1,7 @@
 from django import forms
 from accounts.models import Customer
 from store.models import Category
+from restaurants.models import Restaurant
 
 
 
@@ -18,6 +19,10 @@ class NewProdutcForm(forms.Form):
         widget=forms.CheckboxSelectMultiple
     )
 
+class UptadeRestaurant(forms.ModelForm):
+    class Meta:
+        model = Restaurant
+        fields = "__all__"
 
 
 

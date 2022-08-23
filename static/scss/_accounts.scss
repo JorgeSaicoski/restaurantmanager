@@ -60,6 +60,7 @@
     list-style-type: circle;
     & li{
       color: $alert-color;
+      transition: $transition;
     }
   }
 }
