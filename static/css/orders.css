@@ -1,23 +1,203 @@
-/*
-Errno::ENOENT: No such file or directory @ rb_sysopen - scss/order.sscss
+p {
+  color: #232528;
+  padding: 1vh; }
 
-Backtrace:
-/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:460:in `read'
-/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:460:in `update_stylesheet'
-/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:215:in `block in update_stylesheets'
-/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:209:in `each'
-/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:209:in `update_stylesheets'
-/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/plugin/compiler.rb:294:in `watch'
-/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/plugin.rb:109:in `method_missing'
-/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/exec/sass_scss.rb:354:in `watch_or_update'
-/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/exec/sass_scss.rb:51:in `process_result'
-/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/exec/base.rb:50:in `parse'
-/usr/share/rubygems-integration/all/gems/sass-3.7.4/lib/sass/exec/base.rb:18:in `parse!'
-/usr/share/rubygems-integration/all/gems/sass-3.7.4/bin/sass:8:in `<top (required)>'
-/usr/bin/sass:25:in `load'
-/usr/bin/sass:25:in `<main>'
-*/
-body:before {
-  white-space: pre;
-  font-family: monospace;
-  content: "Errno::ENOENT: No such file or directory @ rb_sysopen - scss/order.sscss"; }
+body {
+  background-color: #009FFD; }
+  body::-webkit-scrollbar {
+    width: 10px;
+    height: 10px; }
+  body::-webkit-scrollbar-thumb {
+    background: #2A2A72;
+    border-radius: 2vh; }
+  body::-webkit-scrollbar-track {
+    background: #EAF6FF; }
+  body {
+    scrollbar-face-color: #2A2A72;
+    scrollbar-track-color: #EAF6FF; }
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0;
+  min-height: 10vh;
+  margin: 2vh 0 2vh 0;
+  flex-wrap: wrap;
+  width: 100%;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+
+.navbar a {
+  color: #232528;
+  text-decoration: none;
+  height: 10vh;
+  background-color: #BB0A21;
+  border-radius: 2vh;
+  border: solid 3px #009FFD;
+  padding: 2vh;
+  display: flex;
+  align-items: center;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+  .navbar a:hover {
+    background-color: #EAF6FF;
+    cursor: pointer; }
+
+.navbar li {
+  font-size: 24px;
+  text-align: center; }
+
+.navbar img {
+  width: 50px; }
+
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none; }
+
+#searchBar {
+  width: 50%;
+  border: double 1vh;
+  border-color: #BB0A21;
+  padding: 1vw;
+  color: #232528;
+  border-radius: 2vh;
+  font-size: 24px;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+  #searchBar:focus {
+    width: 85%; }
+
+.search {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+/* When is necessary to hidde some information and show when hover */
+.focus {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 1;
+  background-color: #2A2A72;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; }
+  .focus:hover {
+    opacity: 1; }
+
+.focus p {
+  color: #EAF6FF; }
+
+.screen {
+  min-width: 100%;
+  min-height: 100vh; }
+
+.hidden {
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  opacity: 0 !important;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+
+body {
+  margin: 0;
+  padding: 0; }
+
+.list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+  min-height: 90vh; }
+  .list-order {
+    width: 35vw;
+    background-color: #2A2A72;
+    margin: 2vh;
+    height: 35vh;
+    border-radius: 2vh;
+    color: #EAF6FF; }
+  .list-link {
+    text-decoration: none; }
+    .list-link p {
+      color: #EAF6FF; }
+
+.nav {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+  font-size: 2em;
+  align-items: baseline; }
+  .nav-container {
+    text-decoration: none;
+    border-bottom: 2px solid #2A2A72;
+    flex-grow: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end; }
+    .nav-container:hover {
+      background-color: #EAF6FF; }
+
+.order-detail {
+  display: flex;
+  flex-direction: column; }
+  .order-detail-number {
+    width: 100%;
+    border: 2px #2A2A72;
+    border-style: solid none; }
+  .order-detail-info {
+    display: flex;
+    flex-direction: column;
+    background-color: #2A2A72; }
+    .order-detail-info p {
+      border-bottom: 2px solid #BB0A21;
+      color: #EAF6FF; }
+  .order-detail-items, .order-detail-contact {
+    margin: 2vh 0;
+    border: 6px #2A2A72;
+    border-style: double none;
+    border-radius: 2vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; }
+    .order-detail-items-item {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      width: 100%;
+      border-bottom: 2px solid #2A2A72;
+      margin-bottom: 1vw;
+      border-radius: 2vh; }
+  .order-detail-contact {
+    flex-direction: row;
+    justify-content: center;
+    font-size: 18px;
+    background-color: #2A2A72;
+    border-color: #BB0A21; }
+    .order-detail-contact p {
+      color: #EAF6FF; }
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield; }
+
+/*# sourceMappingURL=orders.css.map */

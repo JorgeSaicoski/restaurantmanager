@@ -17,20 +17,21 @@ body {
     scrollbar-track-color: #EAF6FF; }
 
 .navbar {
-  padding: 0;
-  height: 10vh;
-  margin: 2vh 0 2vh 0;
-  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
   align-items: center;
+  padding: 0;
+  min-height: 10vh;
+  margin: 2vh 0 2vh 0;
+  flex-wrap: wrap;
+  width: 100%;
   transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
 
 .navbar a {
   color: #232528;
   text-decoration: none;
-  height: 100%;
+  height: 10vh;
   background-color: #BB0A21;
   border-radius: 2vh;
   border: solid 3px #009FFD;
@@ -181,6 +182,43 @@ body {
   color: #EAF6FF;
   width: 300px;
   min-height: 450px; }
+  .card-normal {
+    width: 100%;
+    border-bottom: 2px solid #2A2A72;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 2.5vw;
+    justify-content: space-between;
+    min-height: 25vh; }
+    .card-normal-title {
+      color: #232528;
+      margin: 2vh;
+      font-size: 24px;
+      width: 100%; }
+    .card-normal-button {
+      width: 80%;
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      height: 24px; }
+      .card-normal-button button {
+        margin: 0 2vh; }
+    .card-normal-detail {
+      width: 100%;
+      overflow-x: scroll;
+      margin-bottom: 1vw; }
+      .card-normal-detail::-webkit-scrollbar {
+        width: 10px;
+        height: 10px; }
+      .card-normal-detail::-webkit-scrollbar-thumb {
+        background: #2A2A72;
+        border-radius: 2vh; }
+      .card-normal-detail::-webkit-scrollbar-track {
+        background: #009FFD; }
+      .card-normal-detail {
+        scrollbar-face-color: #2A2A72;
+        scrollbar-track-color: #009FFD; }
   .card:hover {
     background-color: #EAF6FF;
     color: #2A2A72; }
@@ -449,24 +487,28 @@ body {
       font-size: 24px;
       height: 36px;
       transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
-    .list-store-category-items {
+    .list-store-category-items, .list-store-category-items-normal {
       display: flex;
       flex-direction: row;
       overflow-x: scroll;
       width: 100%;
       height: 600px;
       transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
-      .list-store-category-items::-webkit-scrollbar {
+      .list-store-category-items::-webkit-scrollbar, .list-store-category-items-normal::-webkit-scrollbar {
         width: 10px;
         height: 10px; }
-      .list-store-category-items::-webkit-scrollbar-thumb {
+      .list-store-category-items::-webkit-scrollbar-thumb, .list-store-category-items-normal::-webkit-scrollbar-thumb {
         background: #2A2A72;
         border-radius: 2vh; }
-      .list-store-category-items::-webkit-scrollbar-track {
+      .list-store-category-items::-webkit-scrollbar-track, .list-store-category-items-normal::-webkit-scrollbar-track {
         background: #009FFD; }
-      .list-store-category-items {
+      .list-store-category-items, .list-store-category-items-normal {
         scrollbar-face-color: #2A2A72;
         scrollbar-track-color: #009FFD; }
+      .list-store-category-items-normal {
+        flex-direction: column;
+        height: auto;
+        overflow: auto; }
 
 .staff-link {
   background-color: #2A2A72;

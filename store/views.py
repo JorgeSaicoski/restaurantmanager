@@ -11,6 +11,7 @@ def store(request,pk):
 	# Change to get a specif restaurant
 	restaurant = Restaurant.objects.get(name=pk)
 	categories = Category.objects.all()
+	promo = Category.objects.get(name="Promo")
 	products = Product.objects.filter(restaurant=restaurant)
 	categories_list = []
 	for i in categories:
@@ -37,9 +38,11 @@ def store(request,pk):
 	if request.user.is_authenticated:
 		items = order.get_items
 
+	for i in products:
+		if i in promo.get_products:
+			print(i)
 
-
-	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant, 'order':order, 'categories':categories_list, "items":items}
+	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant, 'order':order, 'categories':categories_list, "items":items, "promo":promo}
 	return render(request, 'store/store.html', context)
 
 def store_category(request,pk,category):
