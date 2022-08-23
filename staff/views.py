@@ -1,10 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from restaurants.models import Restaurant
 from store.models import OrderItem, Order, Product, ShippingAddress, Category
 from .forms import NewTableForm, NewProdutcForm, UptadeRestaurant
 from accounts.models import Customer
 from django.http import JsonResponse
 import json
+
 
 
 # Create your views here.
@@ -247,7 +248,7 @@ def restaurant_update(request, pk):
     if form.is_valid():
         form.save()
         return redirect('/')
-    return render(request, 'my_template.html', {'form': form})
+    return render(request, 'staff/updaterestaurant.html', {'form': form})
 
 
 #detail of a order

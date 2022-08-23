@@ -7,12 +7,11 @@
 	<h1 class="title">Pedido</h1>
 	<form method="POST">
 		{% csrf_token %}
-
 		<div class="form">
 			<div class="form-section">
-				<label for="name" class="form-section-label">Nombre:</label>
-				{{ register_form.name }}
+				{{ form }}
 			</div>
+
 
 		</div>
 		<div class="action">
