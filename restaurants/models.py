@@ -19,15 +19,15 @@ class Restaurant(models.Model):
     #how much the restaurant have in the cash?
     cash = models.FloatField()
     #this restaurant paid us?
-    is_vip = models.BooleanField(default=True)
+    is_vip = models.BooleanField(default=True, editable=False)
     #30 days free. And then the restaurant must to pay to renew. Manualy check is cheaper.
-    vip_days = models.IntegerField(default=30)
+    vip_days = models.IntegerField(default=30, editable=False)
     #how much order this restaurant have today?
-    counter = models.IntegerField(default=1)
+    counter = models.IntegerField(default=1, editable=False)
     #description
     description = models.TextField(max_length=2000, default="")
     #contact for clients
-    contact = models.CharField(max_length=200, default="")
+    contact = models.CharField(max_length=200)
 
     def __str__(self):
         return self.name

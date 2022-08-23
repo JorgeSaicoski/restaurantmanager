@@ -5,7 +5,7 @@
     <div class="owner-section-info">
       <img src="{{restaurant.image.url}}" alt="{{restaurant.name}}" class="owner-section-image">
       <div class="owner-section-items">
-        <a href="{% url 'new_product' restaurant.name %}">Alterar Info/Empleado</a>
+        <a href="{% url 'restaurant_update' restaurant.name %}">Alterar Info/Empleado</a>
         <a href="{% url 'new_product' restaurant.name %}">Alterar Producto</a>
         <a href="{% url 'new_product' restaurant.name %}">Nuevo Empleado</a>
         <a href="{% url 'new_product' restaurant.name %}">Nuevo Producto</a>

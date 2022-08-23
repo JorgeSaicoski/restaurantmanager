@@ -46,6 +46,9 @@
             {% if is_cashier %}
             <a href="{% url 'cashier' restaurant.name %}" class="nav-link"><img src="/static/images/admin/cashier.png" alt="cashier"></a>
             {% endif %}
+            {% if is_owner %}
+            <a href="{% url 'owner' restaurant.name %}" class="nav-link"><img src="/static/images/admin/owner.png" alt="cashier"></a>
+            {% endif %}
         </nav>
         <div>
             {% block content %}

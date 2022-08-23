@@ -201,6 +201,46 @@ body {
   margin: 2vh;
   display: flex;
   flex-direction: column; }
+  .form-employees {
+    border: 2px solid #BB0A21;
+    border-radius: 2vh;
+    padding: 2.5vw;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    background-color: #2A2A72;
+    align-items: center;
+    min-height: 30vh;
+    justify-content: space-around; }
+    .form-employees label {
+      color: #EAF6FF;
+      margin-left: 1vw; }
+    .form-employees-container {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      align-items: baseline; }
+      .form-employees-container select {
+        width: 100%;
+        background-color: #009FFD; }
+        .form-employees-container select::-webkit-scrollbar {
+          width: 10px;
+          height: 10px; }
+        .form-employees-container select::-webkit-scrollbar-thumb {
+          background: #2A2A72;
+          border-radius: 2vh; }
+        .form-employees-container select::-webkit-scrollbar-track {
+          background: #EAF6FF; }
+        .form-employees-container select {
+          scrollbar-face-color: #2A2A72;
+          scrollbar-track-color: #EAF6FF; }
+        .form-employees-container select option {
+          background-color: #009FFD; }
+          .form-employees-container select option:checked {
+            background-color: #2A2A72;
+            color: #EAF6FF; }
   .form-section {
     margin: 2vh 0;
     display: flex;
@@ -208,6 +248,10 @@ body {
     transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
     .form-section-label {
       color: #2A2A72; }
+    .form-section-logo {
+      margin: 2vh; }
+      .form-section-logo input, .form-section-logo textarea {
+        width: auto; }
 
 input, textarea {
   width: 100%;

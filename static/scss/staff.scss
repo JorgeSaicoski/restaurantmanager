@@ -111,6 +111,42 @@ body{
   margin: $margin-default;
   display: flex;
   flex-direction: column;
+  &-employees{
+    border: $border-default solid $alert-color;
+    border-radius: $rounded-soft;
+    padding: $padding-default;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    background-color: $dark-color;
+    align-items: center;
+    min-height: 30vh;
+    justify-content: space-around;
+    & label{
+      color:$select-color;
+      margin-left: $margin-small;
+    }
+    &-container{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      align-items: baseline;
+      & select{
+        width: 100%;
+        background-color: $base-color;
+        @include scrollbars(10px, $dark-color, $select-color);
+        & option{
+          background-color: $base-color;
+          &:checked{
+            background-color: $dark-color;
+            color: $select-color;
+          }
+        }
+      }
+    }
+  }
   &-section{
     margin: $margin-default 0;
     display: flex;
@@ -118,6 +154,14 @@ body{
     transition: $transition;
     &-label{
       color: $dark-color;
+    }
+    &-logo{
+      margin: $margin-default;
+      & input{
+        width: auto;
+      }
+
+
     }
   }
 }

@@ -2,7 +2,7 @@ from django import forms
 from accounts.models import Customer
 from store.models import Category
 from restaurants.models import Restaurant
-
+from django.contrib.auth.models import User
 
 
 class NewTableForm(forms.ModelForm):
@@ -23,6 +23,14 @@ class UptadeRestaurant(forms.ModelForm):
     class Meta:
         model = Restaurant
         fields = "__all__"
+
+
+
+
+
+
+
+
 
 
 

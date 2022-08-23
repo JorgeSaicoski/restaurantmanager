@@ -1,23 +1,46 @@
 {% extends 'staff/main.html' %}
+{% load static %}
 {% block content %}
 
 
 <!--Register-->
 
-	<h1 class="title">Pedido</h1>
+	<h1 class="title">Info</h1>
 	<form method="POST">
 		{% csrf_token %}
 		<div class="form">
 			<div class="form-section">
-				{{ form }}
+				<label for="name">Nombre: </label>{{ form.name }}
+			</div>
+			<div class="form-section">
+				<label for="owner">Dueño: </label>{{ form.owner }}
+			</div>
+
+			<div class="form-employees">
+				<input type="text" id="searchBar" onkeyup="searchBarr()" placeholder="Login del empleado" title="category">
+				<div class="form-employees-container" id="listToSearch">
+					<label for="name">Mozos: </label>{{ form.weiter }}
+					<label for="name">Cocina: </label>{{ form.kitchen }}
+					<label for="name">Caja/delivery: </label>{{ form.cashier }}
+				</div>
+			</div>
+			<div class="form-section">
+				<label for="name">Descricion: </label>{{ form.description }}
+			</div>
+			<div class="form-section">
+				<label for="name">Contato: </label>{{ form.contact }}
+			</div>
+			<div class="form-section">
+				<label for="name">Dinero en caja: </label>{{ form.cash }}
 			</div>
 
 
 		</div>
 		<div class="action">
-			<button class="action-button" type="submit">Crear</button>
+			<button class="action-button" type="submit">Actualizar</button>
 		</div>
 	</form>
+	<script type="text/javascript" src="{% static 'js/searchstaff.js' %}"></script>
 
 
 {% endblock %}
