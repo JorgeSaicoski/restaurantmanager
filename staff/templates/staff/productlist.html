@@ -1,0 +1,39 @@
+{% extends 'staff/main.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<div>
+		<div class="search">
+			<input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Que vamos a pedir en {{restaurant.name}}?" title="category">
+		</div>
+
+		<ul class="list-store" id="listToSearch">
+			{% for category in categories %}
+				{% if category.name %}
+					<li class="list-store-category">
+						<a class="list-store-category-title">{{category.name}}</a>
+					</li>
+					<li class="list-store-category-items-normal">
+					{% for product in products %}
+						{% if product in category.get_products %}
+								<a class="card-normal">
+									<h3 class="card-normal-title">{{product.name}}</h3>
+									<div class="card-normal-detail">
+										<p class="hidden">{{category.name}}</p>
+										<p>{{product.description}}</p>
+									</div>
+									<h4>UYU {{product.price}}</h4>
+									<div class="card-normal-button">
+										<button data-product="{{product.id}}" class="card-normal-button-action">Alterar</button>
+									</div>
+								</a>
+
+						{% endif %}
+					{% endfor %}
+					</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+	</div>
+<script type="text/javascript" src="{% static 'js/search.js' %}"></script>
+{% endblock content %}

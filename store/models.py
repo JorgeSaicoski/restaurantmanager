@@ -19,9 +19,9 @@ class Product(models.Model):
 	name = models.CharField(max_length=200)
 	price = models.FloatField()
 	restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE)
-	description = models.TextField(max_length=2000, default="")
+	description = models.TextField(max_length=2000, default="", null=False, blank=True)
 	category = models.ManyToManyField(Category, related_name="category")
-	image = models.ImageField(null=False, blank=True, upload_to='restaurant/',default="/default/food.svg")
+	image = models.ImageField(null=False, blank=True, upload_to='restaurant/', default="/default/food.svg")
 	def __str__(self):
 		return self.name
 	#Get te properties when it is needed

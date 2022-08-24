@@ -2,6 +2,7 @@ let updateBtns = document.getElementsByClassName('update-order')
 
 let btnDelivered = document.getElementsByClassName('btn-delivered')
 
+let btnProduct = document.getElementsByClassName('card-normal-button-action')
 //kitchen secion (if the item was did or no)
 
 for (i = 0; i < updateBtns.length; i++) {
@@ -60,4 +61,12 @@ function updateOrderItem(productId, orderId, mode){
 		.then((data) => {
 		    location.reload()
 		});
+}
+
+//redirect to product page update
+for (i = 0; i < btnProduct.length; i++) {
+	btnProduct[i].addEventListener('click', function(){
+		let productId = this.dataset.product
+		window.location.href = `/staff/product_update/${productId}`
+	})
 }

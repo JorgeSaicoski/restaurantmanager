@@ -61,8 +61,14 @@
       flex-direction: row;
       justify-content: flex-start;
       height: 24px;
-      & button{
+      & button, a{
         margin: 0 $margin-default;
+        background-color: $dark-color;
+        color: $select-color;
+        &:hover{
+          background-color: $select-color;
+          color: $dark-color;
+        }
       }
     }
     &-detail{

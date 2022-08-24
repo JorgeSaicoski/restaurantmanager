@@ -202,8 +202,13 @@ body {
       flex-direction: row;
       justify-content: flex-start;
       height: 24px; }
-      .card-normal-button button {
-        margin: 0 2vh; }
+      .card-normal-button button, .card-normal-button a {
+        margin: 0 2vh;
+        background-color: #2A2A72;
+        color: #EAF6FF; }
+        .card-normal-button button:hover, .card-normal-button a:hover {
+          background-color: #EAF6FF;
+          color: #2A2A72; }
     .card-normal-detail {
       width: 100%;
       overflow-x: scroll;

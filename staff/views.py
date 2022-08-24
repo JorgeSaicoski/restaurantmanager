@@ -7,7 +7,6 @@ from django.http import JsonResponse
 import json
 
 
-
 # Create your views here.
 
 # Function to check the permission
@@ -75,7 +74,7 @@ def kitchen(request, pk):
 
         for i in orders:
             if i.transaction_id:
-            # function to detail any item for a order
+                # function to detail any item for a order
                 if i.is_delivery:
                     product = i.get_items
                     delivery.append(product)
@@ -137,7 +136,7 @@ def cashier(request, pk):
                 for item in this_orders:
                     list.append(item)
 
-            local_order.append({"name": custo, "item":list})
+            local_order.append({"name": custo, "item": list})
         for order in all_orders:
             if order.complete and order.delivery:
                 orders.append(order)
@@ -182,12 +181,13 @@ def weiter(request, pk):
     }
     return render(request, 'staff/weiter.html', context)
 
+
 # Owner page
 def owner(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
     user = request.user
     # check if user is auth to kitchen
-    if  is_owner(user, restaurant):
+    if is_owner(user, restaurant):
         # get the orders of this restaurant
         orders = Order.objects.filter(restaurant=restaurant).order_by('-date_ordered')
 
@@ -201,6 +201,7 @@ def owner(request, pk):
     }
     return render(request, 'staff/owner.html', context)
 
+
 # Owner forms!!
 # Create new product
 def new_product(request, pk):
@@ -209,17 +210,17 @@ def new_product(request, pk):
     user = request.user
     if is_owner(user, restaurant):
         if request.method == "POST":
-            #get information
+            # get information
             name = request.POST["name"]
             price = request.POST["price"]
             description = request.POST["description"]
             categories = request.POST["category"]
-            #list to add category correctly
+            # list to add category correctly
             category = []
             for i in categories:
                 cat = Category.objects.get(id=i)
                 category.append(cat)
-            #create product and add category (restaurant add too)
+            # create product and add category (restaurant add too)
             try:
                 Product.objects.get(name=name, restaurant=restaurant)
                 return render(request=request, template_name="staff/newproduct.html",
@@ -231,7 +232,7 @@ def new_product(request, pk):
             return redirect("/staff/{}".format(restaurant))
 
         return render(request=request, template_name="staff/newproduct.html", context={"form": form})
-    #if it is not owner:
+    # if it is not owner:
     restaurant = Restaurant.objects.get(name=pk)
     context = {
         'restaurant': restaurant,
@@ -242,16 +243,53 @@ def new_product(request, pk):
         "message": "No tenes permiso para crear un producto",
     }
     return render(request, 'staff/main.html', context)
+
+
+# Upgrade restaurant info
 def restaurant_update(request, pk):
-    instance = get_object_or_404(Restaurant, name=pk)
-    form = UptadeRestaurant(request.POST or None, instance=instance)
-    if form.is_valid():
-        form.save()
-        return redirect('/')
-    return render(request, 'staff/updaterestaurant.html', {'form': form})
+    context = {
+        'restaurant': restaurant,
+        'is_kitchen': is_kitchen(user, restaurant),
+        'is_weiter': is_weiter(user, restaurant),
+        'is_cashier': is_cashier(user, restaurant),
+        'is_owner': is_owner(user, restaurant),
+        "message": "No tenes permiso para crear un producto",
+    }
+
+    if is_owner(user, restaurant):
+        instance = get_object_or_404(Restaurant, name=pk)
+        form = UptadeRestaurant(request.POST or None, instance=instance)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        return render(request, 'staff/updaterestaurant.html', {'form': form})
+    # if it is not owner:
+    restaurant = Restaurant.objects.get(name=pk)
+
+    return render(request, 'staff/main.html', context)
 
 
-#detail of a order
+# Uptade products:
+def product_list(request, pk):
+    # Change to get a specif restaurant
+    restaurant = Restaurant.objects.get(name=pk)
+    categories = Category.objects.all()
+    products = Product.objects.filter(restaurant=restaurant)
+    categories_list = []
+    for i in categories:
+        check = i.get_products
+        put = False
+        for product_check in check:
+            if product_check in products:
+                put = True
+        if put:
+            categories_list.append(i)
+
+    context = {'products': products, 'restaurant': restaurant, 'categories': categories_list}
+    return render(request, 'staff/productlist.html', context)
+
+
+# detail of a order
 def orderDetail(request, pk, id):
     restaurant = Restaurant.objects.get(name=pk)
     user = request.user
@@ -284,6 +322,7 @@ def orderDetail(request, pk, id):
         'is_owner': is_owner(user, restaurant)
     }
     return render(request, 'staff/orderdetail.html', context)
+
 
 def delivery_item(request, pk):
     restaurant = Restaurant.objects.get(name=pk)
@@ -320,7 +359,7 @@ def new_table(request, pk):
             except:
                 customer = Customer.objects.create(name=name, restaurant=restaurant)
             customer.save()
-            return redirect("/staff/{}/{}".format(restaurant,name))
+            return redirect("/staff/{}/{}".format(restaurant, name))
     form = NewTableForm(request.POST)
     return render(request=request, template_name="staff/newtable.html", context={"register_form": form})
 
@@ -357,7 +396,7 @@ def table(request, pk, table):
                                                      restaurant=restaurant)
         products = Product.objects.filter(restaurant=restaurant)
         orders_closed = Order.objects.filter(customer=customer, closed=False, complete=True, restaurant=restaurant)
-        items=[]
+        items = []
         for item in products:
             check = True
             for i in order.get_items:
@@ -365,7 +404,6 @@ def table(request, pk, table):
                     check = False
             if check:
                 items.append(item)
-
 
     context = {
         'items': items,
@@ -405,6 +443,8 @@ def updateOrder(request, pk, id):
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
+
+
 def updateTable(request, pk, table):
     restaurant = Restaurant.objects.get(name=pk)
 
@@ -450,6 +490,7 @@ def processTable(request, pk, table):
 
     return JsonResponse('Payment submitted..', safe=False)
 
+
 def closeOrder(request, pk, id):
     restaurant = Restaurant.objects.get(name=pk)
     data = json.loads(request.body)
@@ -465,12 +506,9 @@ def closeOrder(request, pk, id):
             for i in order["orders"]:
                 if i["transaction_id"]:
                     if not i["closed"]:
-                       return JsonResponse('Payment submitted..', safe=False)
+                        return JsonResponse('Payment submitted..', safe=False)
         customer.delete()
     except:
         pass
 
-
-
     return JsonResponse('Payment submitted..', safe=False)
-
