@@ -7,45 +7,9 @@
 		</div>
 
 		<ul class="list-store" id="listToSearch">
-			<li class="list-store-category">
-				<a class="list-store-category-title" href="{% url 'store_category' restaurant.name 'Promo' %}">Promo</a>
-			</li>
-			<li class="list-store-category-items">
-			{% for product in products %}
-				{% if product in promo.get_products %}
-						<a class="card">
-							<div class="card-image">
-								<img src="{{product.image.url}}" alt="{{product.name}}" >
-							</div>
 
-							<h3 class="card-title">{{product.name}}</h3>
-							<div class="card-detail">
-								<p class="hidden">{{category.name}}</p>
-								<p>{{product.description}}</p>
-								<h4>UYU {{product.price}}</h4>
-							</div>
-							<div class="card-button">
-								{% for item in items %}
-									{% if item.id == product.id or item.product_id == product.id  %}
-										<button type="button" name="remove" data-product="{{product.id}}" data-action="remove" class="update-cart card-button-action">-</button>
-										<p class="card-button-text">{{item.quantity}}</p>
-										<button type="button" name="add" data-product="{{product.id}}" data-action="add" class="update-cart card-button-action">+</button>
-										<div class="hidden">
-									{% endif %}
-								{% endfor %}
-								<button data-product="{{product.id}}" data-action="add" class="update-cart card-button-action">Adicionar</button>
-								{% for item in items %}
-									{% if item.id == product.id or item.product_id == product.id %}
-										</div>
-									{% endif %}
-								{% endfor %}
-							</div>
-						</a>
-				{% endif %}
-			{% endfor %}
-			</li>
 			{% for category in categories %}
-				{% if category.name != "Promo" %}
+
 					<li class="list-store-category">
 						<a class="list-store-category-title" href="{% url 'store_category' restaurant.name category %}">{{category.name}}</a>
 					</li>
@@ -79,7 +43,7 @@
 						{% endif %}
 					{% endfor %}
 					</li>
-				{% endif %}
+
 			{% endfor %}
 		</ul>
 		{% if order.get_cart_items > 0 %}<a href="{% url 'cart' restaurant.name %}" class="action"><p class="action-button">Carrito</p></a>{% endif %}

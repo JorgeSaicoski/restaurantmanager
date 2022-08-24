@@ -58,7 +58,7 @@ def store_category(request,pk,category):
 	order = data['order']
 
 	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant, 'order':order, 'categories':[category_select]}
-	return render(request, 'store/store.html', context)
+	return render(request, 'store/storecategory.html', context)
 
 #send to cart
 def cart(request, pk):
