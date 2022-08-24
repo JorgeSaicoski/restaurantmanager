@@ -4,10 +4,9 @@ from . import views
 
 urlpatterns = [
 	path('', views.list, name="list"),
-
 	path('<str:pk>/', views.main, name="main"),
 	path('<str:pk>/produtos', views.product_list, name="product_list"),
-	path('product_update/<int:pk>', views.product_update, name="main"),
+	path('product_update/<int:pk>', views.product_update, name="product_update"),
 	path('<str:pk>/cocina/', views.kitchen, name="kitchen"),
 	path('<str:pk>/cashier/', views.cashier, name="cashier"),
 	path('<str:pk>/mozo/', views.weiter, name="weiter"),

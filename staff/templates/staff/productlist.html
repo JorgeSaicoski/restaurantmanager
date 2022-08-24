@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
 	<div>
 		<div class="search">
-			<input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Que vamos a pedir en {{restaurant.name}}?" title="category">
+			<input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Cual product queres alterar?" title="category">
 		</div>
 
 		<ul class="list-store" id="listToSearch">
@@ -21,7 +21,7 @@
 									<div class="card-normal-detail">
 										<p class="hidden">{{category.name}}</p>
 										<p>{{product.description}}</p>
-									</div>	
+									</div>
 									<div class="card-normal-button">
 										<h4>UYU {{product.price}}</h4>
 										<button data-product="{{product.id}}" class="card-normal-button-action">Alterar</button>

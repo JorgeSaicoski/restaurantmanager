@@ -1,6 +1,6 @@
 from django import forms
 from accounts.models import Customer
-from store.models import Category
+from store.models import Category, Product
 from restaurants.models import Restaurant
 from django.contrib.auth.models import User
 
@@ -22,6 +22,11 @@ class NewProdutcForm(forms.Form):
 class UptadeRestaurant(forms.ModelForm):
     class Meta:
         model = Restaurant
+        fields = "__all__"
+
+class UptadeProduct(forms.ModelForm):
+    class Meta:
+        model = Product
         fields = "__all__"
 
 

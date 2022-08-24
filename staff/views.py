@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from restaurants.models import Restaurant
 from store.models import OrderItem, Order, Product, ShippingAddress, Category
-from .forms import NewTableForm, NewProdutcForm, UptadeRestaurant
+from .forms import NewTableForm, NewProdutcForm, UptadeRestaurant, UptadeProduct
 from accounts.models import Customer
 from django.http import JsonResponse
 import json
@@ -266,7 +266,7 @@ def restaurant_update(request, pk):
         context["form"] = form
         if form.is_valid():
             form.save()
-            return redirect('/')
+            return redirect("/staff/{}/owner".format(restaurant))
         return render(request, 'staff/updaterestaurant.html', context)
     # if it is not owner:
     message = "No tenes permiso para crear un producto"
@@ -290,11 +290,14 @@ def product_list(request, pk):
                 put = True
         if put:
             categories_list.append(i)
-
+    for b in products:
+        print(b.id)
     context = {'products': products, 'restaurant': restaurant, 'categories': categories_list}
     return render(request, 'staff/productlist.html', context)
 def product_update(request, pk):
-    restaurant = Restaurant.objects.get(name=pk)
+
+    product = Product.objects.get(id=pk)
+    restaurant = product.restaurant
     user = request.user
 
     context = {
@@ -308,13 +311,13 @@ def product_update(request, pk):
     }
 
     if is_owner(user, restaurant):
-        instance = get_object_or_404(Restaurant, name=pk)
-        form = UptadeRestaurant(request.POST or None, instance=instance)
+        instance = get_object_or_404(Product, id=pk)
+        form = UptadeProduct(request.POST or None, instance=instance)
         context["form"] = form
         if form.is_valid():
             form.save()
-            return redirect('/')
-        return render(request, 'staff/updaterestaurant.html', context)
+            return redirect("/staff/{}/owner".format(restaurant))
+        return render(request, 'staff/updateproduct.html', context)
     # if it is not owner:
     message = "No tenes permiso para crear un producto"
     context["message"] = message
