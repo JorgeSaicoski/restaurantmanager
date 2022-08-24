@@ -41,14 +41,14 @@
   width: $image-width;
   min-height: $image-height*1.5;
   &-normal{
-    width: 100%;
+    width: 450px;
     border-bottom: $border-default solid $dark-color;
     display: flex;
     flex-direction: row;
     flex-wrap:wrap;
-    padding: $padding-default;
     justify-content: space-between;
-    min-height: 25vh;
+    margin: 0 25px;
+    font-size: $font-small;
     &-title{
       color: $font-color;
       margin: $margin-default;
@@ -56,7 +56,6 @@
       width: 100%;
     }
     &-button{
-      width: 80%;
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
@@ -75,6 +74,8 @@
       width: 100%;
       @include scrollbars(10px, $dark-color, $base-color);
       overflow-x: scroll;
+      overflow-y: hidden;
+      height: $font-big;
       margin-bottom: $margin-small;
     }
   }
@@ -394,9 +395,12 @@
       transition: $transition;
       &-normal{
         @extend .list-store-category-items;
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: flex-start;
         height: auto;
         overflow: auto;
+        padding-bottom: $padding-small;
 
       }
     }

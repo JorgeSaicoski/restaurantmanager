@@ -247,24 +247,30 @@ def new_product(request, pk):
 
 # Upgrade restaurant info
 def restaurant_update(request, pk):
+    restaurant = Restaurant.objects.get(name=pk)
+    user = request.user
+
     context = {
         'restaurant': restaurant,
         'is_kitchen': is_kitchen(user, restaurant),
         'is_weiter': is_weiter(user, restaurant),
         'is_cashier': is_cashier(user, restaurant),
         'is_owner': is_owner(user, restaurant),
-        "message": "No tenes permiso para crear un producto",
+        "message": "",
+        'form': False,
     }
 
     if is_owner(user, restaurant):
         instance = get_object_or_404(Restaurant, name=pk)
         form = UptadeRestaurant(request.POST or None, instance=instance)
+        context["form"] = form
         if form.is_valid():
             form.save()
             return redirect('/')
-        return render(request, 'staff/updaterestaurant.html', {'form': form})
+        return render(request, 'staff/updaterestaurant.html', context)
     # if it is not owner:
-    restaurant = Restaurant.objects.get(name=pk)
+    message = "No tenes permiso para crear un producto"
+    context["message"] = message
 
     return render(request, 'staff/main.html', context)
 
@@ -287,7 +293,33 @@ def product_list(request, pk):
 
     context = {'products': products, 'restaurant': restaurant, 'categories': categories_list}
     return render(request, 'staff/productlist.html', context)
+def product_update(request, pk):
+    restaurant = Restaurant.objects.get(name=pk)
+    user = request.user
 
+    context = {
+        'restaurant': restaurant,
+        'is_kitchen': is_kitchen(user, restaurant),
+        'is_weiter': is_weiter(user, restaurant),
+        'is_cashier': is_cashier(user, restaurant),
+        'is_owner': is_owner(user, restaurant),
+        "message": "",
+        'form': False,
+    }
+
+    if is_owner(user, restaurant):
+        instance = get_object_or_404(Restaurant, name=pk)
+        form = UptadeRestaurant(request.POST or None, instance=instance)
+        context["form"] = form
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+        return render(request, 'staff/updaterestaurant.html', context)
+    # if it is not owner:
+    message = "No tenes permiso para crear un producto"
+    context["message"] = message
+
+    return render(request, 'staff/main.html', context)
 
 # detail of a order
 def orderDetail(request, pk, id):
