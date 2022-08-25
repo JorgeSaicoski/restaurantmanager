@@ -38,7 +38,6 @@ def store(request,pk):
 	if request.user.is_authenticated:
 		items = order.get_items
 
-
 	context = {'products':products, 'cartItems':cartItems, 'restaurant':restaurant, 'order':order, 'categories':categories_list, "items":items, "promo":promo}
 	return render(request, 'store/store.html', context)
 
