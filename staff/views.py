@@ -394,7 +394,7 @@ def new_table(request, pk):
             except:
                 customer = Customer.objects.create(name=name, restaurant=restaurant)
             customer.save()
-            return redirect("/staff/{}/{}".format(restaurant, name))
+            return redirect("/staff/{}/create/{}".format(restaurant, name))
     form = NewTableForm(request.POST)
     return render(request=request, template_name="staff/newtable.html", context={"register_form": form})
 

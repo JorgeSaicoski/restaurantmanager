@@ -62,9 +62,12 @@ def guestOrder(request, data, restaurant):
     cookieData = cookieCart(request)
     items = cookieData['items']
 
-    customer, created = Customer.objects.get_or_create(
-        email=email,
-    )
+    try:
+        Customer.objects.get(email=email).user
+    except:
+        customer, created = Customer.objects.get_or_create(
+            email=email,
+        )
     customer.phone = phone
     customer.name = name
     customer.save()

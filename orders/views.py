@@ -15,10 +15,12 @@ def user_list(request, pk):
 
     else:
         try:
+            Customer.objects.get(email=pk).user
+            return redirect("/account/login/")
+        except:
             customer = Customer.objects.get(email=pk)
             message = "para proteger esta pagina, registre con el mismo e-mail del pedido"
-        except:
-            return redirect("/account/login")
+
     orders = Order.objects.filter(customer=customer).order_by('-date_ordered')
     context = {
         'customer':customer,
