@@ -17,7 +17,7 @@ python manage.py runserver
 ### All image (logo and product) must to be create for you. So you can controll the server disk usage. 
 
 # Preview
-## https://micarta.jorgeadriano.info/
+## https://micarta.sarkis.dev/
 ### To create a restaurant go to https://micarta.jorgeadriano.info/admin
 ### Login: Creator
 ### Password: pQG4BzhnafP0
