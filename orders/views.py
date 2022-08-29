@@ -16,6 +16,7 @@ def user_list(request, pk):
     else:
         try:
             Customer.objects.get(email=pk).user
+            print(user)
             return redirect("/account/login/")
         except:
             customer = Customer.objects.get(email=pk)

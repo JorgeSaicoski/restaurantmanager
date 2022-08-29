@@ -64,6 +64,7 @@ def guestOrder(request, data, restaurant):
 
     try:
         Customer.objects.get(email=email).user
+        print(user)
     except:
         customer, created = Customer.objects.get_or_create(
             email=email,

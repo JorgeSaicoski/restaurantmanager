@@ -533,6 +533,10 @@ def closeOrder(request, pk, id):
     order = Order.objects.get(restaurant=restaurant, transaction_id=id)
     order.closed = True
     order.save()
+
+    #update the cash in restaurant
+    restaurant.cash = restaurant.cash + order.get_cart_total
+    restaurant.save()
     # try to delete the Costumer. If it is not a local is will pass
     try:
         customer = Customer.objects.get(name=name, restaurant=restaurant)
