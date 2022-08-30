@@ -2,15 +2,15 @@
 {% block content %}
 
 
-<div class="container py-5 log-view" class="form">
-	<h1>Ingresar</h1>
+<div class="form">
+	<h2 class="form-title">Ingresar</h2>
 	<form method="POST">
 		{% csrf_token %}
 		<label class="form-section-label" for="username">Usuario:</label>
 		{{ form.username }}
 		<label class="form-section-label" for="password">Password:</label>
 		{{ form.password }}
-		<button class="btn btn-primary" type="submit">Entrar</button>
+		<button class="form-button" type="submit">Entrar</button>
 	</form>
 </div>
 

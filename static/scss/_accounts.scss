@@ -12,6 +12,18 @@
   flex-direction: column;
   justify-content: space-between;
   padding: $padding-default;
+  &-title{
+    width: 100%;
+    font-size: $font-big;
+    text-align: center;
+  }
+  & input{
+    width: 100%;
+    background-color: inherit;
+    border: none;
+    border-bottom: $border-default solid $dark-color;
+    margin-bottom: $margin-default;
+  }
   &-section{
     display: flex;
     flex-direction: row;

@@ -545,6 +545,16 @@ body {
   flex-direction: column;
   justify-content: space-between;
   padding: 2.5vw; }
+  .form-title {
+    width: 100%;
+    font-size: 24px;
+    text-align: center; }
+  .form input {
+    width: 100%;
+    background-color: inherit;
+    border: none;
+    border-bottom: 2px solid #2A2A72;
+    margin-bottom: 2vh; }
   .form-section, .form-section-button {
     display: flex;
     flex-direction: row;
