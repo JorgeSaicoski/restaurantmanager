@@ -10,35 +10,36 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     </head>
     <body>
-      <div class="search restaurantBar">
-        <ul class="login-register">
-          {% if show_login %}
-            <li><a href="{% url 'register' %}">Registrar</a></li>
-            <li><a href="{% url 'login' %}">Entrar en mi cuenta</a></li>
-          {% else %}
-            <li><a href="{% url 'orders_customer' request.user.email %}">Mis pedidos</a></li>
-            <li><a href="{% url 'customer_page' %}">Actualizar datos</a></li>
-          {% endif %}
-        </ul>
-        <input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Que quieres ordenar?" title="Type in a name">
-      </div>
-      <ul class="list" id="listToSearch">
-        {% for restaurant in restaurants %}
-          <li class="list-restaurant">
-            <a href="/restaurant/{{restaurant.name}}" class="list-restaurant-link">
-              <div class="focus">
-                <p>{{restaurant.name}}</p>
-                <p>{{restaurant.description}}</p>
-              </div>
-              <img src="{{restaurant.image.url}}" class="logo">
-            </a>
-          </li>
-        {% endfor %}
+      <ul class="navbar">
+        {% if show_login %}
+          <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'register' %}"><img src="/static/images/edit.svg" alt="edit" class="navbar-img">Registrar</a></li>
+          <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'login' %}"><img src="/static/images/login.png" alt="login" class="navbar-img">Entrar en mi cuenta</a></li>
+        {% else %}
+          <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'orders_customer' request.user.email %}"><img src="/static/images/list.svg" alt="list" class="navbar-img">Mis pedidos</a></li>
+          <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'customer_page' %}"><img src="/static/images/settings.svg" alt="settings" class="navbar-img">Actualizar datos</a></li>
+        {% endif %}
       </ul>
-      <div class="staff-link-container">
-        <a href="{% url 'list' %}" class="staff-link">Soy empleado</a>
-        <a href="{% url 'logout' %}" class="staff-link">Salir de la cuenta</a>
-      </div>
+      <section id="home">
+        <div class="search restaurantBar">
+          <input type="text" id="searchBar" onkeyup="searchBar()" placeholder="Que quieres ordenar?" title="Type in a name">
+        </div>
+        <ul class="list" id="listToSearch">
+          {% for restaurant in restaurants %}
+            <li class="list-restaurant">
+              <a href="/restaurant/{{restaurant.name}}" class="list-restaurant-link">
+                <div class="focus">
+                  <p>{{restaurant.name}}</p>
+                  <p>{{restaurant.description}}</p>
+                </div>
+                <img src="{{restaurant.image.url}}" class="logo">
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+        <div class="staff-link-container">
+          <a href="{% url 'list' %}" class="staff-link">Soy empleado</a>
+        </div>
+      </section>
     <script type="text/javascript" src="{% static 'js/search.js' %}"></script>
     </body>
 </html>

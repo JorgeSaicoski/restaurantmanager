@@ -9,11 +9,14 @@
     </head>
     <body>
     	<ul class="navbar">
-        <a href="{% url 'home' %}"><li>Inicio</li></a>
-        <a href="{% url 'store' restaurant.name %}"><li>Pedir {% if order.get_cart_items > 0 %}mas!{% else %} algo!{% endif %}</li></a>
-        {% if order.get_cart_items > 0 %}<a href="{% url 'checkout' restaurant.name %}"><li>Realizar Pedido</li></a>
-        <a href="{% url 'cart' restaurant.name %}" class="cart-nav"><li class="cart-nav-container"><img src="/static/images/cart.png" alt="cart" class="cart-nav-img"> {% if order.get_cart_items > 0 %}<p>{{order.get_cart_items}}</p>{% endif %}</li></a>
+        <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'home' %}"><img src="/static/images/uruguay.png" alt="uy" class="navbar-img"> Inicio</a></li>
+        <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'store' restaurant.name %}"><img src="/static/images/menu.png" alt="menu" class="navbar-img"> Pedir {% if order.get_cart_items > 0 %}mas!{% else %} algo!{% endif %}</a></li>
+        {% if order.get_cart_items > 0 %}
+        <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'cart' restaurant.name %}"><img src="/static/images/cart.png" alt="cart" class="cart-nav-img"></a></li>
+        <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'checkout' restaurant.name %}"><img src="/static/images/order.svg" alt="order" class="navbar-img"> Realizar Pedido</a></li>
+
         {% endif %}
+        <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'login' %}"><img src="/static/images/login.png" alt="login" class="navbar-img">Entrar en mi cuenta</a></li>
       </ul>
 
         <script>
@@ -72,10 +75,10 @@
 
 
         </script>
-        <div>
+        <section id="store">
             {% block content %}
             {% endblock content %}
-        </div>
+        </section>
         <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>

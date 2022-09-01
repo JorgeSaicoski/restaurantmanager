@@ -16,45 +16,93 @@ body {
     scrollbar-face-color: #2A2A72;
     scrollbar-track-color: #EAF6FF; }
 
+section {
+  margin-top: 6em !important; }
+
 .navbar {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  padding: 0;
-  min-height: 10vh;
-  margin: 2vh 0 2vh 0;
+  padding: 0 1.25vw;
+  height: 5em;
   flex-wrap: wrap;
   width: 100%;
+  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
+  background-color: #EAF6FF;
   transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
-
-.navbar a {
-  color: #232528;
-  text-decoration: none;
-  height: 10vh;
-  background-color: #BB0A21;
-  border-radius: 2vh;
-  border: solid 3px #009FFD;
-  padding: 2vh;
-  display: flex;
-  align-items: center;
-  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
-  .navbar a:hover {
-    background-color: #EAF6FF;
-    cursor: pointer; }
-
-.navbar li {
-  font-size: 24px;
-  text-align: center; }
-
-.navbar img {
-  width: 50px; }
-
-.list {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  list-style-type: none; }
+  .navbar-container, .navbar-container-cart {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    overflow: hidden;
+    transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
+    position: relative; }
+    @media screen and (min-width: 1025px) {
+      .navbar-container, .navbar-container-cart {
+        width: auto;
+        height: 5em;
+        flex-grow: 1; } }
+    .navbar-container-cart {
+      width: auto; }
+    .navbar-container p, .navbar-container-cart p {
+      background-color: #BB0A21;
+      border-radius: 9999px;
+      padding: 14px 19px;
+      font-size: 24px;
+      text-align: center;
+      display: flex;
+      align-items: center; }
+    .navbar-container-active {
+      background-color: #2A2A72;
+      width: auto;
+      height: 5em;
+      padding: 1.75vw 1.25vw;
+      border-radius: 0; }
+    .navbar-container a, .navbar-container-cart a {
+      width: 50px;
+      height: 50px;
+      display: flex;
+      flex-direction: row;
+      position: absolute;
+      align-items: center;
+      color: #EAF6FF;
+      left: 0;
+      top: 0;
+      z-index: 0; }
+      @media screen and (min-width: 1025px) {
+        .navbar-container a, .navbar-container-cart a {
+          z-index: 2;
+          width: 100%;
+          justify-content: space-around;
+          background-color: #2A2A72;
+          height: 100%;
+          padding: 1.75vw 0;
+          position: relative;
+          border: 2px #EAF6FF;
+          border-style: none solid; } }
+  .navbar-block {
+    width: 50px;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1; }
+    .navbar-block:hover {
+      cursor: pointer; }
+  .navbar-img {
+    transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
+    width: 50px;
+    height: 50px; }
 
 #searchBar {
   width: 50%;
@@ -73,28 +121,6 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center; }
-
-/* When is necessary to hidde some information and show when hover */
-.focus {
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  z-index: 1;
-  background-color: #2A2A72;
-  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; }
-  .focus:hover {
-    opacity: 1; }
-
-.focus p {
-  color: #EAF6FF; }
 
 .screen {
   min-width: 100%;

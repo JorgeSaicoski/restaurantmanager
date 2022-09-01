@@ -1,15 +1,83 @@
-.list-restaurant{
-  height: $image-width;
-  width: $image-width;
 
-  margin: $margin-default;
-   &-link{
-     height: $image-width;
-     width: $image-width;
-     position: absolute;
-     border-radius: $rounded;
-     overflow: hidden;
-   }
+.list{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style-type: none;
+  @media screen and (min-width: $desktops){
+    flex-direction: column;
+    height: 100vh;
+    width: 45%;
+    overflow-y: scroll;
+    flex-wrap: nowrap;
+    padding-top: $nav-size;
+    background-image: url("/static/images/background.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-attachment: fixed;
+    @include scrollbars(10px, $select-color , $dark-color);
+
+  }
+  @media screen and (min-width: $large){
+    width: 25%
+  }
+  &-restaurant{
+    height: $image-width;
+    width: $image-width;
+    margin: $margin-default;
+    @media screen and (min-width: $desktops){
+      height: 45vh;
+      width: auto;
+      border: $border-default solid $dark-color;
+    }
+
+     &-link{
+       height: $image-width;
+       width: $image-width;
+       position: absolute;
+       border-radius: $rounded;
+       overflow: hidden;
+       @media screen and (min-width: $desktops){
+         position: relative;
+         left: auto;
+         top: auto;
+         overflow: hidden;
+         height: 100%;
+         width: 100%;
+       }
+     }
+  }
+}
+/* When is necessary to hidde some information and show when hover */
+.focus{
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  z-index: 1;
+  background-color: $dark-color;
+  transition: $transition;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media screen and (min-width: $desktops){
+    position: relative;
+    left: auto;
+    top: auto;
+    height: 25%;
+    opacity: 1;
+  }
+  &:hover {
+      opacity: 1;
+    }
+}
+.focus p{
+  color: $select-color;
 }
 .logo{
   height: 100%;
@@ -17,6 +85,12 @@
   position: absolute;
   left: 0;
   top: 0;
+  @media screen and (min-width: $desktops){
+    position: relative;
+    left: auto;
+    top: auto;
+    height: 75%;
+  }
 }
 
 .restaurantBar{
@@ -28,6 +102,17 @@
   width: 100vw;
   margin: 0;
   background-attachment: fixed;
+  @media screen and (min-width: $desktops){
+    flex-direction: row;
+    width: 55%;
+    flex-wrap: wrap;
+    position: relative;
+    left: auto;
+    top: auto;
+  }
+  @media screen and (min-width: $large){
+    width: 75%
+  }
 }
 
 .login-register{
@@ -39,4 +124,15 @@
   padding: 10px;
   border-radius: $rounded-soft;
   margin: 10vh;
+}
+
+#home{
+  display: flex;
+  flex-direction: column;
+  margin: 0 !important;
+  @media screen and (min-width: $desktops){
+    flex-direction: row;
+    width: 100%;
+    flex-wrap: wrap;
+  }
 }

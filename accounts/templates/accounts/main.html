@@ -11,13 +11,16 @@
     <body>
       <ul class="navbar">
         {% if request.user.is_authenticated %}
-          <a href="{% url 'orders_customer' request.user.email %}"><li>Mis pedidos</li></a>
-          <a href="{% url 'logout' %}"><li>Salir de su cuenta</li></a>
+          <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'register' %}"><img src="/static/images/edit.svg" alt="edit" class="navbar-img">Registrar</a></li>
+          <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'orders_customer' request.user.email %}"><img src="/static/images/list.svg" alt="list" class="navbar-img">Mis pedidos</a></li>
+          <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'logout' %}"><img src="/static/images/lock.svg" alt="lock" class="navbar-img">Salir de su cuenta</a></li>
         {% endif %}
-        <a href="{% url 'home' %}"><li>Lista de restaurantes</li></a>
+        <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'home' %}"><img src="/static/images/restaurant.png" alt="restaurant" class="navbar-img">Lista de restaurantes</a></li>
       </ul>
-      {% block content %}
-      {% endblock %}
+      <section id="accounts">
+        {% block content %}
+        {% endblock %}
+      </section>
       <script type="text/javascript">
       	let message = '{{message}}'
       	if (message){

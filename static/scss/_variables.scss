@@ -6,6 +6,7 @@ $alert-color: #BB0A21;
 $image-width: 300px;
 $image-height: 300px;
 $nav-images-default-site: 50px;
+$nav-size: 5em;
 $transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
 $font-small:12px;
 $font-size:18px;
@@ -21,3 +22,8 @@ $rounded-soft: 2vh;
 $card-heigth: 55vh;
 $card-width: 35vw;
 $card-width-min: 300px;
+//media query:
+$mobile: 480px;
+$tablet: 767px;
+$desktops: 1025px;
+$large: 1281px;

@@ -29,54 +29,106 @@ body{
   background-color: $base-color;
   @include scrollbars(10px, $dark-color, $select-color);
 }
+section{
+  margin-top: $nav-size*1.2 !important;
+}
 
 .navbar{
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
-  padding: 0;
-  min-height: 10vh;
-  margin: $margin-default 0 $margin-default 0;
+  padding: 0 $padding-default*0.5;
+  height: 5em;
   flex-wrap: wrap;
   width: 100%;
   transition: $transition;
-}
-.navbar a{
-  color: $font-color;
-  text-decoration: none;
-  height: 10vh;
-  background-color: $alert-color;
-  border-radius: $rounded-soft;
-  border: solid 3px $base-color;
-  padding: $margin-default;
-  display: flex;
-  align-items: center;
+  background-color: $select-color;
   transition: $transition;
-  &:hover {
-      background-color: $select-color;
+  &-container{
+    width: $nav-images-default-site;
+    height:  $nav-images-default-site;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0;
+    overflow: hidden;
+    transition: $transition;
+    position: relative;
+
+    @media screen and (min-width: $desktops){
+      width: auto;
+      height: $nav-size;
+      flex-grow: 1;
+    }
+
+    &-cart{
+      @extend .navbar-container;
+      width: auto;
+    }
+    & p{
+      background-color: $alert-color;
+      border-radius: 9999px;
+      padding: 14px 19px;
+      font-size: 24px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+    }
+    &-active{
+      background-color: $dark-color;
+      width: auto;
+      height: $nav-size;
+      padding: $padding-default*0.7 $padding-default*0.5;
+      border-radius: 0;
+    }
+    & a{
+      width: $nav-images-default-site;
+      height:  $nav-images-default-site;
+      display: flex;
+      flex-direction: row;
+      position: absolute;
+      align-items: center;
+      color: $select-color;
+      left: 0;
+      top: 0;
+      z-index: 0;
+      @media screen and (min-width: $desktops){
+        z-index: 2;
+        width: 100%;
+        justify-content: space-around;
+        background-color: $dark-color;
+        height: 100%;
+        padding: $padding-default*0.7 0;
+        position: relative;
+        border: $border-default $select-color;
+        border-style: none solid;
+      }
+    }
+  }
+  &-block{
+    width: $nav-images-default-site;
+    height:  100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    &:hover{
       cursor: pointer;
     }
+  }
+  &-img{
+    transition: $transition;
+    width: $nav-images-default-site;
+    height:  $nav-images-default-site;
+  }
 }
-.navbar li{
-  font-size: 24px;
-  text-align: center;
-
-
-
-
-}
-.navbar img{
-  width: $nav-images-default-site;
-}
-
-.list{
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  list-style-type: none;
-}
-
 #searchBar{
   width: 50%;
   border: double 1vh;
@@ -97,29 +149,6 @@ body{
   justify-content: center;
 }
 
-/* When is necessary to hidde some information and show when hover */
-.focus{
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  z-index: 1;
-  background-color: $dark-color;
-  transition: $transition;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  &:hover {
-      opacity: 1;
-    }
-}
-.focus p{
-  color: $select-color;
-}
 
 .screen{
   min-width: 100%;
