@@ -19,7 +19,7 @@ body {
 section {
   margin-top: 6em !important; }
 
-.navbar {
+#navbar {
   position: fixed;
   z-index: 10;
   top: 0;
@@ -32,19 +32,69 @@ section {
   height: 5em;
   flex-wrap: wrap;
   width: 100%;
-  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
-  background-color: #EAF6FF;
-  transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s; }
+  transition: height 0.5s;
+  transition-timing-function: ease-out; }
+
+#close-navbar {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  z-index: 0; }
+
+.wait {
+  transition: height 0.5s;
+  transition-delay: 0.25s; }
+
+.close-active {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  opacity: 1 !important; }
+.close-img {
+  height: 50px; }
+  .close-img-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: auto;
+    border-radius: 0 0 20% 20%;
+    width: 100%;
+    background-color: #BB0A21; }
+
+.navbar {
+  background: #EAF6FF; }
+  .navbar-active {
+    height: 100vh !important;
+    flex-wrap: wrap !important;
+    background-color: none;
+    padding: 0 !important;
+    overflow: hidden;
+    transition: height 5s; }
+    .navbar-active .navbar-container, .navbar-active .navbar-container-cart {
+      z-index: 3 !important;
+      width: 100% !important;
+      justify-content: space-around;
+      background-color: #EAF6FF; }
+      .navbar-active .navbar-container a, .navbar-active .navbar-container-cart a {
+        color: #2A2A72;
+        text-decoration: none;
+        justify-content: space-around;
+        border-bottom: #2A2A72 solid 2px;
+        width: 100%; }
   .navbar-container, .navbar-container-cart {
     width: 50px;
     height: 50px;
+    background-color: #EAF6FF;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding: 0;
     overflow: hidden;
-    transition: width 1s, height 2.5s, opacity 2s, background-color 1s, border-radius 3s, padding 1.5s;
     position: relative; }
     @media screen and (min-width: 1025px) {
       .navbar-container, .navbar-container-cart {
@@ -62,11 +112,17 @@ section {
       display: flex;
       align-items: center; }
     .navbar-container-active {
-      background-color: #2A2A72;
-      width: auto;
+      background-color: #2A2A72 !important;
+      padding: 0 !important;
+      width: 100%;
       height: 5em;
-      padding: 1.75vw 1.25vw;
       border-radius: 0; }
+      .navbar-container-active a {
+        z-index: 3 !important;
+        width: 100% !important;
+        justify-content: space-around;
+        position: relative !important;
+        color: #EAF6FF !important; }
     .navbar-container a, .navbar-container-cart a {
       width: 50px;
       height: 50px;

@@ -32,8 +32,7 @@ body{
 section{
   margin-top: $nav-size*1.2 !important;
 }
-
-.navbar{
+#navbar{
   position: fixed;
   z-index: 10;
   top: 0;
@@ -46,19 +45,77 @@ section{
   height: 5em;
   flex-wrap: wrap;
   width: 100%;
-  transition: $transition;
-  background-color: $select-color;
-  transition: $transition;
+  transition: height 0.5s;
+  transition-timing-function: ease-out;
+}
+#close-navbar{
+  opacity: 0;
+  width: 0;
+  height: 0;
+  z-index: 0;
+
+}
+.wait{
+  transition: height 0.5s;
+  transition-delay: 0.25s;
+}
+.close{
+    &-active{
+    width: 100% !important;
+    height: 100% !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    opacity: 1 !important;
+  }
+  &-img{
+    height: $nav-images-default-site;
+    &-container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      height: auto;
+      border-radius: 0 0 $rounded $rounded;
+      width: 100%;
+      background-color: $alert-color;
+    }
+  }
+}
+.navbar{
+  background: $select-color;
+  &-active{
+    height: 100vh !important;
+    flex-wrap: wrap !important;
+    background-color: none;
+    padding: 0 !important;
+    overflow: hidden;
+    transition: height 5s;
+    & .navbar-container{
+      z-index: 3 !important;
+      width: 100% !important;
+      justify-content: space-around;
+      background-color: $select-color;
+      & a{
+        color: $dark-color;
+        text-decoration: none;
+        justify-content: space-around;
+        border-bottom: $dark-color solid $border-default;
+        width: 100%;
+      }
+    }
+  }
   &-container{
     width: $nav-images-default-site;
     height:  $nav-images-default-site;
+    background-color: $select-color;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     padding: 0;
     overflow: hidden;
-    transition: $transition;
     position: relative;
 
     @media screen and (min-width: $desktops){
@@ -81,11 +138,19 @@ section{
       align-items: center;
     }
     &-active{
-      background-color: $dark-color;
-      width: auto;
+      background-color: $dark-color !important;
+      padding: 0 !important;
+      width: 100%;
       height: $nav-size;
-      padding: $padding-default*0.7 $padding-default*0.5;
       border-radius: 0;
+      & a{
+        z-index: 3 !important;
+        width: 100% !important;
+        justify-content: space-around;
+        position: relative !important;
+        color: $select-color !important;
+      }
+
     }
     & a{
       width: $nav-images-default-site;
