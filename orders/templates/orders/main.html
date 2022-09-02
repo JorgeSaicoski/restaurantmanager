@@ -19,6 +19,11 @@
         {% endif %}
         <a href="{% url 'orders_customer' customer.email %}" class="nav-container"><li>Lista de Pedidos</li></a>
         <a href="{% url 'home' %}" class="nav-container"><li>Lista de restaurantes</li></a>
+        <div id="close-navbar">
+          <div class="close-img-container">
+            <img src="/static/images/closer.png" alt="close" class="close-img">
+          </div>
+        </div>
       </ul>
       {% block content %}
       {% endblock content %}
@@ -33,6 +38,6 @@
       )
     {% endif %}
     </script>
-
+    <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
     </body>
 </html>

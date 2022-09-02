@@ -9,13 +9,19 @@
         <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
     </head>
     <body>
-      <ul class="navbar">
+      <ul class="navbar" id="navbar">
         {% if request.user.is_authenticated %}
-          <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'register' %}"><img src="/static/images/edit.svg" alt="edit" class="navbar-img">Registrar</a></li>
           <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'orders_customer' request.user.email %}"><img src="/static/images/list.svg" alt="list" class="navbar-img">Mis pedidos</a></li>
           <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'logout' %}"><img src="/static/images/lock.svg" alt="lock" class="navbar-img">Salir de su cuenta</a></li>
+        {% else %}
+          <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'register' %}"><img src="/static/images/edit.svg" alt="edit" class="navbar-img">Registrar</a></li>
         {% endif %}
         <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'home' %}"><img src="/static/images/restaurant.png" alt="restaurant" class="navbar-img">Lista de restaurantes</a></li>
+        <div id="close-navbar">
+          <div class="close-img-container">
+            <img src="/static/images/closer.png" alt="close" class="close-img">
+          </div>
+        </div>
       </ul>
       <section id="accounts">
         {% block content %}
@@ -27,6 +33,7 @@
       		alert(message)
       	}
       </script>
+      <script type="text/javascript" src="{% static 'js/navbar.js' %}"></script>
     </body>
 
 </html>

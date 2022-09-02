@@ -16,7 +16,11 @@
         <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'checkout' restaurant.name %}"><img src="/static/images/order.svg" alt="order" class="navbar-img"> Realizar Pedido</a></li>
 
         {% endif %}
+        {% if request.user.is_authenticated %}
+        <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'orders_customer' request.user.email %}"><img src="/static/images/list.svg" alt="list" class="navbar-img">Mis pedidos</a></li>
+        {% else %}
         <li class="navbar-container"><div class="navbar-block"></div><a href="{% url 'login' %}"><img src="/static/images/login.png" alt="login" class="navbar-img">Entrar en mi cuenta</a></li>
+        {% endif %}
         <div id="close-navbar">
           <div class="close-img-container">
             <img src="/static/images/closer.png" alt="close" class="close-img">
