@@ -7,7 +7,7 @@
 		</div>
 
 		<ul class="list-store" id="listToSearch">
-			{% if products in promo.get_products %}
+			{% if promo %}
 				<li class="list-store-category">
 					<a class="list-store-category-title" href="{% url 'store_category' restaurant.name 'Promo' %}">Promo</a>
 				</li>

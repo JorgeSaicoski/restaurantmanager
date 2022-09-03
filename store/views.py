@@ -22,8 +22,15 @@ def store(request,pk):
 				put = True
 		if put:
 			categories_list.append(i)
+	check_promo = False
+	for i in products:
 
+		if i in promo.get_products:
+			check_promo = True
+			break
 
+	if not check_promo:
+		promo = False
 
 
 	#get cookies

@@ -42,11 +42,15 @@ section{
   justify-content: space-between;
   align-items: center;
   padding: 0 $padding-default*0.5;
-  height: 5em;
+  height: $nav-size;
   flex-wrap: wrap;
   width: 100%;
   transition: height 0.5s;
   transition-timing-function: ease-out;
+  @media screen and (min-width: $desktops){
+    height: $nav-size*0.75
+  }
+
 }
 #close-navbar{
   opacity: 0;
@@ -85,6 +89,9 @@ section{
 }
 .navbar{
   background: $select-color;
+  @media screen and (min-width: $desktops){
+    background: $base-color;
+  }
   &-active{
     height: 100vh !important;
     flex-wrap: wrap !important;
@@ -120,8 +127,9 @@ section{
 
     @media screen and (min-width: $desktops){
       width: auto;
-      height: $nav-size;
+      height: $nav-size*0.75;
       flex-grow: 1;
+      background-color: $base-color;
     }
 
     &-cart{
@@ -171,8 +179,9 @@ section{
         height: 100%;
         padding: $padding-default*0.7 0;
         position: relative;
-        border: $border-default $select-color;
-        border-style: none solid;
+        border-width: $border-big $border-default;
+        border-color: $font-color $select-color;
+        border-style: none solid solid;
       }
     }
   }

@@ -34,6 +34,9 @@ section {
   width: 100%;
   transition: height 0.5s;
   transition-timing-function: ease-out; }
+  @media screen and (min-width: 1025px) {
+    #navbar {
+      height: 3.75em; } }
 
 #close-navbar {
   opacity: 0;
@@ -67,6 +70,9 @@ section {
 
 .navbar {
   background: #EAF6FF; }
+  @media screen and (min-width: 1025px) {
+    .navbar {
+      background: #009FFD; } }
   .navbar-active {
     height: 100vh !important;
     flex-wrap: wrap !important;
@@ -99,8 +105,9 @@ section {
     @media screen and (min-width: 1025px) {
       .navbar-container, .navbar-container-cart {
         width: auto;
-        height: 5em;
-        flex-grow: 1; } }
+        height: 3.75em;
+        flex-grow: 1;
+        background-color: #009FFD; } }
     .navbar-container-cart {
       width: auto; }
     .navbar-container p, .navbar-container-cart p {
@@ -143,8 +150,9 @@ section {
           height: 100%;
           padding: 1.75vw 0;
           position: relative;
-          border: 2px #EAF6FF;
-          border-style: none solid; } }
+          border-width: 6px 2px;
+          border-color: #232528 #EAF6FF;
+          border-style: none solid solid; } }
   .navbar-block {
     width: 50px;
     height: 100%;
